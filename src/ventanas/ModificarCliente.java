@@ -12,16 +12,16 @@ public class ModificarCliente extends javax.swing.JFrame {
         initComponents();
         setSize(600, 500);
         setResizable(false);
-        setTitle("Modificar cliente");
+        setTitle("Modificar cliente " + cliente);
         setLocationRelativeTo(null);
 
-        //Evite que el programa se cierre al cerrar la ventana
+        //Impide que el programa se cierre al cerrar la ventana
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         cliente = Clientes.cliente;
 
         bd = new BD();
-        
+
         //Muestra la info del cliente al abrir la ventana
         cargarDatosCliente();
     }
@@ -105,6 +105,19 @@ public class ModificarCliente extends javax.swing.JFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
+        bd.modificarCliente(
+                String.valueOf(cliente),
+                txt_nombre.getText(),
+                txt_apellidos.getText(),
+                txt_dni.getText(),
+                txt_pasaporte.getText(),
+                txt_nacionalidad.getText(),
+                txt_telefono.getText(),
+                txt_email.getText()
+        );
+
+        this.dispose();
+
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     /**
@@ -175,7 +188,6 @@ public class ModificarCliente extends javax.swing.JFrame {
         txt_nacionalidad.setText(info[4]);
         txt_telefono.setText(info[5]);
         txt_email.setText(info[6]);
-        
 
     }
 

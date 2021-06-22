@@ -15,7 +15,7 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
         setTitle("Modificar alojamiento");
         setLocationRelativeTo(null);
 
-        //Evite que el programa se cierre al cerrar la ventana
+        //Impide que el programa se cierre al cerrar la ventana
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         alojamiento = Alojamientos.alojamiento;
@@ -53,6 +53,8 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
         txt_direccion = new javax.swing.JTextField();
         txt_propietario = new javax.swing.JTextField();
         txt_nombre = new javax.swing.JTextField();
+        btn_cancelar = new javax.swing.JButton();
+        btn_guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -99,8 +101,36 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
         getContentPane().add(txt_propietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 150, -1));
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 150, -1));
 
+        btn_cancelar.setText("Cancelar");
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, -1, -1));
+
+        btn_guardar.setText("Guardar");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+        
+        bd.modificarAlojamiento(
+                alojamiento,
+                txt_nombre.getText(), 
+                txt_propietario.getText(),
+                txt_direccion.getText(),
+                txt_plazas.getText(),
+                txt_dormitorios.getText(),
+                txt_baños.getText(),
+                txt_terraza.getText(),
+                txt_piscina.getText(),
+                txt_aparcamiento.getText());
+        
+        this.dispose();
+    }//GEN-LAST:event_btn_guardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +168,8 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -126,6 +126,7 @@ public class InfoReserva extends javax.swing.JFrame {
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         ModificarReserva mr = new ModificarReserva();
         mr.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     /**

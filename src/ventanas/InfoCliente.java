@@ -133,6 +133,7 @@ public class InfoCliente extends javax.swing.JFrame {
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         ModificarCliente mc = new ModificarCliente();
         mc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     /**

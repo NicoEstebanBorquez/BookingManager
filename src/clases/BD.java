@@ -273,4 +273,60 @@ public class BD {
         return nombre_cliente;
     }
 
+    public void modificarAlojamiento(String ID, String nombre, String prop, String direccion, String plazas, String dormitorios, String baños, String terraza, String piscina, String aparcamiento) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            PreparedStatement pst = cn.prepareStatement("UPDATE alojamientos SET nombre=?, propietario=?, direccion=?, plazas=?, dormitorios=?, baños=?, terraza=?, piscina=?, aparcamiento=? WHERE id_alojamiento=?");
+            pst.setString(1, nombre);
+            pst.setString(2, prop);
+            pst.setString(3, direccion);
+            pst.setString(4, plazas);
+            pst.setString(5, dormitorios);
+            pst.setString(6, baños);
+            pst.setString(7, terraza);
+            pst.setString(8, piscina);
+            pst.setString(9, aparcamiento);
+            pst.setString(10, ID);
+            pst.executeUpdate();
+            
+
+            pst.close();
+            cn.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void modificarCliente(String ID, String nombre, String apellidos, String DNI, String pasaporte, String nacionalidad, String telefono, String email) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            PreparedStatement pst = cn.prepareStatement("UPDATE clientes SET nombre=?, apellidos=?, DNI=?, pasaporte=?, nacionalidad=?, telefono=?, email=? WHERE id_cliente=?");
+            pst.setString(1, nombre);
+            pst.setString(2, apellidos);
+            pst.setString(3, DNI);
+            pst.setString(4, pasaporte);
+            pst.setString(5, nacionalidad);
+            pst.setString(6, telefono);
+            pst.setString(7, email);
+            pst.setString(8, ID);
+            pst.executeUpdate();
+
+            pst.close();
+            cn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void modificarReserva(String ID) {
+    }
+
 }

@@ -11,12 +11,12 @@ public class ModificarReserva extends javax.swing.JFrame {
     public ModificarReserva() {
         initComponents();
 
-        setSize(600, 500);
+        setSize(600, 350);
         setResizable(false);
         setTitle("Modificar reserva");
         setLocationRelativeTo(null);
 
-        //Evite que el programa se cierre al cerrar la ventana
+        //Impide que el programa se cierre al cerrar la ventana
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         reserva = Reservas.reserva;
@@ -42,6 +42,8 @@ public class ModificarReserva extends javax.swing.JFrame {
         txt_salida = new javax.swing.JTextField();
         txt_precio = new javax.swing.JTextField();
         txt_entrada = new javax.swing.JTextField();
+        btn_guardar = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,8 +66,30 @@ public class ModificarReserva extends javax.swing.JFrame {
         getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 100, -1));
         getContentPane().add(txt_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 100, -1));
 
+        btn_guardar.setText("Guardar");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
+
+        btn_cancelar.setText("Cancelar");
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btn_guardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,6 +127,8 @@ public class ModificarReserva extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

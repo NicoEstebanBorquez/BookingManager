@@ -12,7 +12,7 @@ public class InfoAlojamiento extends javax.swing.JFrame {
 
     public InfoAlojamiento() {
         initComponents();
-
+        alojamiento = Alojamientos.alojamiento;
 
         setSize(820, 510);
         setResizable(false);
@@ -154,6 +154,7 @@ public class InfoAlojamiento extends javax.swing.JFrame {
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         ModificarAlojamiento ma = new ModificarAlojamiento();
         ma.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     /**
