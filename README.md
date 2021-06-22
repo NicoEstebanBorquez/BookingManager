@@ -1,5 +1,5 @@
 # BookingManager
- I'have developed this Java project after finishing my first year in CFGS Desarrollo de Aplicaciones Multiplataforma (Senior Technician Multi Platform Application Development). 
+ I'have developed this Java project after finishing my first year of CFGS Desarrollo de Aplicaciones Multiplataforma (Senior Technician Multi Platform Application Development). 
  I've included in this project what I've learned about JAVA and SQL durings this course. 
  
  
