@@ -21,7 +21,8 @@ public class ModificarCliente extends javax.swing.JFrame {
         cliente = Clientes.cliente;
 
         bd = new BD();
-
+        
+        //Muestra la info del cliente al abrir la ventana
         cargarDatosCliente();
     }
 
@@ -48,6 +49,8 @@ public class ModificarCliente extends javax.swing.JFrame {
         txt_apellidos = new javax.swing.JTextField();
         txt_nombre = new javax.swing.JTextField();
         btn_cancelar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        label_id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,6 +93,12 @@ public class ModificarCliente extends javax.swing.JFrame {
 
         btn_cancelar.setText("Cancelar");
         getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, -1, -1));
+
+        jLabel8.setText("Cliente:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+
+        label_id.setText("...");
+        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -143,6 +152,8 @@ public class ModificarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel label_id;
     private javax.swing.JTextField txt_apellidos;
     private javax.swing.JTextField txt_dni;
     private javax.swing.JTextField txt_email;
@@ -156,6 +167,7 @@ public class ModificarCliente extends javax.swing.JFrame {
 
         String[] info = bd.obtenerInfoCliente(cliente);
 
+        label_id.setText(String.valueOf(cliente));
         txt_nombre.setText(info[0]);
         txt_apellidos.setText(info[1]);
         txt_dni.setText(info[2]);

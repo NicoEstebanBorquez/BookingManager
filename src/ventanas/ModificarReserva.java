@@ -1,12 +1,16 @@
 package ventanas;
+
 import clases.BD;
 import javax.swing.WindowConstants;
 
 public class ModificarReserva extends javax.swing.JFrame {
 
+    int reserva;
+    BD bd;
+
     public ModificarReserva() {
         initComponents();
-        
+
         setSize(600, 500);
         setResizable(false);
         setTitle("Modificar reserva");
@@ -14,6 +18,13 @@ public class ModificarReserva extends javax.swing.JFrame {
 
         //Evite que el programa se cierre al cerrar la ventana
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+        reserva = Reservas.reserva;
+
+        bd = new BD();
+
+        //Muestra la info del alojamiento al abrir la ventana
+        cargarDatosReserva();
     }
 
     /**
@@ -23,8 +34,35 @@ public class ModificarReserva extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        label_ID = new javax.swing.JLabel();
+        txt_salida = new javax.swing.JTextField();
+        txt_precio = new javax.swing.JTextField();
+        txt_entrada = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("Reserva:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jLabel2.setText("Entrada:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        jLabel3.setText("Salida:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        jLabel4.setText("Precio:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+
+        label_ID.setText("...");
+        getContentPane().add(label_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+        getContentPane().add(txt_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 100, -1));
+        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 100, -1));
+        getContentPane().add(txt_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 100, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -65,5 +103,24 @@ public class ModificarReserva extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel label_ID;
+    private javax.swing.JTextField txt_entrada;
+    private javax.swing.JTextField txt_precio;
+    private javax.swing.JTextField txt_salida;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarDatosReserva() {
+
+        String[] info = bd.obtenerInfoReserva(reserva);
+
+        label_ID.setText(String.valueOf(reserva));
+        txt_entrada.setText(info[1]);
+        txt_salida.setText(info[2]);
+        txt_precio.setText(info[3]);
+    }
+
 }

@@ -1,13 +1,15 @@
 package ventanas;
-
 import clases.BD;
 import javax.swing.WindowConstants;
 
 public class ModificarAlojamiento extends javax.swing.JFrame {
 
+    String alojamiento;
+    BD bd;
+
     public ModificarAlojamiento() {
         initComponents();
-        
+
         setSize(600, 500);
         setResizable(false);
         setTitle("Modificar alojamiento");
@@ -16,6 +18,12 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
         //Evite que el programa se cierre al cerrar la ventana
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+        alojamiento = Alojamientos.alojamiento;
+
+        bd = new BD();
+
+        //Muestra la info del alojamiento al abrir la ventana
+        cargarDatosAlojamiento();
     }
 
     /**
@@ -25,8 +33,71 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        label_ID = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txt_aparcamiento = new javax.swing.JTextField();
+        txt_piscina = new javax.swing.JTextField();
+        txt_terraza = new javax.swing.JTextField();
+        txt_baños = new javax.swing.JTextField();
+        txt_dormitorios = new javax.swing.JTextField();
+        txt_plazas = new javax.swing.JTextField();
+        txt_direccion = new javax.swing.JTextField();
+        txt_propietario = new javax.swing.JTextField();
+        txt_nombre = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("Alojamiento:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        label_ID.setText("...");
+        getContentPane().add(label_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+
+        jLabel3.setText("Nombre:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        jLabel4.setText("Propietario");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        jLabel5.setText("Direccion");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+
+        jLabel6.setText("Plazas");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        jLabel7.setText("Dormitorios:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        jLabel8.setText("Terraza:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+
+        jLabel9.setText("Piscina:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+
+        jLabel10.setText("Aparcamiento:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+
+        jLabel11.setText("Baños:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        getContentPane().add(txt_aparcamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 150, -1));
+        getContentPane().add(txt_piscina, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 150, -1));
+        getContentPane().add(txt_terraza, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 150, -1));
+        getContentPane().add(txt_baños, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 150, -1));
+        getContentPane().add(txt_dormitorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 150, -1));
+        getContentPane().add(txt_plazas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 150, -1));
+        getContentPane().add(txt_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 150, -1));
+        getContentPane().add(txt_propietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 150, -1));
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 150, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -67,5 +138,43 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel label_ID;
+    private javax.swing.JTextField txt_aparcamiento;
+    private javax.swing.JTextField txt_baños;
+    private javax.swing.JTextField txt_direccion;
+    private javax.swing.JTextField txt_dormitorios;
+    private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_piscina;
+    private javax.swing.JTextField txt_plazas;
+    private javax.swing.JTextField txt_propietario;
+    private javax.swing.JTextField txt_terraza;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarDatosAlojamiento() {
+
+        String[] info = bd.obtenerInfoAlojamiento(alojamiento);
+
+        label_ID.setText(String.valueOf(alojamiento));
+        txt_nombre.setText(info[0]);
+        txt_propietario.setText(info[1]);
+        txt_direccion.setText(info[2]);
+        txt_plazas.setText(info[3]);
+        txt_dormitorios.setText(info[4]);
+        txt_baños.setText(info[5]);
+        txt_terraza.setText(info[6]);
+        txt_piscina.setText(info[6]);
+        txt_aparcamiento.setText(info[6]);
+
+    }
+
 }

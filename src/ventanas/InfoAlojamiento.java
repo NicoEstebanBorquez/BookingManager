@@ -13,7 +13,6 @@ public class InfoAlojamiento extends javax.swing.JFrame {
     public InfoAlojamiento() {
         initComponents();
 
-        alojamiento = Alojamientos.alojamiento;
 
         setSize(820, 510);
         setResizable(false);
