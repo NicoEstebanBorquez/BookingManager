@@ -60,6 +60,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         label_gestionadoPor = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
+        btn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,6 +122,9 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 110, -1));
 
+        btn_cancelar.setText("Cancelar");
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 470, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -180,6 +184,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

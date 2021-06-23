@@ -58,6 +58,7 @@ public class NuevoCliente extends javax.swing.JFrame {
         txt_email = new javax.swing.JTextField();
         txt_id = new javax.swing.JTextField();
         label_gestionadoPor = new javax.swing.JLabel();
+        btn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -98,7 +99,7 @@ public class NuevoCliente extends javax.swing.JFrame {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 520, -1, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, -1, -1));
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 100, -1));
         getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 100, -1));
         getContentPane().add(txt_dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 100, -1));
@@ -110,6 +111,14 @@ public class NuevoCliente extends javax.swing.JFrame {
 
         label_gestionadoPor.setText("usuario");
         getContentPane().add(label_gestionadoPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, -1, -1));
+
+        btn_cancelar.setText("Cancelar");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 380, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,6 +140,12 @@ public class NuevoCliente extends javax.swing.JFrame {
         Clientes cl = new Clientes();
         cl.setVisible(true);
     }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        this.dispose();
+        Clientes cl = new Clientes();
+        cl.setVisible(true);
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,6 +183,7 @@ public class NuevoCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

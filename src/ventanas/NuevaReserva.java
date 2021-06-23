@@ -172,6 +172,7 @@ public class NuevaReserva extends javax.swing.JFrame {
         table_alojamientos = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         table_clientes = new javax.swing.JTable();
+        btn_cancelar = new javax.swing.JButton();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -266,6 +267,14 @@ public class NuevaReserva extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, 380, 100));
 
+        btn_cancelar.setText("Cancelar");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 80, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -303,6 +312,12 @@ public class NuevaReserva extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_guardarReservaActionPerformed
 
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        this.dispose();
+        Reservas r = new Reservas();
+        r.setVisible(true);
+    }//GEN-LAST:event_btn_cancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -339,6 +354,7 @@ public class NuevaReserva extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_guardarReserva;
     private com.toedter.calendar.JDateChooser jDate_entrada;
     private com.toedter.calendar.JDateChooser jDate_salida;
