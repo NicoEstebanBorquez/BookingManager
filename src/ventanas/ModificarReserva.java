@@ -1,6 +1,13 @@
 package ventanas;
 
 import clases.BD;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.WindowConstants;
 
 public class ModificarReserva extends javax.swing.JFrame {
@@ -39,11 +46,11 @@ public class ModificarReserva extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         label_ID = new javax.swing.JLabel();
-        txt_salida = new javax.swing.JTextField();
         txt_precio = new javax.swing.JTextField();
-        txt_entrada = new javax.swing.JTextField();
         btn_guardar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
+        jDate_entrada = new com.toedter.calendar.JDateChooser();
+        jDate_salida = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,9 +69,7 @@ public class ModificarReserva extends javax.swing.JFrame {
 
         label_ID.setText("...");
         getContentPane().add(label_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
-        getContentPane().add(txt_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 100, -1));
         getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 100, -1));
-        getContentPane().add(txt_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 100, -1));
 
         btn_guardar.setText("Guardar");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,21 +80,62 @@ public class ModificarReserva extends javax.swing.JFrame {
         getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
 
         btn_cancelar.setText("Cancelar");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
+        getContentPane().add(jDate_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
+        getContentPane().add(jDate_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        
-        
-        
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+
+        String[] info = bd.obtenerInfoReserva(reserva);
+
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            Date fecha;
+
+            fecha = formato.parse(info[1]);
+
+            jDate_entrada.setDate(fecha);
+            /*
+            String[] info = bd.obtenerInfoReserva(reserva);
+            label_ID.setText(String.valueOf(reserva));
+            txt_entrada.setText(info[1]);
+            txt_salida.setText(info[2]);
+            
+            
+            // Obtención de fechas de entrada y salida con formato DATE
+            Date entrada_input = info[0];//jDate_entrada.getDate();
+            
+            jDate_entrada.setDate("");
+            
+            Date salida_input = jDate_salida.getDate();
+            System.out.println("Entrada: " + entrada_input);
+            System.out.println("Salida: " + salida_input);
+            
+            long entrada_l = entrada_input.getTime();
+            long salida_l = salida_input.getTime();
+            
+            java.sql.Date entrada = new java.sql.Date(entrada_l);
+            java.sql.Date salida = new java.sql.Date(salida_l);
+            
+            System.out.println("Entrada: " + entrada);
+            System.out.println("Salida: " + salida);*/
+        } catch (ParseException ex) {
+            Logger.getLogger(ModificarReserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,23 +175,36 @@ public class ModificarReserva extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_guardar;
+    private com.toedter.calendar.JDateChooser jDate_entrada;
+    private com.toedter.calendar.JDateChooser jDate_salida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel label_ID;
-    private javax.swing.JTextField txt_entrada;
     private javax.swing.JTextField txt_precio;
-    private javax.swing.JTextField txt_salida;
     // End of variables declaration//GEN-END:variables
 
     public void cargarDatosReserva() {
 
         String[] info = bd.obtenerInfoReserva(reserva);
 
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha_entrada;
+        Date fecha_salida;
+        
+        try {
+            fecha_entrada = formato.parse(info[1]);
+            jDate_entrada.setDate(fecha_entrada);
+            fecha_salida = formato.parse(info[2]);
+            jDate_salida.setDate(fecha_salida);
+        } catch (ParseException ex) {
+            Logger.getLogger(ModificarReserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         label_ID.setText(String.valueOf(reserva));
-        txt_entrada.setText(info[1]);
-        txt_salida.setText(info[2]);
+        //txt_entrada.setText(info[1]);
+        //txt_salida.setText(info[2]);
         txt_precio.setText(info[3]);
     }
 
