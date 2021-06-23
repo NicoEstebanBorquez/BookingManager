@@ -120,6 +120,8 @@ public class InfoReserva extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
+        Reservas r = new Reservas();
+        r.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_cerrarActionPerformed
 

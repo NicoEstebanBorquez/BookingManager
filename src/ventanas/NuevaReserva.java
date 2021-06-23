@@ -24,11 +24,11 @@ public class NuevaReserva extends javax.swing.JFrame {
     String alojamiento_seleccionado;
     int cliente_seleccionado;
     java.sql.Date fecha_actual;
-    
+
     //Permite acceder a los metodos necesarios para añadir filas, columnas, dar nombre a las columnas, etc.
     DefaultTableModel modelo = new DefaultTableModel();
     DefaultTableModel modelo_clientes = new DefaultTableModel();
-    
+
     public NuevaReserva() {
         initComponents();
         setSize(1000, 730);
@@ -39,19 +39,20 @@ public class NuevaReserva extends javax.swing.JFrame {
         //Evite que el programa se cierre al cerrar la ventana
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+        //Objeto BD
         bd = new BD();
-        
+
         //Obtención de nombre de usuario y apellidos
         nombre_usuario = InicioAdmin.nombre_usuario;
         apellidos_usuario = InicioAdmin.apellidos_usuario;
         label_gestionadoPor.setText(nombre_usuario + " " + apellidos_usuario);
         id_usuario = bd.obtenerIDusuario(nombre_usuario, apellidos_usuario);
-        
+
         //Obtención de fecha actual
         long fecha_miliseconds = new Date().getTime();
         fecha_actual = new java.sql.Date(fecha_miliseconds);
-        label_fechaActual.setText(""+fecha_actual);
-        
+        label_fechaActual.setText("" + fecha_actual);
+
         //Consulta a la BD para obtener listado de reservas
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -81,21 +82,20 @@ public class NuevaReserva extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //Obtener el alojamiento seleccionada
         table_alojamientos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int fila_point = table_alojamientos.rowAtPoint(e.getPoint());
                 int columna_point = 0;
-                
-                if(fila_point > -1){
-                    alojamiento_seleccionado = (String)modelo.getValueAt(fila_point, columna_point);
-                    System.out.println("ID del alojamiento: " + alojamiento_seleccionado);
+
+                if (fila_point > -1) {
+                    alojamiento_seleccionado = (String) modelo.getValueAt(fila_point, columna_point);
                 }
             }
         });
-        
+
         //Consulta a la BD para obtener listado de clientes
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -126,17 +126,16 @@ public class NuevaReserva extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //Obtener el cliente seleccionado
         table_clientes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int fila_point = table_clientes.rowAtPoint(e.getPoint());
                 int columna_point = 0;
-                
-                if(fila_point > -1){
-                    cliente_seleccionado = (int)modelo_clientes.getValueAt(fila_point, columna_point);
-                    System.out.println("ID del alojamiento: " + cliente_seleccionado);
+
+                if (fila_point > -1) {
+                    cliente_seleccionado = (int) modelo_clientes.getValueAt(fila_point, columna_point);
                 }
             }
         });
@@ -271,33 +270,37 @@ public class NuevaReserva extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_guardarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarReservaActionPerformed
-        
-        
+
         // Obtención de fechas de entrada y salida con formato DATE
         Date entrada_input = jDate_entrada.getDate();
         Date salida_input = jDate_salida.getDate();
-        
+
         long entrada_l = entrada_input.getTime();
         long salida_l = salida_input.getTime();
-        
+
         java.sql.Date entrada = new java.sql.Date(entrada_l);
         java.sql.Date salida = new java.sql.Date(salida_l);
-        
-        bd.altaReserva(
-                Integer.parseInt(txt_id.getText().trim()),
-                fecha_actual,
-                entrada,
-                salida,
-                Integer.parseInt(txt_precio.getText().trim()),
-                alojamiento_seleccionado,
-                cliente_seleccionado,
-                id_usuario
-        );
-        
+        try {
+            bd.altaReserva(
+                    Integer.parseInt(txt_id.getText().trim()),
+                    fecha_actual,
+                    entrada,
+                    salida,
+                    Double.parseDouble(txt_precio.getText().trim()),//Integer.parseInt(txt_precio.getText().trim())
+
+                    alojamiento_seleccionado,
+                    cliente_seleccionado,
+                    id_usuario
+            );
+
+        } catch (Exception e) {
+            System.out.println("EEEEEERROR! " +e);
+        }
+
         this.dispose();
         Reservas r = new Reservas();
         r.setVisible(true);
-        
+
     }//GEN-LAST:event_btn_guardarReservaActionPerformed
 
     /**

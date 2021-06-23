@@ -32,57 +32,9 @@ public class Clientes extends javax.swing.JFrame {
 
         //Evite que el programa se cierre al cerrar la ventana
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
-        //Consulta a la BD para obtener listado de clientes
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
-            PreparedStatement pst = cn.prepareStatement("SELECT id_cliente, nombre, apellidos, DNI, pasaporte, telefono, email FROM clientes");
-            ResultSet rs = pst.executeQuery();
-
-            table_clientes = new JTable(modelo);
-            jScrollPane1.setViewportView(table_clientes);
-
-            modelo.addColumn("ID");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Apellidos");
-            modelo.addColumn("DNI");
-            modelo.addColumn("Pasaporte");
-            modelo.addColumn("Teléfono");
-            modelo.addColumn("Email");
-
-            while (rs.next()) {
-                Object[] fila = new Object[7];
-
-                for (int i = 0; i < 7; i++) {
-                    fila[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(fila);
-            }
-
-            pst.close();
-            cn.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        //Obtener el usuario seleccionado
-        table_clientes.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int fila_point = table_clientes.rowAtPoint(e.getPoint());
-                int columna_point = 0;
-
-                if (fila_point > -1) {
-                    cliente = (int) modelo.getValueAt(fila_point, columna_point);
-                    InfoCliente ic = new InfoCliente();
-                    ic.setVisible(true);
-                }
-            }
-        });
+        
+        //Obtener listado de clientes
+        listadoClientes();
     }
 
     /**
@@ -128,7 +80,7 @@ public class Clientes extends javax.swing.JFrame {
     private void btn_nuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoClienteActionPerformed
         NuevoCliente ncl = new NuevoCliente();
         ncl.setVisible(true);
-        
+
         this.dispose();
     }//GEN-LAST:event_btn_nuevoClienteActionPerformed
 
@@ -172,4 +124,63 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_clientes;
     // End of variables declaration//GEN-END:variables
+
+    public void listadoClientes() {
+        //Consulta a la BD para obtener listado de clientes
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+
+            PreparedStatement pst = cn.prepareStatement("SELECT id_cliente, nombre, apellidos, DNI, pasaporte, telefono, email FROM clientes");
+            ResultSet rs = pst.executeQuery();
+
+            table_clientes = new JTable(modelo);
+            jScrollPane1.setViewportView(table_clientes);
+
+            modelo.addColumn("ID");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Apellidos");
+            modelo.addColumn("DNI");
+            modelo.addColumn("Pasaporte");
+            modelo.addColumn("Teléfono");
+            modelo.addColumn("Email");
+
+            while (rs.next()) {
+                Object[] fila = new Object[7];
+
+                for (int i = 0; i < 7; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(fila);
+            }
+
+            pst.close();
+            cn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //Obtener el usuario seleccionado
+        table_clientes.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila_point = table_clientes.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+
+                if (fila_point > -1) {
+                    cliente = (int) modelo.getValueAt(fila_point, columna_point);
+                    verInfoCliente();
+                }
+            }
+        });
+    }
+
+    public void verInfoCliente() {
+
+        InfoCliente ic = new InfoCliente();
+        ic.setVisible(true);
+        this.dispose();
+    }
 }

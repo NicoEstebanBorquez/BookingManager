@@ -10,6 +10,8 @@ public class ModificarCliente extends javax.swing.JFrame {
 
     public ModificarCliente() {
         initComponents();
+
+        cliente = Clientes.cliente;
         setSize(600, 500);
         setResizable(false);
         setTitle("Modificar cliente " + cliente);
@@ -18,8 +20,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         //Impide que el programa se cierre al cerrar la ventana
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        cliente = Clientes.cliente;
-
+        //Objeto BD
         bd = new BD();
 
         //Muestra la info del cliente al abrir la ventana
@@ -92,6 +93,11 @@ public class ModificarCliente extends javax.swing.JFrame {
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 150, -1));
 
         btn_cancelar.setText("Cancelar");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, -1, -1));
 
         jLabel8.setText("Cliente:");
@@ -115,10 +121,17 @@ public class ModificarCliente extends javax.swing.JFrame {
                 txt_telefono.getText(),
                 txt_email.getText()
         );
-
+        
+        Clientes c = new Clientes();
+        c.setVisible(true);
         this.dispose();
-
     }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        Clientes c = new Clientes();
+        c.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,7 +201,6 @@ public class ModificarCliente extends javax.swing.JFrame {
         txt_nacionalidad.setText(info[4]);
         txt_telefono.setText(info[5]);
         txt_email.setText(info[6]);
-
     }
 
 }

@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import static ventanas.Clientes.cliente;
 
 public class Reservas extends javax.swing.JFrame {
-    
+
     //Variable que contiene el cliente seleccionado
     public static int reserva;
 
@@ -25,65 +25,17 @@ public class Reservas extends javax.swing.JFrame {
 
     public Reservas() {
         initComponents();
-        
+
         setSize(1000, 730);
         setResizable(false);
         setTitle("Reservas");
         setLocationRelativeTo(null);
 
-        //Evite que el programa se cierre al cerrar la ventana
+        //Impide que el programa se cierre al cerrar la ventana
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
-        
-        //Consulta a la BD para obtener listado de reservas
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
-            PreparedStatement pst = cn.prepareStatement("SELECT fecha_confirmacion, id_reserva, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas");
-            ResultSet rs = pst.executeQuery();
-
-            table_reservas = new JTable(modelo);
-            jScrollPane1.setViewportView(table_reservas);
-
-            modelo.addColumn("Fecha");
-            modelo.addColumn("Nº de Reserva");
-            modelo.addColumn("Entrada");
-            modelo.addColumn("Salida");
-            modelo.addColumn("Precio");
-            modelo.addColumn("Alojamiento");
-            modelo.addColumn("Cliente");
-
-            while (rs.next()) {
-                Object[] fila = new Object[7];
-
-                for (int i = 0; i < 7; i++) {
-                    fila[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(fila);
-            }
-            pst.close();
-            cn.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        //Obtener la reserva seleccionada
-        table_reservas.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int fila_point = table_reservas.rowAtPoint(e.getPoint());
-                int columna_point = 1;
-                
-                if(fila_point > -1){
-                    reserva = (int)modelo.getValueAt(fila_point, columna_point);
-                    InfoReserva ir = new InfoReserva();
-                    ir.setVisible(true);
-                }
-            }
-        });
+        //Obtener listado de reservas
+        listadoReservas();
     }
 
     /**
@@ -172,7 +124,7 @@ public class Reservas extends javax.swing.JFrame {
     private void btn_nuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevaReservaActionPerformed
         NuevaReserva nr = new NuevaReserva();
         nr.setVisible(true);
-        
+
         this.dispose();
     }//GEN-LAST:event_btn_nuevaReservaActionPerformed
 
@@ -227,4 +179,65 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_reservas;
     // End of variables declaration//GEN-END:variables
+
+    public void listadoReservas() {
+        //Consulta a la BD para obtener listado de reservas
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+
+            PreparedStatement pst = cn.prepareStatement("SELECT fecha_confirmacion, id_reserva, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas ORDER BY entrada");
+            ResultSet rs = pst.executeQuery();
+
+            table_reservas = new JTable(modelo);
+            jScrollPane1.setViewportView(table_reservas);
+
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Nº de Reserva");
+            modelo.addColumn("Entrada");
+            modelo.addColumn("Salida");
+            modelo.addColumn("Precio");
+            modelo.addColumn("Alojamiento");
+            modelo.addColumn("Cliente");
+
+            while (rs.next()) {
+                Object[] fila = new Object[7];
+
+                for (int i = 0; i < 7; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(fila);
+            }
+            pst.close();
+            cn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //Obtener la reserva seleccionada
+        table_reservas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila_point = table_reservas.rowAtPoint(e.getPoint());
+                int columna_point = 1;
+
+                if (fila_point > -1) {
+                    reserva = (int) modelo.getValueAt(fila_point, columna_point);
+                    verInfoReserva();
+                }
+
+            }
+        });
+
+    }
+
+    public void verInfoReserva() {
+
+        InfoReserva ir = new InfoReserva();
+        ir.setVisible(true);
+        this.dispose();
+    }
+
 }

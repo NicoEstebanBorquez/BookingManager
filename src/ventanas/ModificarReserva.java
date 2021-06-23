@@ -94,47 +94,31 @@ public class ModificarReserva extends javax.swing.JFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
+        // Obtención de fechas de entrada y salida con formato DATE
+        Date entrada_input = jDate_entrada.getDate();
+        Date salida_input = jDate_salida.getDate();
 
+        long entrada_l = entrada_input.getTime();
+        long salida_l = salida_input.getTime();
+
+        java.sql.Date entrada = new java.sql.Date(entrada_l);
+        java.sql.Date salida = new java.sql.Date(salida_l);
+
+        bd.modificarReserva(
+                String.valueOf(reserva),
+                entrada,
+                salida,
+                Double.parseDouble(txt_precio.getText()));
+        Reservas r = new Reservas();
+        r.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
 
-        String[] info = bd.obtenerInfoReserva(reserva);
-
-        try {
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            Date fecha;
-
-            fecha = formato.parse(info[1]);
-
-            jDate_entrada.setDate(fecha);
-            /*
-            String[] info = bd.obtenerInfoReserva(reserva);
-            label_ID.setText(String.valueOf(reserva));
-            txt_entrada.setText(info[1]);
-            txt_salida.setText(info[2]);
-            
-            
-            // Obtención de fechas de entrada y salida con formato DATE
-            Date entrada_input = info[0];//jDate_entrada.getDate();
-            
-            jDate_entrada.setDate("");
-            
-            Date salida_input = jDate_salida.getDate();
-            System.out.println("Entrada: " + entrada_input);
-            System.out.println("Salida: " + salida_input);
-            
-            long entrada_l = entrada_input.getTime();
-            long salida_l = salida_input.getTime();
-            
-            java.sql.Date entrada = new java.sql.Date(entrada_l);
-            java.sql.Date salida = new java.sql.Date(salida_l);
-            
-            System.out.println("Entrada: " + entrada);
-            System.out.println("Salida: " + salida);*/
-        } catch (ParseException ex) {
-            Logger.getLogger(ModificarReserva.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Reservas r = new Reservas();
+        r.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     /**
@@ -192,7 +176,7 @@ public class ModificarReserva extends javax.swing.JFrame {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fecha_entrada;
         Date fecha_salida;
-        
+
         try {
             fecha_entrada = formato.parse(info[1]);
             jDate_entrada.setDate(fecha_entrada);
@@ -201,7 +185,7 @@ public class ModificarReserva extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(ModificarReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
         label_ID.setText(String.valueOf(reserva));
         //txt_entrada.setText(info[1]);
         //txt_salida.setText(info[2]);

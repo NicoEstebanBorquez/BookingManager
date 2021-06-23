@@ -65,7 +65,7 @@ public class BD {
         }
     }
 
-    public void altaReserva(int ID, java.sql.Date fecha, java.sql.Date entrada, java.sql.Date salida, int precio, String alojamiento, int cliente, int usuario) {
+    public void altaReserva(int ID, java.sql.Date fecha, java.sql.Date entrada, java.sql.Date salida, Double precio, String alojamiento, int cliente, int usuario) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -76,7 +76,7 @@ public class BD {
             pst.setDate(2, fecha);
             pst.setDate(3, entrada);
             pst.setDate(4, salida);
-            pst.setInt(5, precio);
+            pst.setDouble(5, precio);
             pst.setString(6, alojamiento);
             pst.setInt(7, cliente);
             pst.setInt(8, usuario);
@@ -288,7 +288,6 @@ public class BD {
             pst.setString(9, aparcamiento);
             pst.setString(10, ID);
             pst.executeUpdate();
-            
 
             pst.close();
             cn.close();
@@ -325,7 +324,27 @@ public class BD {
         }
     }
 
-    public void modificarReserva(String ID) {
+    public void modificarReserva(String ID, java.sql.Date entrada, java.sql.Date salida, Double precio) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            PreparedStatement pst = cn.prepareStatement("UPDATE reservas SET entrada=?, salida=?, precio=? WHERE id_reserva=?");
+
+            pst.setDate(1, entrada);
+            pst.setDate(2, salida);
+            pst.setDouble(3, precio);
+            pst.setString(4, ID);
+            pst.executeUpdate();
+
+            pst.close();
+            cn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

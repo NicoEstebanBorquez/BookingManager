@@ -1,4 +1,5 @@
 package ventanas;
+
 import clases.BD;
 import javax.swing.WindowConstants;
 
@@ -102,6 +103,11 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 150, -1));
 
         btn_cancelar.setText("Cancelar");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, -1, -1));
 
         btn_guardar.setText("Guardar");
@@ -116,10 +122,10 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        
+
         bd.modificarAlojamiento(
                 alojamiento,
-                txt_nombre.getText(), 
+                txt_nombre.getText(),
                 txt_propietario.getText(),
                 txt_direccion.getText(),
                 txt_plazas.getText(),
@@ -128,9 +134,16 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
                 txt_terraza.getText(),
                 txt_piscina.getText(),
                 txt_aparcamiento.getText());
-        
+        Alojamientos a = new Alojamientos();
+        a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        Alojamientos a = new Alojamientos();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
     /**
      * @param args the command line arguments
