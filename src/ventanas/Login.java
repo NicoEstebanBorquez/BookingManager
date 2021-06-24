@@ -62,12 +62,12 @@ public class Login extends javax.swing.JFrame {
 
         label_user.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_user.setForeground(new java.awt.Color(0, 0, 93));
-        label_user.setText("Usuario:");
+        label_user.setText("Username:");
         getContentPane().add(label_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 298, -1, -1));
 
         label_password.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_password.setForeground(new java.awt.Color(0, 0, 93));
-        label_password.setText("Contraseña:");
+        label_password.setText("Password:");
         getContentPane().add(label_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 368, -1, -1));
 
         txt_user.setBackground(new java.awt.Color(240, 240, 240));
@@ -92,7 +92,7 @@ public class Login extends javax.swing.JFrame {
         jButton_Acceder.setBackground(new java.awt.Color(210, 210, 210));
         jButton_Acceder.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jButton_Acceder.setForeground(new java.awt.Color(0, 0, 93));
-        jButton_Acceder.setText("Acceder");
+        jButton_Acceder.setText("Login");
         jButton_Acceder.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton_Acceder.setBorderPainted(false);
         jButton_Acceder.addActionListener(new java.awt.event.ActionListener() {

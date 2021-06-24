@@ -20,7 +20,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
         usuario = Login.usuario;
 
         setTitle("Añadir nuevo usuario - Sesión de " + usuario);
-        setSize(800, 550);
+        setSize(800, 525);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -76,42 +76,42 @@ public class AnadirUsuario extends javax.swing.JFrame {
         jLabel2_password.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel2_password.setForeground(new java.awt.Color(29, 33, 123));
         jLabel2_password.setText("Password:");
-        getContentPane().add(jLabel2_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, -1, -1));
+        getContentPane().add(jLabel2_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, -1));
 
         jLabel3apellidos.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel3apellidos.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel3apellidos.setText("Apellidos:");
-        getContentPane().add(jLabel3apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
+        jLabel3apellidos.setText("Last name:");
+        getContentPane().add(jLabel3apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 175, -1, -1));
 
         jLabel4_nombre.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel4_nombre.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel4_nombre.setText("Nombre:");
-        getContentPane().add(jLabel4_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+        jLabel4_nombre.setText("First name:");
+        getContentPane().add(jLabel4_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 125, -1, -1));
 
         jLabel5_username.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel5_username.setForeground(new java.awt.Color(29, 33, 123));
         jLabel5_username.setText("Username:");
-        getContentPane().add(jLabel5_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, -1, -1));
+        getContentPane().add(jLabel5_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, -1, -1));
 
         jLabel6_email.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel6_email.setForeground(new java.awt.Color(29, 33, 123));
         jLabel6_email.setText("E-mail:");
-        getContentPane().add(jLabel6_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+        getContentPane().add(jLabel6_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 275, -1, -1));
 
         jLabel7_puesto.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel7_puesto.setForeground(new java.awt.Color(29, 33, 123));
         jLabel7_puesto.setText("Puesto:");
-        getContentPane().add(jLabel7_puesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 425, -1, -1));
+        getContentPane().add(jLabel7_puesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
 
         jLabel8_tlf.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel8_tlf.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel8_tlf.setText("Teléfono:");
-        getContentPane().add(jLabel8_tlf, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+        jLabel8_tlf.setText("Phone:");
+        getContentPane().add(jLabel8_tlf, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 225, -1, -1));
 
         jButton_anadir.setBackground(new java.awt.Color(255, 255, 255));
-        jButton_anadir.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
+        jButton_anadir.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jButton_anadir.setForeground(new java.awt.Color(29, 33, 123));
-        jButton_anadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/add.jpg"))); // NOI18N
+        jButton_anadir.setText("Save");
         jButton_anadir.setBorder(null);
         jButton_anadir.setBorderPainted(false);
         jButton_anadir.addActionListener(new java.awt.event.ActionListener() {
@@ -119,60 +119,66 @@ public class AnadirUsuario extends javax.swing.JFrame {
                 jButton_anadirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_anadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, 110, 110));
+        getContentPane().add(jButton_anadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 335, 90, 40));
 
         jLabel1_titulo.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel1_titulo.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel1_titulo.setText("Añadir nuevo usuario");
-        getContentPane().add(jLabel1_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jLabel1_titulo.setText("Create new user");
+        getContentPane().add(jLabel1_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, -1, -1));
 
         txt_apellidos.setBackground(new java.awt.Color(240, 240, 240));
         txt_apellidos.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_apellidos.setForeground(new java.awt.Color(29, 33, 123));
+        txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_apellidos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 200, 200, -1));
+        getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 175, 200, -1));
 
         txt_tlf.setBackground(new java.awt.Color(240, 240, 240));
         txt_tlf.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_tlf.setForeground(new java.awt.Color(29, 33, 123));
+        txt_tlf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_tlf.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_tlf, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 250, 200, -1));
+        getContentPane().add(txt_tlf, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 225, 200, -1));
 
         txt_email.setBackground(new java.awt.Color(240, 240, 240));
         txt_email.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_email.setForeground(new java.awt.Color(29, 33, 123));
+        txt_email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_email.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 300, 200, -1));
+        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 275, 200, -1));
 
         txt_username.setBackground(new java.awt.Color(240, 240, 240));
         txt_username.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_username.setForeground(new java.awt.Color(29, 33, 123));
+        txt_username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_username.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 200, -1));
+        getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 200, -1));
 
         txt_nombre.setBackground(new java.awt.Color(240, 240, 240));
         txt_nombre.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_nombre.setForeground(new java.awt.Color(29, 33, 123));
+        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 150, 200, -1));
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 125, 200, -1));
 
         txt_password.setBackground(new java.awt.Color(240, 240, 240));
         txt_password.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_password.setForeground(new java.awt.Color(29, 33, 123));
+        txt_password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_password.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 200, -1));
+        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 200, -1));
 
         combo_puesto.setBackground(new java.awt.Color(240, 240, 240));
         combo_puesto.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         combo_puesto.setForeground(new java.awt.Color(29, 33, 123));
         combo_puesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recepcion", "Reservas" }));
         combo_puesto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(combo_puesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 200, -1));
+        getContentPane().add(combo_puesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 200, -1));
 
         btn_limpiar.setBackground(new java.awt.Color(255, 255, 255));
         btn_limpiar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_limpiar.setForeground(new java.awt.Color(29, 33, 123));
-        btn_limpiar.setText("Vaciar campos");
+        btn_limpiar.setText("Reset fields");
         btn_limpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_limpiar.setBorderPainted(false);
         btn_limpiar.setFocusPainted(false);
@@ -181,12 +187,12 @@ public class AnadirUsuario extends javax.swing.JFrame {
                 btn_limpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 420, 140, 35));
+        getContentPane().add(btn_limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 395, 140, 35));
 
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
-        btn_cancelar.setText("Cancelar");
+        btn_cancelar.setText("Cancel");
         btn_cancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_cancelar.setBorderPainted(false);
         btn_cancelar.setFocusPainted(false);
@@ -195,7 +201,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 420, 100, 35));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 395, 100, 35));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 650));
 
         pack();

@@ -59,7 +59,6 @@ public class Reservas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btn_buscarAlojamiento = new javax.swing.JButton();
         btn_buscarFechas = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         txt_alojamientoBusqueda = new javax.swing.JTextField();
         btn_verTodas = new javax.swing.JButton();
 
@@ -118,18 +117,16 @@ public class Reservas extends javax.swing.JFrame {
         });
         getContentPane().add(btn_buscarAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
 
+        btn_buscarFechas.setBackground(new java.awt.Color(255, 255, 255));
+        btn_buscarFechas.setForeground(new java.awt.Color(29, 33, 123));
+        btn_buscarFechas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/lupa - copia.png"))); // NOI18N
         btn_buscarFechas.setText("Buscar");
         btn_buscarFechas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buscarFechasActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_buscarFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel7.setText("CONTINUAR CON FILTRO");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, -1, -1));
+        getContentPane().add(btn_buscarFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 100, 30));
         getContentPane().add(txt_alojamientoBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 70, -1));
 
         btn_verTodas.setText("Ver todas las reservas");
@@ -315,7 +312,6 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_reservas;
     private javax.swing.JTextField txt_alojamientoBusqueda;
@@ -333,11 +329,11 @@ public class Reservas extends javax.swing.JFrame {
             table_reservas = new JTable(modelo);
             jScrollPane1.setViewportView(table_reservas);
 
-            modelo.addColumn("Fecha");
-            modelo.addColumn("Nº de Reserva");
+            modelo.addColumn("Fecha de reserva");
+            modelo.addColumn("Referencia");
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
-            modelo.addColumn("Precio");
+            modelo.addColumn("Precio (€)");
             modelo.addColumn("Alojamiento");
             modelo.addColumn("Cliente");
 
