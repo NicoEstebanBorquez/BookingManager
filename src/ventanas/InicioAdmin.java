@@ -158,7 +158,7 @@ public class InicioAdmin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(29, 33, 123));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Reservations");
+        jLabel1.setText("Bookings");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 350, 150, -1));
 
         jLabel2.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N

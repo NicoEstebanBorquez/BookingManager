@@ -7,15 +7,15 @@ import ventanas.InfoReserva;
 
 public class BD {
 
-    public void altaAlojamiento(String ID, String nombre, String propietario, String direccion, int capacidad, int dormitorios,
+    public void altaAlojamiento(int ID, String nombre, String propietario, String direccion, int capacidad, int dormitorios,
             int baños, String terraza, String piscina, String aparcamiento, int usuario) {
-
+        
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
+            
             PreparedStatement pst = cn.prepareStatement("INSERT INTO alojamientos VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-            pst.setString(1, ID);
+            pst.setInt(1, ID);
             pst.setString(2, nombre);
             pst.setString(3, propietario);
             pst.setString(4, direccion);
@@ -347,4 +347,70 @@ public class BD {
 
     }
 
+    public int obtenerSiguienteIDAlojamiento(){
+        
+        String maxID = "";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            
+            PreparedStatement pst = cn.prepareStatement("SELECT MAX(id_alojamiento) FROM `alojamientos`");
+            ResultSet rs = pst.executeQuery();
+            
+            if(rs.next()){
+                maxID = rs.getString(1);
+            }
+         
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return Integer.parseInt(maxID)+1;
+    }
+    
+    public int obtenerSiguienteIDCliente(){
+        
+        String maxID = "";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            
+            PreparedStatement pst = cn.prepareStatement("SELECT MAX(id_cliente) FROM `clientes`");
+            ResultSet rs = pst.executeQuery();
+            
+            if(rs.next()){
+                maxID = rs.getString(1);
+            }
+         
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Integer.parseInt(maxID)+1;
+    }
+    
+    public int obtenerSiguienteIDReserva(){
+        
+        String maxID = "";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            
+            PreparedStatement pst = cn.prepareStatement("SELECT MAX(id_reserva) FROM `reservas`");
+            ResultSet rs = pst.executeQuery();
+            
+            if(rs.next()){
+                maxID = rs.getString(1);
+            }
+         
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Integer.parseInt(maxID)+1;
+    }
 }

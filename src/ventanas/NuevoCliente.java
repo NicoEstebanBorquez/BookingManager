@@ -13,6 +13,7 @@ public class NuevoCliente extends javax.swing.JFrame {
     BD bd;
     String nombre_usuario, apellidos_usuario;
     int id_usuario;
+    int IDNuevoCliente = 0;
     
     public NuevoCliente() {
         initComponents();
@@ -30,8 +31,12 @@ public class NuevoCliente extends javax.swing.JFrame {
         nombre_usuario = InicioAdmin.nombre_usuario;
         apellidos_usuario = InicioAdmin.apellidos_usuario;
         label_gestionadoPor.setText(nombre_usuario + " " + apellidos_usuario);
-        
+
         id_usuario = bd.obtenerIDusuario(nombre_usuario, apellidos_usuario);
+        
+        //Obtencion del ID del cliente desde la BD
+        IDNuevoCliente = bd.obtenerSiguienteIDCliente();
+        label_id.setText(""+IDNuevoCliente);
         
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
@@ -65,14 +70,14 @@ public class NuevoCliente extends javax.swing.JFrame {
         txt_nacionalidad = new javax.swing.JTextField();
         txt_tlf = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
-        txt_id = new javax.swing.JTextField();
-        label_gestionadoPor = new javax.swing.JLabel();
+        label_id = new javax.swing.JLabel();
         btn_cancelar = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        label_gestionadoPor = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -188,17 +193,10 @@ public class NuevoCliente extends javax.swing.JFrame {
         txt_email.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 560, 340, -1));
 
-        txt_id.setBackground(new java.awt.Color(240, 240, 240));
-        txt_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        txt_id.setForeground(new java.awt.Color(29, 33, 123));
-        txt_id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_id.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 155, 100, -1));
-
-        label_gestionadoPor.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        label_gestionadoPor.setForeground(new java.awt.Color(29, 33, 123));
-        label_gestionadoPor.setText("usuario");
-        getContentPane().add(label_gestionadoPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, -1));
+        label_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_id.setForeground(new java.awt.Color(29, 33, 123));
+        label_id.setText("ref");
+        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 155, -1, -1));
 
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
@@ -225,6 +223,11 @@ public class NuevoCliente extends javax.swing.JFrame {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 5, 265));
+
+        label_gestionadoPor.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_gestionadoPor.setForeground(new java.awt.Color(29, 33, 123));
+        label_gestionadoPor.setText("usuario");
+        getContentPane().add(label_gestionadoPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 620));
 
         pack();
@@ -232,7 +235,7 @@ public class NuevoCliente extends javax.swing.JFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         bd.altaCliente(
-                Integer.parseInt(txt_id.getText().trim()),
+                IDNuevoCliente,
                 txt_nombre.getText().trim(),
                 txt_apellidos.getText().trim(),
                 txt_dni.getText().trim(),
@@ -309,10 +312,10 @@ public class NuevoCliente extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel label_gestionadoPor;
+    private javax.swing.JLabel label_id;
     private javax.swing.JTextField txt_apellidos;
     private javax.swing.JTextField txt_dni;
     private javax.swing.JTextField txt_email;
-    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_nacionalidad;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_pasaporte;

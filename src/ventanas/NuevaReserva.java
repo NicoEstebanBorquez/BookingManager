@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -11,6 +12,8 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +27,7 @@ public class NuevaReserva extends javax.swing.JFrame {
     String alojamiento_seleccionado;
     int cliente_seleccionado;
     java.sql.Date fecha_actual;
+    int IDNuevaReserva = 0;
 
     //Permite acceder a los metodos necesarios para añadir filas, columnas, dar nombre a las columnas, etc.
     DefaultTableModel modelo = new DefaultTableModel();
@@ -31,7 +35,7 @@ public class NuevaReserva extends javax.swing.JFrame {
 
     public NuevaReserva() {
         initComponents();
-        setSize(1000, 730);
+        setSize(800, 720);
         setResizable(false);
         setTitle("Nueva reserva");
         setLocationRelativeTo(null);
@@ -48,6 +52,10 @@ public class NuevaReserva extends javax.swing.JFrame {
         label_gestionadoPor.setText(nombre_usuario + " " + apellidos_usuario);
         id_usuario = bd.obtenerIDusuario(nombre_usuario, apellidos_usuario);
 
+        //Obtencion del ID del alojamiento desde la BD
+        IDNuevaReserva = bd.obtenerSiguienteIDReserva();
+        label_id.setText(""+IDNuevaReserva);
+        
         //Obtención de fecha actual
         long fecha_miliseconds = new Date().getTime();
         fecha_actual = new java.sql.Date(fecha_miliseconds);
@@ -58,14 +66,14 @@ public class NuevaReserva extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
-            PreparedStatement pst = cn.prepareStatement("SELECT id_alojamiento, direccion FROM alojamientos");
+            PreparedStatement pst = cn.prepareStatement("SELECT id_alojamiento, nombre FROM alojamientos");
             ResultSet rs = pst.executeQuery();
 
             table_alojamientos = new JTable(modelo);
             jScrollPane1.setViewportView(table_alojamientos);
 
-            modelo.addColumn("ID");
-            modelo.addColumn("Dirección");
+            modelo.addColumn("Ref");
+            modelo.addColumn("Name");
 
             while (rs.next()) {
                 Object[] fila = new Object[2];
@@ -107,9 +115,9 @@ public class NuevaReserva extends javax.swing.JFrame {
             table_clientes = new JTable(modelo_clientes);
             jScrollPane3.setViewportView(table_clientes);
 
-            modelo_clientes.addColumn("ID");
-            modelo_clientes.addColumn("Nombre");
-            modelo_clientes.addColumn("Apellidos");
+            modelo_clientes.addColumn("Ref");
+            modelo_clientes.addColumn("First name");
+            modelo_clientes.addColumn("Last name");
 
             while (rs.next()) {
                 Object[] fila = new Object[3];
@@ -139,6 +147,12 @@ public class NuevaReserva extends javax.swing.JFrame {
                 }
             }
         });
+        
+        //Imagen de fondo
+        ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
+        Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        jLabel_Wallpaper.setIcon(icono);
+        this.repaint();
     }
 
     /**
@@ -160,7 +174,6 @@ public class NuevaReserva extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         btn_guardarReserva = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        txt_id = new javax.swing.JTextField();
         txt_precio = new javax.swing.JTextField();
         label_gestionadoPor = new javax.swing.JLabel();
         jDate_entrada = new com.toedter.calendar.JDateChooser();
@@ -173,6 +186,9 @@ public class NuevaReserva extends javax.swing.JFrame {
         btn_cancelar = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
+        label_id = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel_Wallpaper = new javax.swing.JLabel();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -192,7 +208,7 @@ public class NuevaReserva extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel1.setText("Add new reservation:");
+        jLabel1.setText("Add new booking:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
@@ -202,8 +218,8 @@ public class NuevaReserva extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel3.setText("Confirmation date:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, -1, -1));
+        jLabel3.setText("Booking date:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 215, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(29, 33, 123));
@@ -230,24 +246,21 @@ public class NuevaReserva extends javax.swing.JFrame {
         jLabel8.setText("Customer:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 505, -1, -1));
 
+        btn_guardarReserva.setBackground(new java.awt.Color(255, 255, 255));
+        btn_guardarReserva.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        btn_guardarReserva.setForeground(new java.awt.Color(29, 33, 123));
         btn_guardarReserva.setText("Add");
         btn_guardarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarReservaActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 440, -1, -1));
+        getContentPane().add(btn_guardarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 530, 83, -1));
 
         jLabel10.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(29, 33, 123));
         jLabel10.setText("Created by:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, -1, -1));
-
-        txt_id.setBackground(new java.awt.Color(240, 240, 240));
-        txt_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        txt_id.setForeground(new java.awt.Color(29, 33, 123));
-        txt_id.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 155, 150, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 155, -1, -1));
 
         txt_precio.setBackground(new java.awt.Color(240, 240, 240));
         txt_precio.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
@@ -258,20 +271,20 @@ public class NuevaReserva extends javax.swing.JFrame {
         label_gestionadoPor.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_gestionadoPor.setForeground(new java.awt.Color(29, 33, 123));
         label_gestionadoPor.setText("usuario");
-        getContentPane().add(label_gestionadoPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, -1, -1));
+        getContentPane().add(label_gestionadoPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, -1, -1));
 
         jDate_entrada.setForeground(new java.awt.Color(29, 33, 123));
-        jDate_entrada.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        jDate_entrada.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
         getContentPane().add(jDate_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 205, 150, 30));
 
         jDate_salida.setForeground(new java.awt.Color(29, 33, 123));
-        jDate_salida.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        jDate_salida.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
         getContentPane().add(jDate_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 255, 150, 30));
 
         label_fechaActual.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_fechaActual.setForeground(new java.awt.Color(29, 33, 123));
         label_fechaActual.setText("Fecha actual");
-        getContentPane().add(label_fechaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 90, -1, -1));
+        getContentPane().add(label_fechaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
 
         jScrollPane1.setForeground(new java.awt.Color(29, 33, 123));
 
@@ -309,19 +322,31 @@ public class NuevaReserva extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 535, 440, 108));
 
+        btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
         btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 480, -1, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 570, 83, -1));
 
         jLabel15.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel15.setText("Reservation details");
+        jLabel15.setText("Booking details");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, -1, -1));
-        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 135, 265, -1));
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 135, 285, -1));
+
+        label_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_id.setForeground(new java.awt.Color(29, 33, 123));
+        label_id.setText("ref");
+        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 155, -1, -1));
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, 5, 475));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, -4, 870, 730));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -339,7 +364,7 @@ public class NuevaReserva extends javax.swing.JFrame {
         java.sql.Date salida = new java.sql.Date(salida_l);
         try {
             bd.altaReserva(
-                    Integer.parseInt(txt_id.getText().trim()),
+                    IDNuevaReserva,
                     fecha_actual,
                     entrada,
                     salida,
@@ -416,16 +441,18 @@ public class NuevaReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable2;
     private javax.swing.JLabel label_fechaActual;
     private javax.swing.JLabel label_gestionadoPor;
+    private javax.swing.JLabel label_id;
     private javax.swing.JTable table_alojamientos;
     private javax.swing.JTable table_clientes;
-    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_precio;
     // End of variables declaration//GEN-END:variables
 }

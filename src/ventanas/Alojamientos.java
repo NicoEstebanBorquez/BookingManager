@@ -36,56 +36,7 @@ public class Alojamientos extends javax.swing.JFrame {
 
         //Obtener listado de reservas
         listadoAlojamientos();
-        /*        
-//Consulta a la BD para obtener listado de clientes
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
-            PreparedStatement pst = cn.prepareStatement("SELECT id_alojamiento, nombre, plazas, dormitorios, direccion, propietario FROM alojamientos");
-            ResultSet rs = pst.executeQuery();
-
-            table_alojamientos = new JTable(modelo);
-            jScrollPane1.setViewportView(table_alojamientos);
-
-            modelo.addColumn("ID");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Capacidad");
-            modelo.addColumn("Nº dormitorios");
-            modelo.addColumn("Dirección");
-            modelo.addColumn("Propietario");
-
-            while (rs.next()) {
-                Object[] fila = new Object[6];
-
-                for (int i = 0; i < 6; i++) {
-                    fila[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(fila);
-            }
-
-            pst.close();
-            cn.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        //Obtener el alojamiento seleccionado
-        table_alojamientos.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int fila_point = table_alojamientos.rowAtPoint(e.getPoint());
-                int columna_point = 0;
-
-                if (fila_point > -1) {
-                    alojamiento = (String) modelo.getValueAt(fila_point, columna_point);
-                    InfoAlojamiento ia = new InfoAlojamiento();
-                    ia.setVisible(true);
-                }
-            }
-        });*/
+    
     }
 
     /**

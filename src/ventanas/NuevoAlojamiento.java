@@ -12,6 +12,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
     BD bd;
     String nombre_usuario, apellidos_usuario;
     int id_usuario;
+    int IDNuevoAlojamiento = 0;
 
     public NuevoAlojamiento() {
         initComponents();
@@ -31,6 +32,10 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         label_gestionadoPor.setText(nombre_usuario + " " + apellidos_usuario);
 
         id_usuario = bd.obtenerIDusuario(nombre_usuario, apellidos_usuario);
+        
+        //Obtencion del ID del alojamiento desde la BD
+        IDNuevoAlojamiento = bd.obtenerSiguienteIDAlojamiento();
+        label_id.setText(""+IDNuevoAlojamiento);
 
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
@@ -54,7 +59,6 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btn_guardar = new javax.swing.JButton();
-        txt_id = new javax.swing.JTextField();
         txt_propietario = new javax.swing.JTextField();
         txt_direccion = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -71,7 +75,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         combo_dormitorios = new javax.swing.JComboBox<>();
         combo_baños = new javax.swing.JComboBox<>();
         combo_pax = new javax.swing.JComboBox<>();
-        jLabel13 = new javax.swing.JLabel();
+        label_id = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
@@ -128,13 +132,6 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 400, 83, -1));
-
-        txt_id.setBackground(new java.awt.Color(240, 240, 240));
-        txt_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        txt_id.setForeground(new java.awt.Color(29, 33, 123));
-        txt_id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_id.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 155, 50, -1));
 
         txt_propietario.setBackground(new java.awt.Color(240, 240, 240));
         txt_propietario.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
@@ -219,13 +216,13 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
 
         combo_pax.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         combo_pax.setForeground(new java.awt.Color(29, 33, 123));
-        combo_pax.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6" }));
+        combo_pax.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8" }));
         getContentPane().add(combo_pax, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel13.setText("AN-");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 156, -1, -1));
+        label_id.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        label_id.setForeground(new java.awt.Color(29, 33, 123));
+        label_id.setText("ref");
+        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 156, -1, -1));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 415, 10, 98));
@@ -272,6 +269,10 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
             pax = 5;
         } else if (combo_pax.getSelectedIndex() == 6) {
             pax = 6;
+        } else if (combo_pax.getSelectedIndex() == 7) {
+            pax = 7;
+        } else if (combo_pax.getSelectedIndex() == 8) {
+            pax = 8;
         }
 
         //ComboBox PAX
@@ -338,8 +339,10 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
             parking = "NO";
         }
 
+        
+        
         bd.altaAlojamiento(
-                ("AN-"+txt_id.getText().trim()),
+                IDNuevoAlojamiento,
                 txt_nombre.getText().trim(),
                 txt_propietario.getText().trim(),
                 txt_direccion.getText().trim(),
@@ -357,7 +360,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-
+        
         Alojamientos a = new Alojamientos();
         a.setVisible(true);
         this.dispose();
@@ -415,7 +418,6 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
@@ -432,8 +434,8 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel label_gestionadoPor;
+    private javax.swing.JLabel label_id;
     private javax.swing.JTextField txt_direccion;
-    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_propietario;
     // End of variables declaration//GEN-END:variables
