@@ -272,7 +272,7 @@ public class BD {
         return nombre_cliente;
     }
 
-    public void modificarAlojamiento(String ID, String nombre, String prop, String direccion, String plazas, String dormitorios, String baños, String terraza, String piscina, String aparcamiento) {
+    public void modificarAlojamiento(String ID, String nombre, String prop, String direccion, int plazas, int dormitorios, int baños, String terraza, String piscina, String aparcamiento) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
@@ -280,9 +280,9 @@ public class BD {
             pst.setString(1, nombre);
             pst.setString(2, prop);
             pst.setString(3, direccion);
-            pst.setString(4, plazas);
-            pst.setString(5, dormitorios);
-            pst.setString(6, baños);
+            pst.setInt(4, plazas);
+            pst.setInt(5, dormitorios);
+            pst.setInt(6, baños);
             pst.setString(7, terraza);
             pst.setString(8, piscina);
             pst.setString(9, aparcamiento);

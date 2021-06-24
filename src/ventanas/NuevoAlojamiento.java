@@ -1,4 +1,5 @@
 package ventanas;
+
 import clases.BD;
 import java.awt.Image;
 import javax.swing.Icon;
@@ -11,11 +12,11 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
     BD bd;
     String nombre_usuario, apellidos_usuario;
     int id_usuario;
-    
+
     public NuevoAlojamiento() {
         initComponents();
 
-        setSize(790, 600);
+        setSize(790, 590);
         setResizable(false);
         setTitle("New accommodation");
         setLocationRelativeTo(null);
@@ -24,14 +25,13 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         bd = new BD();
-    
+
         nombre_usuario = InicioAdmin.nombre_usuario;
         apellidos_usuario = InicioAdmin.apellidos_usuario;
         label_gestionadoPor.setText(nombre_usuario + " " + apellidos_usuario);
-        
+
         id_usuario = bd.obtenerIDusuario(nombre_usuario, apellidos_usuario);
-        
-        
+
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -57,31 +57,27 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         txt_id = new javax.swing.JTextField();
         txt_propietario = new javax.swing.JTextField();
         txt_direccion = new javax.swing.JTextField();
-        txt_capacidad = new javax.swing.JTextField();
-        txt_dormitorios = new javax.swing.JTextField();
-        txt_baños = new javax.swing.JTextField();
-        txt_terraza = new javax.swing.JTextField();
-        txt_piscina = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txt_parking = new javax.swing.JTextField();
         label_gestionadoPor = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         btn_cancelar = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        check_parking = new javax.swing.JCheckBox();
+        check_piscina = new javax.swing.JCheckBox();
+        check_terraza = new javax.swing.JCheckBox();
+        combo_dormitorios = new javax.swing.JComboBox<>();
+        combo_baños = new javax.swing.JComboBox<>();
+        combo_pax = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
+        jLabel16 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -95,32 +91,32 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(29, 33, 123));
         jLabel2.setText("PAX:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(29, 33, 123));
         jLabel3.setText("Swimming pool:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel4.setText("Dirección:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 275, -1, -1));
+        jLabel4.setText("Address:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 305, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel5.setText("Propietario/a:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 225, -1, -1));
+        jLabel5.setText("Owner:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 255, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel6.setText("ID:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 125, -1, -1));
+        jLabel6.setText("Ref.:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 155, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(29, 33, 123));
         jLabel7.setText("Bedrooms:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
 
         btn_guardar.setBackground(new java.awt.Color(255, 255, 255));
         btn_guardar.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
@@ -131,107 +127,65 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 420, 83, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 400, 83, -1));
 
         txt_id.setBackground(new java.awt.Color(240, 240, 240));
         txt_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_id.setForeground(new java.awt.Color(29, 33, 123));
         txt_id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_id.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 125, 50, -1));
+        getContentPane().add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 155, 50, -1));
 
         txt_propietario.setBackground(new java.awt.Color(240, 240, 240));
         txt_propietario.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_propietario.setForeground(new java.awt.Color(29, 33, 123));
         txt_propietario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_propietario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_propietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 225, 340, -1));
+        getContentPane().add(txt_propietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 255, 340, -1));
 
         txt_direccion.setBackground(new java.awt.Color(240, 240, 240));
         txt_direccion.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_direccion.setForeground(new java.awt.Color(29, 33, 123));
         txt_direccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_direccion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 275, 340, -1));
-
-        txt_capacidad.setBackground(new java.awt.Color(240, 240, 240));
-        txt_capacidad.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        txt_capacidad.setForeground(new java.awt.Color(29, 33, 123));
-        txt_capacidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_capacidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_capacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 500, 30, -1));
-
-        txt_dormitorios.setBackground(new java.awt.Color(240, 240, 240));
-        txt_dormitorios.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        txt_dormitorios.setForeground(new java.awt.Color(29, 33, 123));
-        txt_dormitorios.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_dormitorios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_dormitorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, 30, -1));
-
-        txt_baños.setBackground(new java.awt.Color(240, 240, 240));
-        txt_baños.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        txt_baños.setForeground(new java.awt.Color(29, 33, 123));
-        txt_baños.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_baños.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_baños, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 30, -1));
-
-        txt_terraza.setBackground(new java.awt.Color(240, 240, 240));
-        txt_terraza.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        txt_terraza.setForeground(new java.awt.Color(29, 33, 123));
-        txt_terraza.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_terraza.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_terraza, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 540, 30, 30));
-
-        txt_piscina.setBackground(new java.awt.Color(240, 240, 240));
-        txt_piscina.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        txt_piscina.setForeground(new java.awt.Color(29, 33, 123));
-        txt_piscina.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_piscina.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_piscina, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 540, 30, 30));
+        getContentPane().add(txt_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 305, 340, -1));
 
         jLabel8.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel8.setText("Managed by user:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 125, -1, -1));
+        jLabel8.setText("Assigned to:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 125, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(29, 33, 123));
         jLabel9.setText("Balcony/Terrace:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(29, 33, 123));
         jLabel10.setText("Bathrooms:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(29, 33, 123));
         jLabel11.setText("Parking:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 460, -1, -1));
-
-        txt_parking.setBackground(new java.awt.Color(240, 240, 240));
-        txt_parking.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        txt_parking.setForeground(new java.awt.Color(29, 33, 123));
-        txt_parking.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_parking.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_parking, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 30, 30));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, -1, -1));
 
         label_gestionadoPor.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_gestionadoPor.setForeground(new java.awt.Color(29, 33, 123));
         label_gestionadoPor.setText("usuario");
-        getContentPane().add(label_gestionadoPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
+        getContentPane().add(label_gestionadoPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel12.setText("Nombre:");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 175, -1, -1));
+        jLabel12.setText("Name:");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 205, -1, -1));
 
         txt_nombre.setBackground(new java.awt.Color(240, 240, 240));
         txt_nombre.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_nombre.setForeground(new java.awt.Color(29, 33, 123));
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 175, 340, -1));
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 205, 340, -1));
 
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
@@ -242,70 +196,176 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 455, 83, -1));
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 465, -1, -1));
-        getContentPane().add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 425, -1, -1));
-        getContentPane().add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 385, -1, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 440, 83, -1));
+        getContentPane().add(check_parking, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 495, -1, -1));
+        getContentPane().add(check_piscina, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 455, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(29, 33, 123));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, -1, -1));
+        check_terraza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                check_terrazaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(check_terraza, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 415, -1, -1));
 
-        jComboBox2.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(29, 33, 123));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, -1, -1));
+        combo_dormitorios.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        combo_dormitorios.setForeground(new java.awt.Color(29, 33, 123));
+        combo_dormitorios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4" }));
+        getContentPane().add(combo_dormitorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, -1, -1));
 
-        jComboBox3.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        jComboBox3.setForeground(new java.awt.Color(29, 33, 123));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
-        getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, -1, -1));
+        combo_baños.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        combo_baños.setForeground(new java.awt.Color(29, 33, 123));
+        combo_baños.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4" }));
+        getContentPane().add(combo_baños, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, -1, -1));
+
+        combo_pax.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        combo_pax.setForeground(new java.awt.Color(29, 33, 123));
+        combo_pax.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6" }));
+        getContentPane().add(combo_pax, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(29, 33, 123));
         jLabel13.setText("AN-");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 126, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 156, -1, -1));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 385, 10, 98));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 415, 10, 98));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 5, 170));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 5, 170));
 
         jLabel15.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel15.setText("Facilities");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 350, -1, -1));
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 359, 312, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, -4, 1000, 510));
+        jLabel15.setText("Accommodation details");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, -1, -1));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 389, 342, -1));
+
+        jLabel16.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel16.setText("Facilities");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 380, -1, -1));
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 135, 265, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, -4, 800, 560));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+
+        int pax = 0;
+        int dormitorios = 0;
+        int baños = 0;
+        String terraza = "t";
+        String piscina = "pi";
+        String parking = "pa";
+
+        if (combo_pax.getSelectedIndex() == 0) {
+            pax = 0;
+        } else if (combo_pax.getSelectedIndex() == 1) {
+            pax = 1;
+        } else if (combo_pax.getSelectedIndex() == 2) {
+            pax = 2;
+        } else if (combo_pax.getSelectedIndex() == 3) {
+            pax = 3;
+        } else if (combo_pax.getSelectedIndex() == 4) {
+            pax = 4;
+        } else if (combo_pax.getSelectedIndex() == 5) {
+            pax = 5;
+        } else if (combo_pax.getSelectedIndex() == 6) {
+            pax = 6;
+        }
+
+        //ComboBox PAX
+        if (combo_pax.getSelectedIndex() == 0) {
+            pax = 0;
+        } else if (combo_pax.getSelectedIndex() == 1) {
+            pax = 1;
+        } else if (combo_pax.getSelectedIndex() == 2) {
+            pax = 2;
+        } else if (combo_pax.getSelectedIndex() == 3) {
+            pax = 3;
+        } else if (combo_pax.getSelectedIndex() == 4) {
+            pax = 4;
+        } else if (combo_pax.getSelectedIndex() == 5) {
+            pax = 5;
+        } else if (combo_pax.getSelectedIndex() == 6) {
+            pax = 6;
+        }
+
+        //ComboBox dormitorios
+        if (combo_dormitorios.getSelectedIndex() == 0) {
+            dormitorios = 0;
+        } else if (combo_dormitorios.getSelectedIndex() == 1) {
+            dormitorios = 1;
+        } else if (combo_dormitorios.getSelectedIndex() == 2) {
+            dormitorios = 2;
+        } else if (combo_dormitorios.getSelectedIndex() == 3) {
+            dormitorios = 3;
+        } else if (combo_dormitorios.getSelectedIndex() == 4) {
+            dormitorios = 4;
+        }
+
+        //ComboBox baños
+        if (combo_baños.getSelectedIndex() == 0) {
+            baños = 0;
+        } else if (combo_baños.getSelectedIndex() == 1) {
+            baños = 1;
+        } else if (combo_baños.getSelectedIndex() == 2) {
+            baños = 2;
+        } else if (combo_baños.getSelectedIndex() == 3) {
+            baños = 3;
+        } else if (combo_baños.getSelectedIndex() == 4) {
+            baños = 4;
+        }
+
+        //CheckBox terraza
+        if (check_terraza.isSelected()) {
+            terraza = "YES";
+        } else {
+            terraza = "NO";
+        }
         
+        //CheckBox piscina
+        if (check_piscina.isSelected()) {
+            piscina = "YES";
+        } else {
+            piscina = "NO";
+        }
+
+        //CheckBox parking
+        if (check_parking.isSelected()) {
+            parking = "YES";
+        } else {
+            parking = "NO";
+        }
+
         bd.altaAlojamiento(
-                txt_id.getText().trim(), 
+                ("AN-"+txt_id.getText().trim()),
                 txt_nombre.getText().trim(),
-                txt_propietario.getText().trim(), 
-                txt_direccion.getText().trim(), 
-                Integer.parseInt(txt_capacidad.getText().trim()), 
-                Integer.parseInt(txt_dormitorios.getText().trim()), 
-                Integer.parseInt(txt_baños.getText().trim()), 
-                txt_terraza.getText().trim(), 
-                txt_piscina.getText().trim(), 
-                txt_parking.getText().trim(), 
-                id_usuario);  
-        
-        this.dispose();
+                txt_propietario.getText().trim(),
+                txt_direccion.getText().trim(),
+                pax,
+                dormitorios,
+                baños,
+                terraza,
+                piscina,
+                parking,
+                id_usuario);
+
         Alojamientos a = new Alojamientos();
         a.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-        // TODO add your handling code here:
+
+        Alojamientos a = new Alojamientos();
+        a.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void check_terrazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_check_terrazaActionPerformed
+        System.out.println("CHECK!");
+    }//GEN-LAST:event_check_terrazaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,18 +405,19 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_guardar;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JCheckBox check_parking;
+    private javax.swing.JCheckBox check_piscina;
+    private javax.swing.JCheckBox check_terraza;
+    private javax.swing.JComboBox<String> combo_baños;
+    private javax.swing.JComboBox<String> combo_dormitorios;
+    private javax.swing.JComboBox<String> combo_pax;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -369,16 +430,11 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel label_gestionadoPor;
-    private javax.swing.JTextField txt_baños;
-    private javax.swing.JTextField txt_capacidad;
     private javax.swing.JTextField txt_direccion;
-    private javax.swing.JTextField txt_dormitorios;
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_parking;
-    private javax.swing.JTextField txt_piscina;
     private javax.swing.JTextField txt_propietario;
-    private javax.swing.JTextField txt_terraza;
     // End of variables declaration//GEN-END:variables
 }

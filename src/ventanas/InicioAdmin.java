@@ -152,44 +152,44 @@ public class InicioAdmin extends javax.swing.JFrame {
 
         jLabel_titulo.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel_titulo.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel_titulo.setText("Panel de Administración");
+        jLabel_titulo.setText("Administratotion Panel");
         getContentPane().add(jLabel_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 350, 50));
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(29, 33, 123));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Reservas");
+        jLabel1.setText("Reservations");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 350, 150, -1));
 
         jLabel2.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(29, 33, 123));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Añadir Usuario");
+        jLabel2.setText("Add User");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 600, 170, -1));
 
         jLabel3.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(29, 33, 123));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Gestionar Usuarios");
+        jLabel3.setText("Manage Users");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 600, 210, -1));
 
         jLabel4.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(29, 33, 123));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Clientes");
+        jLabel4.setText("Customers");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 350, 150, -1));
 
         jLabel5.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(29, 33, 123));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Otros");
+        jLabel5.setText("Others");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 600, 150, -1));
 
         jLabel6.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(29, 33, 123));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Alojamientos");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 150, -1));
+        jLabel6.setText("Accommodations");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 190, -1));
 
         jLabel_nombreUsuario.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel_nombreUsuario.setForeground(new java.awt.Color(29, 33, 73));

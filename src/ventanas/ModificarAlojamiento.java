@@ -128,9 +128,9 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
                 txt_nombre.getText(),
                 txt_propietario.getText(),
                 txt_direccion.getText(),
-                txt_plazas.getText(),
-                txt_dormitorios.getText(),
-                txt_baños.getText(),
+                Integer.parseInt(txt_plazas.getText()),
+                Integer.parseInt(txt_dormitorios.getText()),
+                Integer.parseInt(txt_baños.getText()),
                 txt_terraza.getText(),
                 txt_piscina.getText(),
                 txt_aparcamiento.getText());
