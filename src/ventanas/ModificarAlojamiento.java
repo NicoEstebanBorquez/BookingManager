@@ -69,7 +69,7 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
         jLabel3.setText("Nombre:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        jLabel4.setText("Propietario");
+        jLabel4.setText("xxxx");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
         jLabel5.setText("Direccion");
@@ -126,7 +126,6 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
         bd.modificarAlojamiento(
                 alojamiento,
                 txt_nombre.getText(),
-                txt_propietario.getText(),
                 txt_direccion.getText(),
                 Integer.parseInt(txt_plazas.getText()),
                 Integer.parseInt(txt_dormitorios.getText()),
@@ -211,14 +210,13 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
 
         label_ID.setText(String.valueOf(alojamiento));
         txt_nombre.setText(info[0]);
-        txt_propietario.setText(info[1]);
-        txt_direccion.setText(info[2]);
-        txt_plazas.setText(info[3]);
-        txt_dormitorios.setText(info[4]);
-        txt_baños.setText(info[5]);
-        txt_terraza.setText(info[6]);
+        txt_direccion.setText(info[1]);
+        txt_plazas.setText(info[2]);
+        txt_dormitorios.setText(info[3]);
+        txt_baños.setText(info[4]);
+        txt_terraza.setText(info[5]);
         txt_piscina.setText(info[6]);
-        txt_aparcamiento.setText(info[6]);
+        txt_aparcamiento.setText(info[7]);
 
     }
 

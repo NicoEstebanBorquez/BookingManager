@@ -22,7 +22,7 @@ public class InicioAdmin extends javax.swing.JFrame {
         
         setSize(1000,730);
         setResizable(false);
-        setTitle("Inicio Admin. Conectado como: " + usuario);
+        setTitle("Administration panel. Connected as: " + usuario);
         setLocationRelativeTo(null);
         
         //Evite que el programa se siga ejecutando en segundo plano despues de cerrar la ventana
@@ -44,7 +44,7 @@ public class InicioAdmin extends javax.swing.JFrame {
            if(rs.next()){
                apellidos_usuario = rs.getString("apellidos");
                nombre_usuario = rs.getString("nombre");
-               jLabel_nombreUsuario.setText("Usuario: " + nombre_usuario + " " + apellidos_usuario);
+               jLabel_nombreUsuario.setText("User: " + nombre_usuario + " " + apellidos_usuario);
            } 
            
        }catch(Exception e){
@@ -152,7 +152,7 @@ public class InicioAdmin extends javax.swing.JFrame {
 
         jLabel_titulo.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel_titulo.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel_titulo.setText("Administratotion Panel");
+        jLabel_titulo.setText("Administration Panel");
         getContentPane().add(jLabel_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 350, 50));
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
@@ -195,13 +195,13 @@ public class InicioAdmin extends javax.swing.JFrame {
         jLabel_nombreUsuario.setForeground(new java.awt.Color(29, 33, 73));
         getContentPane().add(jLabel_nombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 340, 40));
 
-        btn_cerrarSesion.setText("Cerrar sesión");
+        btn_cerrarSesion.setText("Logout");
         btn_cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cerrarSesionActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 80, -1, -1));
+        getContentPane().add(btn_cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

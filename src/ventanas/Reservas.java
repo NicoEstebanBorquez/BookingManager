@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import static ventanas.Clientes.cliente;
 
 public class Reservas extends javax.swing.JFrame {
@@ -88,18 +89,18 @@ public class Reservas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table_reservas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 871, 220));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 871, 220));
 
-        btn_nuevaReserva.setBackground(new java.awt.Color(255, 255, 255));
+        btn_nuevaReserva.setBackground(new java.awt.Color(29, 33, 123));
         btn_nuevaReserva.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
-        btn_nuevaReserva.setForeground(new java.awt.Color(29, 33, 123));
+        btn_nuevaReserva.setForeground(new java.awt.Color(255, 255, 255));
         btn_nuevaReserva.setText("Add new booking");
         btn_nuevaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_nuevaReservaActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_nuevaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 600, -1, -1));
+        getContentPane().add(btn_nuevaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 590, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(29, 33, 123));
@@ -127,12 +128,12 @@ public class Reservas extends javax.swing.JFrame {
         jDate_hasta.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
         getContentPane().add(jDate_hasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 195, 150, 30));
 
-        jLabel5.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(29, 33, 123));
         jLabel5.setText("Search by accommodation:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(29, 33, 123));
         jLabel6.setText("Search by Check-In date:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 125, -1, -1));
@@ -157,7 +158,7 @@ public class Reservas extends javax.swing.JFrame {
                 btn_buscarFechasActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_buscarFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 100, 30));
+        getContentPane().add(btn_buscarFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, -1, -1));
 
         txt_alojamientoBusqueda.setBackground(new java.awt.Color(240, 240, 240));
         txt_alojamientoBusqueda.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
@@ -169,13 +170,13 @@ public class Reservas extends javax.swing.JFrame {
         btn_verTodas.setBackground(new java.awt.Color(255, 255, 255));
         btn_verTodas.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_verTodas.setForeground(new java.awt.Color(29, 33, 123));
-        btn_verTodas.setText("List all bookings");
+        btn_verTodas.setText("Show all bookings");
         btn_verTodas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_verTodasActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_verTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 330, -1, -1));
+        getContentPane().add(btn_verTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 310, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 730));
 
         pack();
@@ -365,20 +366,23 @@ public class Reservas extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
-            PreparedStatement pst = cn.prepareStatement("SELECT fecha_confirmacion, id_reserva, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas ORDER BY entrada");
+            PreparedStatement pst = cn.prepareStatement("SELECT id_reserva, fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas ORDER BY entrada");
             ResultSet rs = pst.executeQuery();
 
             table_reservas = new JTable(modelo);
             jScrollPane1.setViewportView(table_reservas);
 
-            modelo.addColumn("Fecha de reserva");
-            modelo.addColumn("Referencia");
-            modelo.addColumn("Entrada");
-            modelo.addColumn("Salida");
-            modelo.addColumn("Precio (€)");
-            modelo.addColumn("Alojamiento");
-            modelo.addColumn("Cliente");
+            modelo.addColumn("Ref.");
+            modelo.addColumn("Booking date");
+            modelo.addColumn("Check-In");
+            modelo.addColumn("Check-Out");
+            modelo.addColumn("Amount (€)");
+            modelo.addColumn("Accommodation");
+            modelo.addColumn("Customer");
 
+            //Alto de filas
+            table_reservas.setRowHeight(25);
+            
             while (rs.next()) {
                 Object[] fila = new Object[7];
 

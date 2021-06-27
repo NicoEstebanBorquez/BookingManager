@@ -7,7 +7,7 @@ import javax.swing.WindowConstants;
 public class InfoAlojamiento extends javax.swing.JFrame {
 
     String alojamiento;
-    String nombre, propietario, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento = "";
+    String nombre, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento = "";
     BD bd;
 
     public InfoAlojamiento() {
@@ -225,18 +225,16 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         String[] infoCliente = bd.obtenerInfoAlojamiento(alojamiento);
 
         nombre = infoCliente[0];
-        propietario = infoCliente[1];
-        direccion = infoCliente[2];
-        plazas = infoCliente[3];
-        dormitorios = infoCliente[4];
-        baños = infoCliente[5];
-        terraza = infoCliente[6];
-        piscina = infoCliente[7];
-        aparcamiento = infoCliente[8];
+        direccion = infoCliente[1];
+        plazas = infoCliente[2];
+        dormitorios = infoCliente[3];
+        baños = infoCliente[4];
+        terraza = infoCliente[5];
+        piscina = infoCliente[6];
+        aparcamiento = infoCliente[7];
 
         label_id.setText(alojamiento);
         label_nombre.setText(nombre);
-        label_propietario.setText(propietario);
         label_direccion.setText(direccion);
         label_capacidad.setText(plazas);
         label_dormitorios.setText(dormitorios);

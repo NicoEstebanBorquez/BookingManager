@@ -7,25 +7,24 @@ import ventanas.InfoReserva;
 
 public class BD {
 
-    public void altaAlojamiento(int ID, String nombre, String propietario, String direccion, int capacidad, int dormitorios,
+    public void altaAlojamiento(int ID, String nombre, String direccion, int capacidad, int dormitorios,
             int baños, String terraza, String piscina, String aparcamiento, int usuario) {
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
             
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO alojamientos VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO alojamientos VALUES(?,?,?,?,?,?,?,?,?,?)");
             pst.setInt(1, ID);
             pst.setString(2, nombre);
-            pst.setString(3, propietario);
-            pst.setString(4, direccion);
-            pst.setInt(5, capacidad);
-            pst.setInt(6, dormitorios);
-            pst.setInt(7, baños);
-            pst.setString(8, terraza);
-            pst.setString(9, piscina);
-            pst.setString(10, aparcamiento);
-            pst.setInt(11, usuario);
+            pst.setString(3, direccion);
+            pst.setInt(4, capacidad);
+            pst.setInt(5, dormitorios);
+            pst.setInt(6, baños);
+            pst.setString(7, terraza);
+            pst.setString(8, piscina);
+            pst.setString(9, aparcamiento);
+            pst.setInt(10, usuario);
             pst.executeUpdate();
 
             pst.close();
@@ -159,7 +158,7 @@ public class BD {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
-            PreparedStatement pst = cn.prepareStatement("SELECT nombre, propietario, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento FROM alojamientos WHERE id_alojamiento = ?");
+            PreparedStatement pst = cn.prepareStatement("SELECT nombre, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento FROM alojamientos WHERE id_alojamiento = ?");
             pst.setString(1, ID);
 
             ResultSet rs = pst.executeQuery();
@@ -167,14 +166,13 @@ public class BD {
             if (rs.next()) {
 
                 info[0] = rs.getString(1); //nombre
-                info[1] = rs.getString(2); //propietario, 
-                info[2] = rs.getString(3); //direccion
-                info[3] = rs.getString(4); //plazas
-                info[4] = rs.getString(5); //dormitorios
-                info[5] = rs.getString(6); //baños
-                info[6] = rs.getString(7); //terraza
-                info[7] = rs.getString(8); //piscina
-                info[8] = rs.getString(9); //aparcamiento
+                info[1] = rs.getString(2); //direccion
+                info[2] = rs.getString(3); //plazas
+                info[3] = rs.getString(4); //dormitorios
+                info[4] = rs.getString(5); //baños
+                info[5] = rs.getString(6); //terraza
+                info[6] = rs.getString(7); //piscina
+                info[7] = rs.getString(8); //aparcamiento
             }
             pst.close();
             rs.close();
@@ -272,21 +270,20 @@ public class BD {
         return nombre_cliente;
     }
 
-    public void modificarAlojamiento(String ID, String nombre, String prop, String direccion, int plazas, int dormitorios, int baños, String terraza, String piscina, String aparcamiento) {
+    public void modificarAlojamiento(String ID, String nombre, String direccion, int plazas, int dormitorios, int baños, String terraza, String piscina, String aparcamiento) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-            PreparedStatement pst = cn.prepareStatement("UPDATE alojamientos SET nombre=?, propietario=?, direccion=?, plazas=?, dormitorios=?, baños=?, terraza=?, piscina=?, aparcamiento=? WHERE id_alojamiento=?");
+            PreparedStatement pst = cn.prepareStatement("UPDATE alojamientos SET nombre=?, direccion=?, plazas=?, dormitorios=?, baños=?, terraza=?, piscina=?, aparcamiento=? WHERE id_alojamiento=?");
             pst.setString(1, nombre);
-            pst.setString(2, prop);
-            pst.setString(3, direccion);
-            pst.setInt(4, plazas);
-            pst.setInt(5, dormitorios);
-            pst.setInt(6, baños);
-            pst.setString(7, terraza);
-            pst.setString(8, piscina);
-            pst.setString(9, aparcamiento);
-            pst.setString(10, ID);
+            pst.setString(2, direccion);
+            pst.setInt(3, plazas);
+            pst.setInt(4, dormitorios);
+            pst.setInt(5, baños);
+            pst.setString(6, terraza);
+            pst.setString(7, piscina);
+            pst.setString(8, aparcamiento);
+            pst.setString(9, ID);
             pst.executeUpdate();
 
             pst.close();
@@ -297,7 +294,6 @@ public class BD {
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public void modificarCliente(String ID, String nombre, String apellidos, String DNI, String pasaporte, String nacionalidad, String telefono, String email) {
@@ -394,7 +390,7 @@ public class BD {
     
     public int obtenerSiguienteIDReserva(){
         
-        String maxID = "";
+        int maxID = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
@@ -403,14 +399,14 @@ public class BD {
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
-                maxID = rs.getString(1);
-            }
+                maxID = rs.getInt(1);
+            } else{maxID = 0;}
          
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return Integer.parseInt(maxID)+1;
+        return maxID+1;
     }
 }

@@ -20,7 +20,7 @@ public class NuevoCliente extends javax.swing.JFrame {
 
         setSize(790, 660);
         setResizable(false);
-        setTitle("Nuevo cliente");
+        setTitle("New customer");
         setLocationRelativeTo(null);
 
         //Evite que el programa se cierre al cerrar la ventana
@@ -88,54 +88,54 @@ public class NuevoCliente extends javax.swing.JFrame {
         jLabel1.setText("Add new customer:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(29, 33, 123));
         jLabel2.setText("Ref.:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 155, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(29, 33, 123));
         jLabel3.setText("First name:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 205, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(29, 33, 123));
         jLabel4.setText("Last name:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 255, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(29, 33, 123));
         jLabel5.setText("ID Card:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 305, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(29, 33, 123));
         jLabel6.setText("Passport:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 355, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(29, 33, 123));
         jLabel7.setText("Nationality:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 405, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(29, 33, 123));
         jLabel8.setText("Phone:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(29, 33, 123));
         jLabel9.setText("E-mail:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(29, 33, 123));
         jLabel10.setText("Assigned to:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 125, -1, -1));
 
-        btn_guardar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_guardar.setBackground(new java.awt.Color(29, 33, 123));
         btn_guardar.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
-        btn_guardar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
         btn_guardar.setText("Add");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

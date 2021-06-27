@@ -165,7 +165,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="7b" green="21" red="1d" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Administratotion Panel"/>
+        <Property name="text" type="java.lang.String" value="Administration Panel"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -292,14 +292,14 @@
     </Component>
     <Component class="javax.swing.JButton" name="btn_cerrarSesion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cerrar sesi&#xf3;n"/>
+        <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cerrarSesionActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="860" y="80" width="-1" height="-1"/>
+          <AbsoluteConstraints x="820" y="80" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Image;
 import javax.swing.WindowConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,8 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 public class Clientes extends javax.swing.JFrame {
 
@@ -25,16 +29,22 @@ public class Clientes extends javax.swing.JFrame {
     public Clientes() {
         initComponents();
 
-        setSize(1000, 730);
+        setSize(980, 500);
         setResizable(false);
-        setTitle("Clientes");
+        setTitle("Customers");
         setLocationRelativeTo(null);
 
         //Evite que el programa se cierre al cerrar la ventana
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        
+
         //Obtener listado de clientes
         listadoClientes();
+
+        //Imagen de fondo
+        ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
+        Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        jLabel_Wallpaper.setIcon(icono);
+        this.repaint();
     }
 
     /**
@@ -47,6 +57,8 @@ public class Clientes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table_clientes = new javax.swing.JTable();
         btn_nuevoCliente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,17 +74,27 @@ public class Clientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table_clientes.setMinimumSize(new java.awt.Dimension(5, 64));
         jScrollPane1.setViewportView(table_clientes);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 28, 862, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 125, 862, 252));
 
-        btn_nuevoCliente.setText("Nuevo cliente");
+        btn_nuevoCliente.setBackground(new java.awt.Color(29, 33, 123));
+        btn_nuevoCliente.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        btn_nuevoCliente.setForeground(new java.awt.Color(255, 255, 255));
+        btn_nuevoCliente.setText("Add new customer");
         btn_nuevoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_nuevoClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_nuevoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 580, -1, -1));
+        getContentPane().add(btn_nuevoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 395, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel1.setText("Customers:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, -1, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, -4, 990, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -121,11 +143,14 @@ public class Clientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_nuevoCliente;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_clientes;
     // End of variables declaration//GEN-END:variables
 
     public void listadoClientes() {
+
         //Consulta a la BD para obtener listado de clientes
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -137,13 +162,26 @@ public class Clientes extends javax.swing.JFrame {
             table_clientes = new JTable(modelo);
             jScrollPane1.setViewportView(table_clientes);
 
-            modelo.addColumn("ID");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Apellidos");
-            modelo.addColumn("DNI");
-            modelo.addColumn("Pasaporte");
-            modelo.addColumn("Teléfono");
-            modelo.addColumn("Email");
+            modelo.addColumn("Ref.");
+            modelo.addColumn("First name");
+            modelo.addColumn("Last name");
+            modelo.addColumn("ID Card");
+            modelo.addColumn("Passport");
+            modelo.addColumn("Phone");
+            modelo.addColumn("E-mail");
+
+            //Alto de filas
+            table_clientes.setRowHeight(25);
+            //Ancho de columnas
+            TableColumnModel modeloColumna = table_clientes.getColumnModel();
+            modeloColumna.getColumn(0).setPreferredWidth(10);
+            modeloColumna.getColumn(1).setPreferredWidth(50);
+            modeloColumna.getColumn(2).setPreferredWidth(100);
+            modeloColumna.getColumn(3).setPreferredWidth(20);
+            modeloColumna.getColumn(4).setPreferredWidth(20);
+            modeloColumna.getColumn(5).setPreferredWidth(20);
+            modeloColumna.getColumn(6).setPreferredWidth(120);
+
 
             while (rs.next()) {
                 Object[] fila = new Object[7];
@@ -152,6 +190,7 @@ public class Clientes extends javax.swing.JFrame {
                     fila[i] = rs.getObject(i + 1);
                 }
                 modelo.addRow(fila);
+
             }
 
             pst.close();
