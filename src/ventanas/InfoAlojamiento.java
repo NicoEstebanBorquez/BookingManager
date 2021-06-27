@@ -1,22 +1,25 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import javax.swing.WindowConstants;
 
 public class InfoAlojamiento extends javax.swing.JFrame {
 
     String alojamiento;
-    String nombre, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento = "";
+    String nombre, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento, usuario = "";
     BD bd;
 
     public InfoAlojamiento() {
         initComponents();
         alojamiento = Alojamientos.alojamiento;
 
-        setSize(820, 510);
+        setSize(790, 545);
         setResizable(false);
-        setTitle("Información de alojamiento " + alojamiento);
+        setTitle("Accommodation information");
         setLocationRelativeTo(null);
 
         //Evite que el programa se cierre al cerrar la ventana
@@ -24,6 +27,12 @@ public class InfoAlojamiento extends javax.swing.JFrame {
 
         bd = new BD();
 
+        //Imagen de fondo
+        ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
+        Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        jLabel_Wallpaper.setIcon(icono);
+        this.repaint();
+        
         //Muestra la info del alojamiento al abrir la ventana
         mostrarInfoAlojamiento();
     }
@@ -39,110 +48,193 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         btn_cerrar = new javax.swing.JButton();
         btn_modificar = new javax.swing.JButton();
-        label_terraza = new javax.swing.JLabel();
-        label_piscina = new javax.swing.JLabel();
-        label_aparcamiento = new javax.swing.JLabel();
         label_baños = new javax.swing.JLabel();
         label_dormitorios = new javax.swing.JLabel();
-        label_capacidad = new javax.swing.JLabel();
+        label_piscina = new javax.swing.JLabel();
         label_direccion = new javax.swing.JLabel();
-        label_propietario = new javax.swing.JLabel();
         label_nombre = new javax.swing.JLabel();
         label_id = new javax.swing.JLabel();
+        btn_eliminar = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel16 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        label_capacidad = new javax.swing.JLabel();
+        label_aparcamiento = new javax.swing.JLabel();
+        label_terraza = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        label_gestionadoPor = new javax.swing.JLabel();
+        jLabel_Wallpaper = new javax.swing.JLabel();
 
         jLabel12.setText("jLabel12");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Alojamiento:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel1.setText("Accommodation information:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, -1, -1));
 
-        jLabel2.setText("ID:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel2.setText("Ref:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 155, -1, -1));
 
-        jLabel3.setText("Nombre:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel3.setText("Name:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 205, -1, -1));
 
-        jLabel4.setText("Propietario/a:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel5.setText("Address:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 255, -1, -1));
 
-        jLabel5.setText("Direccion:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
+        jLabel6.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel6.setText("PAX:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
 
-        jLabel6.setText("Capacidad:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel7.setText("Bedrooms");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
 
-        jLabel7.setText("Dormitorios:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, -1, -1));
+        jLabel8.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel8.setText("Bathrooms:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, -1));
 
-        jLabel8.setText("Baños:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, -1, -1));
-
-        jLabel9.setText("Piscina:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, -1, -1));
-
-        jLabel10.setText("Parking:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 230, -1, -1));
-
-        jLabel11.setText("Terraza:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, -1, -1));
-
-        btn_cerrar.setText("Cerrar");
+        btn_cerrar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_cerrar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        btn_cerrar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cerrar.setText("Close");
         btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cerrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, -1, -1));
+        getContentPane().add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, -1, -1));
 
-        btn_modificar.setText("Modificar");
+        btn_modificar.setBackground(new java.awt.Color(29, 33, 123));
+        btn_modificar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        btn_modificar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_modificar.setText("Modify");
         btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_modificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, -1, -1));
+        getContentPane().add(btn_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 350, 90, -1));
 
-        label_terraza.setText("...");
-        getContentPane().add(label_terraza, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, -1, -1));
-
-        label_piscina.setText("...");
-        getContentPane().add(label_piscina, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, -1, -1));
-
-        label_aparcamiento.setText("...");
-        getContentPane().add(label_aparcamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 230, -1, -1));
-
+        label_baños.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_baños.setForeground(new java.awt.Color(29, 33, 123));
         label_baños.setText("...");
-        getContentPane().add(label_baños, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, -1, -1));
+        getContentPane().add(label_baños, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 440, -1, -1));
 
+        label_dormitorios.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_dormitorios.setForeground(new java.awt.Color(29, 33, 123));
         label_dormitorios.setText("...");
-        getContentPane().add(label_dormitorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
+        getContentPane().add(label_dormitorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 400, -1, -1));
 
-        label_capacidad.setText("...");
-        getContentPane().add(label_capacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
+        label_piscina.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_piscina.setForeground(new java.awt.Color(29, 33, 123));
+        label_piscina.setText("...");
+        getContentPane().add(label_piscina, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 400, -1, -1));
 
+        label_direccion.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_direccion.setForeground(new java.awt.Color(29, 33, 123));
         label_direccion.setText("...");
-        getContentPane().add(label_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
+        getContentPane().add(label_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 255, -1, -1));
 
-        label_propietario.setText("...");
-        getContentPane().add(label_propietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
-
+        label_nombre.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_nombre.setForeground(new java.awt.Color(29, 33, 123));
         label_nombre.setText("...");
-        getContentPane().add(label_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, -1));
+        getContentPane().add(label_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 205, -1, -1));
 
+        label_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_id.setForeground(new java.awt.Color(29, 33, 123));
         label_id.setText("...");
-        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
+        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 155, -1, -1));
+        label_id.getAccessibleContext().setAccessibleName("");
+        label_id.getAccessibleContext().setAccessibleDescription("");
+
+        btn_eliminar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_eliminar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        btn_eliminar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_eliminar.setText("Delete");
+        getContentPane().add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 90, -1));
+
+        jLabel15.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel15.setText("Accommodation details");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, -1, -1));
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 135, 265, -1));
+
+        jLabel16.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel16.setText("Facilities");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 330, -1, -1));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 340, 342, -1));
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 365, 10, 98));
+
+        jLabel13.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel13.setText("Balcony/Terrace:");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel4.setText("Swimming pool:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel14.setText("Parking:");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, -1, -1));
+
+        label_capacidad.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_capacidad.setForeground(new java.awt.Color(29, 33, 123));
+        label_capacidad.setText("...");
+        getContentPane().add(label_capacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 360, -1, -1));
+
+        label_aparcamiento.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_aparcamiento.setForeground(new java.awt.Color(29, 33, 123));
+        label_aparcamiento.setText("...");
+        getContentPane().add(label_aparcamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 440, -1, -1));
+
+        label_terraza.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_terraza.setForeground(new java.awt.Color(29, 33, 123));
+        label_terraza.setText("...");
+        getContentPane().add(label_terraza, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 360, -1, -1));
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 5, 170));
+
+        jLabel9.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel9.setText("Assigned to:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 125, -1, -1));
+
+        label_gestionadoPor.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_gestionadoPor.setForeground(new java.awt.Color(29, 33, 123));
+        label_gestionadoPor.setText("usuario");
+        getContentPane().add(label_gestionadoPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -196,11 +288,14 @@ public class InfoAlojamiento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cerrar;
+    private javax.swing.JButton btn_eliminar;
     private javax.swing.JButton btn_modificar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -209,29 +304,35 @@ public class InfoAlojamiento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_Wallpaper;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel label_aparcamiento;
     private javax.swing.JLabel label_baños;
     private javax.swing.JLabel label_capacidad;
     private javax.swing.JLabel label_direccion;
     private javax.swing.JLabel label_dormitorios;
+    private javax.swing.JLabel label_gestionadoPor;
     private javax.swing.JLabel label_id;
     private javax.swing.JLabel label_nombre;
     private javax.swing.JLabel label_piscina;
-    private javax.swing.JLabel label_propietario;
     private javax.swing.JLabel label_terraza;
     // End of variables declaration//GEN-END:variables
 
     public void mostrarInfoAlojamiento() {
-        String[] infoCliente = bd.obtenerInfoAlojamiento(alojamiento);
+        String[] infoAlojamiento = bd.obtenerInfoAlojamiento(alojamiento);
 
-        nombre = infoCliente[0];
-        direccion = infoCliente[1];
-        plazas = infoCliente[2];
-        dormitorios = infoCliente[3];
-        baños = infoCliente[4];
-        terraza = infoCliente[5];
-        piscina = infoCliente[6];
-        aparcamiento = infoCliente[7];
+        nombre = infoAlojamiento[0];
+        direccion = infoAlojamiento[1];
+        plazas = infoAlojamiento[2];
+        dormitorios = infoAlojamiento[3];
+        baños = infoAlojamiento[4];
+        terraza = infoAlojamiento[5];
+        piscina = infoAlojamiento[6];
+        aparcamiento = infoAlojamiento[7];
+        usuario = infoAlojamiento[8];
 
         label_id.setText(alojamiento);
         label_nombre.setText(nombre);
@@ -242,5 +343,7 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         label_terraza.setText(terraza);
         label_piscina.setText(piscina);
         label_aparcamiento.setText(aparcamiento);
+        
+        this.label_gestionadoPor.setText(bd.obtenerNombreUsuario(usuario));
     }
 }

@@ -1,17 +1,21 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.WindowConstants;
 
 public class ModificarAlojamiento extends javax.swing.JFrame {
 
-    String alojamiento;
+    String alojamiento, terraza, piscina, parking;
+    int pax, dormitorios, baños;
     BD bd;
 
     public ModificarAlojamiento() {
         initComponents();
 
-        setSize(600, 500);
+        setSize(705, 545);
         setResizable(false);
         setTitle("Modificar alojamiento");
         setLocationRelativeTo(null);
@@ -25,6 +29,12 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
 
         //Muestra la info del alojamiento al abrir la ventana
         cargarDatosAlojamiento();
+
+        //Imagen de fondo
+        ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
+        Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        jLabel_Wallpaper.setIcon(icono);
+        this.repaint();
     }
 
     /**
@@ -35,104 +45,245 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        label_ID = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        txt_aparcamiento = new javax.swing.JTextField();
-        txt_piscina = new javax.swing.JTextField();
-        txt_terraza = new javax.swing.JTextField();
-        txt_baños = new javax.swing.JTextField();
-        txt_dormitorios = new javax.swing.JTextField();
-        txt_plazas = new javax.swing.JTextField();
         txt_direccion = new javax.swing.JTextField();
-        txt_propietario = new javax.swing.JTextField();
         txt_nombre = new javax.swing.JTextField();
         btn_cancelar = new javax.swing.JButton();
         btn_guardar = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        label_id = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        combo_pax = new javax.swing.JComboBox<>();
+        combo_dormitorios = new javax.swing.JComboBox<>();
+        combo_baños = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        check_parking = new javax.swing.JCheckBox();
+        check_piscina = new javax.swing.JCheckBox();
+        check_terraza = new javax.swing.JCheckBox();
+        jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Alojamiento:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel1.setText("Accommodation modification:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, -1, -1));
 
-        label_ID.setText("...");
-        getContentPane().add(label_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel3.setText("Name:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 205, -1, -1));
 
-        jLabel3.setText("Nombre:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel5.setText("Address:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 255, -1, -1));
 
-        jLabel4.setText("xxxx");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        txt_direccion.setBackground(new java.awt.Color(240, 240, 240));
+        txt_direccion.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        txt_direccion.setForeground(new java.awt.Color(29, 33, 123));
+        txt_direccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_direccion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 255, 340, -1));
 
-        jLabel5.setText("Direccion");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        txt_nombre.setBackground(new java.awt.Color(240, 240, 240));
+        txt_nombre.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        txt_nombre.setForeground(new java.awt.Color(29, 33, 123));
+        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 205, 340, -1));
 
-        jLabel6.setText("Plazas");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
-
-        jLabel7.setText("Dormitorios:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
-
-        jLabel8.setText("Terraza:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
-
-        jLabel9.setText("Piscina:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
-
-        jLabel10.setText("Aparcamiento:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
-
-        jLabel11.setText("Baños:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
-        getContentPane().add(txt_aparcamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 150, -1));
-        getContentPane().add(txt_piscina, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 150, -1));
-        getContentPane().add(txt_terraza, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 150, -1));
-        getContentPane().add(txt_baños, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 150, -1));
-        getContentPane().add(txt_dormitorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 150, -1));
-        getContentPane().add(txt_plazas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 150, -1));
-        getContentPane().add(txt_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 150, -1));
-        getContentPane().add(txt_propietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 150, -1));
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 150, -1));
-
-        btn_cancelar.setText("Cancelar");
+        btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, -1, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, -1, -1));
 
-        btn_guardar.setText("Guardar");
+        btn_guardar.setBackground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_guardar.setText("Save changes");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, -1, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, -1, -1));
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 135, 265, -1));
+
+        jLabel15.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel15.setText("Accommodation details");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, -1, -1));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 340, 342, -1));
+
+        jLabel16.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel16.setText("Facilities");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel12.setText("Ref.:");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 155, -1, -1));
+
+        label_id.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        label_id.setForeground(new java.awt.Color(29, 33, 123));
+        label_id.setText("ref");
+        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 156, -1, -1));
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 365, 10, 98));
+
+        combo_pax.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        combo_pax.setForeground(new java.awt.Color(29, 33, 123));
+        combo_pax.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8" }));
+        getContentPane().add(combo_pax, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, -1, -1));
+
+        combo_dormitorios.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        combo_dormitorios.setForeground(new java.awt.Color(29, 33, 123));
+        combo_dormitorios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4" }));
+        getContentPane().add(combo_dormitorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, -1, -1));
+
+        combo_baños.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        combo_baños.setForeground(new java.awt.Color(29, 33, 123));
+        combo_baños.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4" }));
+        getContentPane().add(combo_baños, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel10.setText("Bathrooms:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel7.setText("Bedrooms:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel2.setText("PAX:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel9.setText("Balcony/Terrace:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel4.setText("Swimming pool:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel11.setText("Parking:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, -1, -1));
+        getContentPane().add(check_parking, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 445, -1, -1));
+        getContentPane().add(check_piscina, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 405, -1, -1));
+        getContentPane().add(check_terraza, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 365, -1, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
+        //ComboBox PAX
+        if (combo_pax.getSelectedIndex() == 0) {
+            pax = 0;
+        } else if (combo_pax.getSelectedIndex() == 1) {
+            pax = 1;
+        } else if (combo_pax.getSelectedIndex() == 2) {
+            pax = 2;
+        } else if (combo_pax.getSelectedIndex() == 3) {
+            pax = 3;
+        } else if (combo_pax.getSelectedIndex() == 4) {
+            pax = 4;
+        } else if (combo_pax.getSelectedIndex() == 5) {
+            pax = 5;
+        } else if (combo_pax.getSelectedIndex() == 6) {
+            pax = 6;
+        } else if (combo_pax.getSelectedIndex() == 7) {
+            pax = 7;
+        } else if (combo_pax.getSelectedIndex() == 8) {
+            pax = 8;
+        }
+
+        //ComboBox dormitorios
+        if (combo_dormitorios.getSelectedIndex() == 0) {
+            dormitorios = 0;
+        } else if (combo_dormitorios.getSelectedIndex() == 1) {
+            dormitorios = 1;
+        } else if (combo_dormitorios.getSelectedIndex() == 2) {
+            dormitorios = 2;
+        } else if (combo_dormitorios.getSelectedIndex() == 3) {
+            dormitorios = 3;
+        } else if (combo_dormitorios.getSelectedIndex() == 4) {
+            dormitorios = 4;
+        }
+
+        //ComboBox baños
+        if (combo_baños.getSelectedIndex() == 0) {
+            baños = 0;
+        } else if (combo_baños.getSelectedIndex() == 1) {
+            baños = 1;
+        } else if (combo_baños.getSelectedIndex() == 2) {
+            baños = 2;
+        } else if (combo_baños.getSelectedIndex() == 3) {
+            baños = 3;
+        } else if (combo_baños.getSelectedIndex() == 4) {
+            baños = 4;
+        }
+
+        //CheckBox terraza
+        if (check_terraza.isSelected()) {
+            terraza = "YES";
+        } else {
+            terraza = "NO";
+        }
+
+        //CheckBox piscina
+        if (check_piscina.isSelected()) {
+            piscina = "YES";
+        } else {
+            piscina = "NO";
+        }
+
+        //CheckBox parking
+        if (check_parking.isSelected()) {
+            parking = "YES";
+        } else {
+            parking = "NO";
+        }
+
         bd.modificarAlojamiento(
                 alojamiento,
                 txt_nombre.getText(),
                 txt_direccion.getText(),
-                Integer.parseInt(txt_plazas.getText()),
-                Integer.parseInt(txt_dormitorios.getText()),
-                Integer.parseInt(txt_baños.getText()),
-                txt_terraza.getText(),
-                txt_piscina.getText(),
-                txt_aparcamiento.getText());
+                pax,
+                dormitorios,
+                baños,
+                terraza,
+                piscina,
+                parking
+        );
         Alojamientos a = new Alojamientos();
         a.setVisible(true);
         this.dispose();
@@ -182,42 +333,136 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_guardar;
+    private javax.swing.JCheckBox check_parking;
+    private javax.swing.JCheckBox check_piscina;
+    private javax.swing.JCheckBox check_terraza;
+    private javax.swing.JComboBox<String> combo_baños;
+    private javax.swing.JComboBox<String> combo_dormitorios;
+    private javax.swing.JComboBox<String> combo_pax;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel label_ID;
-    private javax.swing.JTextField txt_aparcamiento;
-    private javax.swing.JTextField txt_baños;
+    private javax.swing.JLabel jLabel_Wallpaper;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel label_id;
     private javax.swing.JTextField txt_direccion;
-    private javax.swing.JTextField txt_dormitorios;
     private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_piscina;
-    private javax.swing.JTextField txt_plazas;
-    private javax.swing.JTextField txt_propietario;
-    private javax.swing.JTextField txt_terraza;
     // End of variables declaration//GEN-END:variables
 
     public void cargarDatosAlojamiento() {
 
         String[] info = bd.obtenerInfoAlojamiento(alojamiento);
 
-        label_ID.setText(String.valueOf(alojamiento));
+        label_id.setText(String.valueOf(alojamiento));
         txt_nombre.setText(info[0]);
         txt_direccion.setText(info[1]);
-        txt_plazas.setText(info[2]);
-        txt_dormitorios.setText(info[3]);
-        txt_baños.setText(info[4]);
-        txt_terraza.setText(info[5]);
-        txt_piscina.setText(info[6]);
-        txt_aparcamiento.setText(info[7]);
 
+        //PAX
+        switch (info[2]) {
+            case "0":
+                combo_pax.setSelectedIndex(0);
+                break;
+            case "1":
+                combo_pax.setSelectedIndex(1);
+                break;
+            case "2":
+                combo_pax.setSelectedIndex(2);
+                break;
+            case "3":
+                combo_pax.setSelectedIndex(3);
+                break;
+            case "4":
+                combo_pax.setSelectedIndex(4);
+                break;
+            case "5":
+                combo_pax.setSelectedIndex(5);
+                break;
+            case "6":
+                combo_pax.setSelectedIndex(6);
+                break;
+            case "7":
+                combo_pax.setSelectedIndex(7);
+                break;
+            case "8":
+                combo_pax.setSelectedIndex(8);
+                break;
+            default:
+                combo_pax.setSelectedIndex(0);
+        }
+
+        //Dormitorios
+        switch (info[3]) {
+            case "0":
+                combo_dormitorios.setSelectedIndex(0);
+                break;
+            case "1":
+                combo_dormitorios.setSelectedIndex(1);
+                break;
+            case "2":
+                combo_dormitorios.setSelectedIndex(2);
+                break;
+            case "3":
+                combo_dormitorios.setSelectedIndex(3);
+                break;
+            case "4":
+                combo_dormitorios.setSelectedIndex(4);
+                break;
+            default:
+                combo_dormitorios.setSelectedIndex(0);
+        }
+
+        //Baños
+        switch (info[4]) {
+            case "0":
+                combo_baños.setSelectedIndex(0);
+                break;
+            case "1":
+                combo_baños.setSelectedIndex(1);
+                break;
+            case "2":
+                combo_baños.setSelectedIndex(2);
+                break;
+            case "3":
+                combo_baños.setSelectedIndex(3);
+                break;
+            case "4":
+                combo_baños.setSelectedIndex(4);
+                break;
+            default:
+                combo_baños.setSelectedIndex(0);
+        }
+
+        //Terraza
+        if (info[5].equals("YES")) {
+            check_terraza.setSelected(true);
+        } else {
+            check_terraza.setSelected(false);
+        }
+
+        //Piscina
+        if (info[6].equals("YES")) {
+            check_piscina.setSelected(true);
+        } else {
+            check_piscina.setSelected(false);
+        }
+
+        //Parking
+        if (info[7].equals("YES")) {
+            check_parking.setSelected(true);
+        } else {
+            check_parking.setSelected(false);
+        }
     }
 
 }

@@ -10,8 +10,8 @@ import javax.swing.WindowConstants;
 public class NuevoAlojamiento extends javax.swing.JFrame {
 
     BD bd;
-    String nombre_usuario, apellidos_usuario;
-    int id_usuario;
+    String nombre_usuario, apellidos_usuario, terraza, piscina, parking;
+    int id_usuario, pax, dormitorios, baños;
     int IDNuevoAlojamiento = 0;
 
     public NuevoAlojamiento() {
@@ -32,17 +32,16 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         label_gestionadoPor.setText(nombre_usuario + " " + apellidos_usuario);
 
         id_usuario = bd.obtenerIDusuario(nombre_usuario, apellidos_usuario);
-        
+
         //Obtencion del ID del alojamiento desde la BD
         IDNuevoAlojamiento = bd.obtenerSiguienteIDAlojamiento();
-        label_id.setText(""+IDNuevoAlojamiento);
+        label_id.setText("" + IDNuevoAlojamiento);
 
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
-        
     }
 
     /**
@@ -229,13 +228,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
-        int pax = 0;
-        int dormitorios = 0;
-        int baños = 0;
-        String terraza = "t";
-        String piscina = "pi";
-        String parking = "pa";
-
+        //ComboBox PAX
         if (combo_pax.getSelectedIndex() == 0) {
             pax = 0;
         } else if (combo_pax.getSelectedIndex() == 1) {
@@ -254,23 +247,6 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
             pax = 7;
         } else if (combo_pax.getSelectedIndex() == 8) {
             pax = 8;
-        }
-
-        //ComboBox PAX
-        if (combo_pax.getSelectedIndex() == 0) {
-            pax = 0;
-        } else if (combo_pax.getSelectedIndex() == 1) {
-            pax = 1;
-        } else if (combo_pax.getSelectedIndex() == 2) {
-            pax = 2;
-        } else if (combo_pax.getSelectedIndex() == 3) {
-            pax = 3;
-        } else if (combo_pax.getSelectedIndex() == 4) {
-            pax = 4;
-        } else if (combo_pax.getSelectedIndex() == 5) {
-            pax = 5;
-        } else if (combo_pax.getSelectedIndex() == 6) {
-            pax = 6;
         }
 
         //ComboBox dormitorios
@@ -305,7 +281,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         } else {
             terraza = "NO";
         }
-        
+
         //CheckBox piscina
         if (check_piscina.isSelected()) {
             piscina = "YES";
@@ -320,8 +296,6 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
             parking = "NO";
         }
 
-        
-        
         bd.altaAlojamiento(
                 IDNuevoAlojamiento,
                 txt_nombre.getText().trim(),
@@ -340,7 +314,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-        
+
         Alojamientos a = new Alojamientos();
         a.setVisible(true);
         this.dispose();

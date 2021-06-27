@@ -116,16 +116,44 @@ public class BD {
         }
         return ID;
     }
+    
+    public String obtenerNombreUsuario(String ID) {
+
+        String nombre = "";
+        String apellidos = "";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+
+            PreparedStatement pst = cn.prepareStatement("SELECT nombre, apellidos FROM usuarios WHERE id_usuario=?");
+            pst.setString(1, ID);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                nombre = rs.getString(1);
+                apellidos = rs.getString(2);
+            }
+            pst.close();
+            rs.close();
+            cn.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nombre+ " " +apellidos;
+    }
 
     public String[] obtenerInfoCliente(int ID) {
 
-        String[] info = new String[7];
+        String[] info = new String[8];
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
-            PreparedStatement pst = cn.prepareStatement("SELECT nombre, apellidos, DNI, pasaporte, nacionalidad, telefono, email FROM clientes WHERE id_cliente = ?");
+            PreparedStatement pst = cn.prepareStatement("SELECT nombre, apellidos, DNI, pasaporte, nacionalidad, telefono, email, id_usuario FROM clientes WHERE id_cliente = ?");
             pst.setInt(1, ID);
 
             ResultSet rs = pst.executeQuery();
@@ -139,6 +167,7 @@ public class BD {
                 info[4] = rs.getString(5); //nacionalidad
                 info[5] = rs.getString(6); //telefono
                 info[6] = rs.getString(7); //email
+                info[7] = rs.getString(8); //usuario
             }
             pst.close();
             rs.close();
@@ -158,7 +187,7 @@ public class BD {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
-            PreparedStatement pst = cn.prepareStatement("SELECT nombre, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento FROM alojamientos WHERE id_alojamiento = ?");
+            PreparedStatement pst = cn.prepareStatement("SELECT nombre, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento, id_usuario FROM alojamientos WHERE id_alojamiento = ?");
             pst.setString(1, ID);
 
             ResultSet rs = pst.executeQuery();
@@ -173,6 +202,7 @@ public class BD {
                 info[5] = rs.getString(6); //terraza
                 info[6] = rs.getString(7); //piscina
                 info[7] = rs.getString(8); //aparcamiento
+                info[8] = rs.getString(9); //usuario
             }
             pst.close();
             rs.close();
@@ -187,12 +217,12 @@ public class BD {
 
     public String[] obtenerInfoReserva(int ID) {
 
-        String[] info = new String[6];
+        String[] info = new String[7];
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
-            PreparedStatement pst = cn.prepareStatement("SELECT fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas WHERE id_reserva = ?");
+            PreparedStatement pst = cn.prepareStatement("SELECT fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente, id_usuario FROM reservas WHERE id_reserva = ?");
             pst.setInt(1, ID);
 
             ResultSet rs = pst.executeQuery();
@@ -205,6 +235,7 @@ public class BD {
                 info[3] = rs.getString(4); //precio
                 info[4] = rs.getString(5); //alojamiento
                 info[5] = rs.getString(6); //cliente
+                info[6] = rs.getString(7); //usuario
             }
             pst.close();
             rs.close();

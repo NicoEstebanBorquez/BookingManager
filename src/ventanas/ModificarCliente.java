@@ -12,7 +12,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         initComponents();
 
         cliente = Clientes.cliente;
-        setSize(600, 500);
+        setSize(710, 660);
         setResizable(false);
         setTitle("Modificar cliente " + cliente);
         setLocationRelativeTo(null);
@@ -35,13 +35,6 @@ public class ModificarCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_guardar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         txt_email = new javax.swing.JTextField();
         txt_telefono = new javax.swing.JTextField();
         txt_nacionalidad = new javax.swing.JTextField();
@@ -52,59 +45,110 @@ public class ModificarCliente extends javax.swing.JFrame {
         btn_cancelar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         label_id = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_guardar.setText("Guardar");
+        btn_guardar.setBackground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_guardar.setText("Save changes");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, -1, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, -1, -1));
+        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 560, 340, -1));
+        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 150, -1));
+        getContentPane().add(txt_nacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 405, 200, -1));
+        getContentPane().add(txt_pasaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 355, 200, -1));
+        getContentPane().add(txt_dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 305, 200, -1));
+        getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 255, 340, -1));
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 205, 340, -1));
 
-        jLabel1.setText("Nombre:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
-
-        jLabel2.setText("Apellidos:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
-
-        jLabel3.setText("DNI:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
-
-        jLabel4.setText("Pasaporte:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
-
-        jLabel5.setText("Nacionalidad:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
-
-        jLabel6.setText("Email:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
-
-        jLabel7.setText("Telefono:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
-        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 150, -1));
-        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 150, -1));
-        getContentPane().add(txt_nacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 150, -1));
-        getContentPane().add(txt_pasaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 150, -1));
-        getContentPane().add(txt_dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 150, -1));
-        getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 150, -1));
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 150, -1));
-
-        btn_cancelar.setText("Cancelar");
+        btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, -1, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 530, -1, -1));
 
-        jLabel8.setText("Cliente:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+        jLabel8.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel8.setText("Customer modification:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, -1, -1));
 
         label_id.setText("...");
-        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
+        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 155, -1, -1));
+        getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 315, -1));
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 135, 250, -1));
+
+        jLabel9.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel9.setText("Ref.:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 155, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel10.setText("First name:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 205, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel11.setText("Last name:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 255, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel12.setText("ID Card:");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 305, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel13.setText("Passport:");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 355, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel14.setText("Nationality:");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 405, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel18.setText("Contact details");
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel15.setText("Phone:");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel16.setText("E-mail:");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel17.setText("Customer details");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -171,14 +215,19 @@ public class ModificarCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_guardar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel label_id;
     private javax.swing.JTextField txt_apellidos;
     private javax.swing.JTextField txt_dni;

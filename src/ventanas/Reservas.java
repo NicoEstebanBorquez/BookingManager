@@ -205,7 +205,7 @@ public class Reservas extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
-            PreparedStatement pst = cn.prepareStatement("SELECT fecha_confirmacion, id_reserva, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas "
+            PreparedStatement pst = cn.prepareStatement("SELECT id_reserva, fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas "
                     + "WHERE entrada BETWEEN ? AND ? ORDER BY entrada");
             pst.setDate(1, desde);
             pst.setDate(2, hasta);
@@ -213,6 +213,9 @@ public class Reservas extends javax.swing.JFrame {
 
             table_reservas = new JTable(modelo);
             jScrollPane1.setViewportView(table_reservas);
+            
+            //Alto de filas
+            table_reservas.setRowHeight(25);
 
             //Limpia la tabla
             modelo.setRowCount(0);
@@ -243,12 +246,15 @@ public class Reservas extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
-            PreparedStatement pst = cn.prepareStatement("SELECT fecha_confirmacion, id_reserva, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas WHERE id_alojamiento=? ORDER BY entrada");
+            PreparedStatement pst = cn.prepareStatement("SELECT id_reserva,fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas WHERE id_alojamiento=? ORDER BY entrada");
             pst.setString(1, txt_alojamientoBusqueda.getText());
             ResultSet rs = pst.executeQuery();
 
             table_reservas = new JTable(modelo);
             jScrollPane1.setViewportView(table_reservas);
+            
+            //Alto de filas
+            table_reservas.setRowHeight(25);
 
             //Limpia la tabla
             modelo.setRowCount(0);
@@ -279,12 +285,13 @@ public class Reservas extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
-            PreparedStatement pst = cn.prepareStatement("SELECT fecha_confirmacion, id_reserva, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas ORDER BY entrada");
+            PreparedStatement pst = cn.prepareStatement("SELECT id_reserva, fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas ORDER BY entrada");
             ResultSet rs = pst.executeQuery();
 
             table_reservas = new JTable(modelo);
             jScrollPane1.setViewportView(table_reservas);
+            //Alto de filas
+            table_reservas.setRowHeight(25);
 
             //Limpia la tabla
             modelo.setRowCount(0);
@@ -365,7 +372,6 @@ public class Reservas extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
             PreparedStatement pst = cn.prepareStatement("SELECT id_reserva, fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas ORDER BY entrada");
             ResultSet rs = pst.executeQuery();
 
@@ -414,7 +420,7 @@ public class Reservas extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int fila_point = table_reservas.rowAtPoint(e.getPoint());
-                int columna_point = 1;
+                int columna_point = 0;
 
                 if (fila_point > -1) {
                     reserva = (int) modelo.getValueAt(fila_point, columna_point);

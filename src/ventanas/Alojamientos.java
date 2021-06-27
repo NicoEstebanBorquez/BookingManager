@@ -80,7 +80,7 @@ public class Alojamientos extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, 862, 252));
 
         btn_nuevoAlojamiento.setBackground(new java.awt.Color(29, 33, 123));
-        btn_nuevoAlojamiento.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        btn_nuevoAlojamiento.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_nuevoAlojamiento.setForeground(new java.awt.Color(255, 255, 255));
         btn_nuevoAlojamiento.setText("Add new accommodation");
         btn_nuevoAlojamiento.addActionListener(new java.awt.event.ActionListener() {
