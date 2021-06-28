@@ -1,8 +1,10 @@
 package ventanas;
+
 import clases.BD;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 public class InfoReserva extends javax.swing.JFrame {
@@ -28,7 +30,7 @@ public class InfoReserva extends javax.swing.JFrame {
 
         //Muestra la info de la reserva al abrir la ventana
         mostrarInfoReserva();
-       
+
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -66,6 +68,7 @@ public class InfoReserva extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,7 +82,7 @@ public class InfoReserva extends javax.swing.JFrame {
         Close.setBackground(new java.awt.Color(255, 255, 255));
         Close.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         Close.setForeground(new java.awt.Color(23, 33, 123));
-        Close.setText("Cerrar");
+        Close.setText("Close");
         Close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CloseActionPerformed(evt);
@@ -87,16 +90,16 @@ public class InfoReserva extends javax.swing.JFrame {
         });
         getContentPane().add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, -1, -1));
 
-        btn_modificar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_modificar.setBackground(new java.awt.Color(23, 33, 123));
         btn_modificar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
-        btn_modificar.setForeground(new java.awt.Color(23, 33, 123));
+        btn_modificar.setForeground(new java.awt.Color(255, 255, 255));
         btn_modificar.setText("Modify");
         btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_modificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, -1, -1));
+        getContentPane().add(btn_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, 89, -1));
 
         label_alojamiento.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_alojamiento.setForeground(new java.awt.Color(29, 33, 123));
@@ -132,7 +135,12 @@ public class InfoReserva extends javax.swing.JFrame {
         btn_eliminar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_eliminar.setForeground(new java.awt.Color(23, 33, 123));
         btn_eliminar.setText("Delete");
-        getContentPane().add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, -1, -1));
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, 89, -1));
         getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 135, 285, -1));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -192,6 +200,11 @@ public class InfoReserva extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(29, 33, 123));
         jLabel15.setText("Booking details");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel3.setText("€");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 305, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 490));
 
         pack();
@@ -208,6 +221,24 @@ public class InfoReserva extends javax.swing.JFrame {
         mr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_modificarActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        int confirmacion = 0;
+        confirmacion = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this booking?", "Delete",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            if (bd.eliminarReserva(String.valueOf(reserva)) == 0) {
+                JOptionPane.showMessageDialog(null, "An error occurred while deleting this booking.", "Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Booking successfully deleted.");
+            }
+        }
+        Reservas r = new Reservas();
+        r.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_btn_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +283,7 @@ public class InfoReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -289,7 +321,7 @@ public class InfoReserva extends javax.swing.JFrame {
         label_precio.setText(precio);
         label_alojamiento.setText(bd.obtenerNombreAlojamiento(alojamiento));
         label_cliente.setText(bd.obtenerNombreCliente(cliente));
-        
+
         this.label_gestionadoPor.setText(bd.obtenerNombreUsuario(usuario));
     }
 

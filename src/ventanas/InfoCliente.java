@@ -4,6 +4,7 @@ import clases.BD;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import javax.swing.WindowConstants;
 
@@ -34,7 +35,7 @@ public class InfoCliente extends javax.swing.JFrame {
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
-        
+
         //Muestra la info del cliente al abrir la ventana
         mostrarInfoCliente();
     }
@@ -89,9 +90,9 @@ public class InfoCliente extends javax.swing.JFrame {
         });
         getContentPane().add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 480, -1, -1));
 
-        btn_modificar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_modificar.setBackground(new java.awt.Color(29, 33, 123));
         btn_modificar.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        btn_modificar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_modificar.setForeground(new java.awt.Color(255, 255, 255));
         btn_modificar.setText("Modify");
         btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +145,11 @@ public class InfoCliente extends javax.swing.JFrame {
         btn_eliminar.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         btn_eliminar.setForeground(new java.awt.Color(29, 33, 123));
         btn_eliminar.setText("Delete");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
@@ -232,6 +238,24 @@ public class InfoCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_modificarActionPerformed
 
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+
+        int confirmacion = 0;
+        confirmacion = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this customer?", "Delete",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            if (bd.eliminarCliente(String.valueOf(cliente)) == 0) {
+                JOptionPane.showMessageDialog(null, "Impossible to delete this customer. \nThere are still bookings pending.", "Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Customer successfully deleted.");
+            }
+        }
+        Clientes c = new Clientes();
+        c.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_eliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -318,7 +342,7 @@ public class InfoCliente extends javax.swing.JFrame {
         label_nacionalidad.setText(nacionalidad);
         label_telefono.setText(telefono);
         label_email.setText(email);
-        
+
         label_gestionadoPor.setText(bd.obtenerNombreUsuario(usuario));
     }
 

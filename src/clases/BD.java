@@ -64,8 +64,8 @@ public class BD {
         }
     }
 
-    public void altaReserva(int ID, java.sql.Date fecha, java.sql.Date entrada, java.sql.Date salida, Double precio, String alojamiento, int cliente, int usuario) {
-
+    public int altaReserva(int ID, java.sql.Date fecha, java.sql.Date entrada, java.sql.Date salida, Double precio, String alojamiento, int cliente, int usuario) {
+        int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
@@ -79,7 +79,7 @@ public class BD {
             pst.setString(6, alojamiento);
             pst.setInt(7, cliente);
             pst.setInt(8, usuario);
-            pst.executeUpdate();
+            resultado = pst.executeUpdate();
 
             pst.close();
             cn.close();
@@ -88,6 +88,7 @@ public class BD {
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return resultado;
     }
 
     public int obtenerIDusuario(String nombre, String apellidos) {
@@ -439,5 +440,70 @@ public class BD {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return maxID+1;
+    }
+    
+    public int eliminarAlojamiento(String ID){
+    
+        int resultado = 0;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM alojamientos WHERE id_alojamiento = ?");
+            pst.setString(1, ID);
+            resultado = pst.executeUpdate();
+            
+            pst.close();
+            cn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            //Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al eliminar. El alojamiento tiene reservas pendientes.\nException: " + ex);
+        }
+        return resultado;
+    }
+    
+    public int eliminarCliente(String ID){
+    
+        int resultado = 0;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM clientes WHERE id_cliente = ?");
+            pst.setString(1, ID);
+            resultado = pst.executeUpdate();
+            
+            pst.close();
+            cn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            //Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al eliminar. El Cliente tiene reservas pendientes.\nException: " + ex);
+        }
+        return resultado;
+    }
+    
+    public int eliminarReserva(String ID){
+    
+        int resultado = 0;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM reservas WHERE id_reserva = ?");
+            pst.setString(1, ID);
+            resultado = pst.executeUpdate();
+            
+            pst.close();
+            cn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
     }
 }

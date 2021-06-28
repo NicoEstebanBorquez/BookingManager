@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Image;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -8,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.WindowConstants;
 
 public class ModificarReserva extends javax.swing.JFrame {
@@ -18,7 +21,7 @@ public class ModificarReserva extends javax.swing.JFrame {
     public ModificarReserva() {
         initComponents();
 
-        setSize(600, 350);
+        setSize(585, 355);
         setResizable(false);
         setTitle("Modificar reserva");
         setLocationRelativeTo(null);
@@ -32,6 +35,12 @@ public class ModificarReserva extends javax.swing.JFrame {
 
         //Muestra la info del alojamiento al abrir la ventana
         cargarDatosReserva();
+        
+        //Imagen de fondo
+        ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
+        Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        jLabel_Wallpaper.setIcon(icono);
+        this.repaint();
     }
 
     /**
@@ -42,15 +51,20 @@ public class ModificarReserva extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         label_ID = new javax.swing.JLabel();
         txt_precio = new javax.swing.JTextField();
         btn_guardar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
         jDate_entrada = new com.toedter.calendar.JDateChooser();
         jDate_salida = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -60,36 +74,67 @@ public class ModificarReserva extends javax.swing.JFrame {
         jLabel1.setText("Booking modification:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, -1, -1));
 
-        jLabel2.setText("Entrada:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
-
-        jLabel3.setText("Salida:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
-
-        jLabel4.setText("Precio:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
-
+        label_ID.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_ID.setForeground(new java.awt.Color(29, 33, 123));
         label_ID.setText("...");
-        getContentPane().add(label_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
-        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 100, -1));
+        getContentPane().add(label_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 155, -1, -1));
+        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 305, 100, -1));
 
-        btn_guardar.setText("Guardar");
+        btn_guardar.setBackground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_guardar.setText("Save changes");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, -1, -1));
 
-        btn_cancelar.setText("Cancelar");
+        btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
+        btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
-        getContentPane().add(jDate_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
-        getContentPane().add(jDate_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, -1, -1));
+        getContentPane().add(jDate_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
+        getContentPane().add(jDate_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel5.setText("€");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 305, -1, -1));
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 135, 175, -1));
+
+        jLabel15.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel15.setText("Booking details");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel6.setText("Ref.:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 155, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel7.setText("Check-In date:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 205, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel8.setText("Check-Out date:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 255, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel9.setText("Amount:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 305, -1, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, -4, 590, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -164,9 +209,14 @@ public class ModificarReserva extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDate_entrada;
     private com.toedter.calendar.JDateChooser jDate_salida;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_Wallpaper;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel label_ID;
     private javax.swing.JTextField txt_precio;
     // End of variables declaration//GEN-END:variables
@@ -189,8 +239,6 @@ public class ModificarReserva extends javax.swing.JFrame {
         }
 
         label_ID.setText(String.valueOf(reserva));
-        //txt_entrada.setText(info[1]);
-        //txt_salida.setText(info[2]);
         txt_precio.setText(info[3]);
     }
 

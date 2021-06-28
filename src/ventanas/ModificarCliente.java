@@ -1,6 +1,9 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.WindowConstants;
 
 public class ModificarCliente extends javax.swing.JFrame {
@@ -25,6 +28,12 @@ public class ModificarCliente extends javax.swing.JFrame {
 
         //Muestra la info del cliente al abrir la ventana
         cargarDatosCliente();
+        
+        //Imagen de fondo
+        ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
+        Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        jLabel_Wallpaper.setIcon(icono);
+        this.repaint();
     }
 
     /**
@@ -57,12 +66,13 @@ public class ModificarCliente extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_guardar.setBackground(new java.awt.Color(29, 33, 123));
-        btn_guardar.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        btn_guardar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
         btn_guardar.setText("Save changes");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,16 +81,51 @@ public class ModificarCliente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, -1, -1));
+
+        txt_email.setBackground(new java.awt.Color(240, 240, 240));
+        txt_email.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        txt_email.setForeground(new java.awt.Color(29, 33, 123));
+        txt_email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 560, 340, -1));
+
+        txt_telefono.setBackground(new java.awt.Color(240, 240, 240));
+        txt_telefono.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        txt_telefono.setForeground(new java.awt.Color(29, 33, 123));
+        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 150, -1));
+
+        txt_nacionalidad.setBackground(new java.awt.Color(240, 240, 240));
+        txt_nacionalidad.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        txt_nacionalidad.setForeground(new java.awt.Color(29, 33, 123));
+        txt_nacionalidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(txt_nacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 405, 200, -1));
+
+        txt_pasaporte.setBackground(new java.awt.Color(240, 240, 240));
+        txt_pasaporte.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        txt_pasaporte.setForeground(new java.awt.Color(29, 33, 123));
+        txt_pasaporte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(txt_pasaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 355, 200, -1));
+
+        txt_dni.setBackground(new java.awt.Color(240, 240, 240));
+        txt_dni.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        txt_dni.setForeground(new java.awt.Color(29, 33, 123));
+        txt_dni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(txt_dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 305, 200, -1));
+
+        txt_apellidos.setBackground(new java.awt.Color(240, 240, 240));
+        txt_apellidos.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        txt_apellidos.setForeground(new java.awt.Color(29, 33, 123));
+        txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 255, 340, -1));
+
+        txt_nombre.setBackground(new java.awt.Color(240, 240, 240));
+        txt_nombre.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        txt_nombre.setForeground(new java.awt.Color(29, 33, 123));
+        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 205, 340, -1));
 
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
-        btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
         btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -95,8 +140,10 @@ public class ModificarCliente extends javax.swing.JFrame {
         jLabel8.setText("Customer modification:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, -1, -1));
 
+        label_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        label_id.setForeground(new java.awt.Color(29, 33, 123));
         label_id.setText("...");
-        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 155, -1, -1));
+        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 156, -1, -1));
         getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 315, -1));
         getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 135, 250, -1));
 
@@ -149,6 +196,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(29, 33, 123));
         jLabel17.setText("Customer details");
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, -1, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 660));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -226,6 +274,7 @@ public class ModificarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel label_id;

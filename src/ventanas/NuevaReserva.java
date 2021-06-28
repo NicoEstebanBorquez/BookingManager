@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
@@ -283,7 +284,7 @@ public class NuevaReserva extends javax.swing.JFrame {
         txt_precio.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         txt_precio.setForeground(new java.awt.Color(29, 33, 123));
         txt_precio.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 305, 150, -1));
+        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 305, 150, -1));
 
         label_gestionadoPor.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_gestionadoPor.setForeground(new java.awt.Color(29, 33, 123));
@@ -292,11 +293,11 @@ public class NuevaReserva extends javax.swing.JFrame {
 
         jDate_entrada.setForeground(new java.awt.Color(29, 33, 123));
         jDate_entrada.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
-        getContentPane().add(jDate_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 205, 150, 30));
+        getContentPane().add(jDate_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 205, 150, 30));
 
         jDate_salida.setForeground(new java.awt.Color(29, 33, 123));
         jDate_salida.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
-        getContentPane().add(jDate_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 255, 150, 30));
+        getContentPane().add(jDate_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 255, 150, 30));
 
         label_fechaActual.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_fechaActual.setForeground(new java.awt.Color(29, 33, 123));
@@ -359,7 +360,7 @@ public class NuevaReserva extends javax.swing.JFrame {
         label_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_id.setForeground(new java.awt.Color(29, 33, 123));
         label_id.setText("ref");
-        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 155, -1, -1));
+        getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 155, -1, -1));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, 5, 475));
@@ -369,7 +370,8 @@ public class NuevaReserva extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_guardarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarReservaActionPerformed
-
+        
+        
         // Obtención de fechas de entrada y salida con formato DATE
         Date entrada_input = jDate_entrada.getDate();
         Date salida_input = jDate_salida.getDate();
@@ -380,7 +382,7 @@ public class NuevaReserva extends javax.swing.JFrame {
         java.sql.Date entrada = new java.sql.Date(entrada_l);
         java.sql.Date salida = new java.sql.Date(salida_l);
         try {
-            bd.altaReserva(
+            if (bd.altaReserva(
                     IDNuevaReserva,
                     fecha_actual,
                     entrada,
@@ -390,7 +392,10 @@ public class NuevaReserva extends javax.swing.JFrame {
                     alojamiento_seleccionado,
                     cliente_seleccionado,
                     id_usuario
-            );
+            ) == 0) {
+                JOptionPane.showMessageDialog(null, "Error occurred while adding new booking.");
+            } else{JOptionPane.showMessageDialog(null, "New booking successfully added.");}
+            
 
         } catch (Exception e) {
          }

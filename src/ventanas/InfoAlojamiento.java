@@ -4,6 +4,7 @@ import clases.BD;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import javax.swing.WindowConstants;
 
@@ -32,7 +33,7 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
-        
+
         //Muestra la info del alojamiento al abrir la ventana
         mostrarInfoAlojamiento();
     }
@@ -175,6 +176,11 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         btn_eliminar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_eliminar.setForeground(new java.awt.Color(29, 33, 123));
         btn_eliminar.setText("Delete");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 90, -1));
 
         jLabel15.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
@@ -250,6 +256,25 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         ma.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_modificarActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+
+        int confirmacion = 0;
+        confirmacion = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this accommodation?", "Delete",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            if (bd.eliminarAlojamiento(alojamiento) == 0) {
+                JOptionPane.showMessageDialog(null, "Impossible to delete this accommodation. \nThere are still bookings pending.", "Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Accommodation successfully deleted.");
+            }
+        }
+
+        Alojamientos a = new Alojamientos();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,7 +368,7 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         label_terraza.setText(terraza);
         label_piscina.setText(piscina);
         label_aparcamiento.setText(aparcamiento);
-        
+
         this.label_gestionadoPor.setText(bd.obtenerNombreUsuario(usuario));
     }
 }
