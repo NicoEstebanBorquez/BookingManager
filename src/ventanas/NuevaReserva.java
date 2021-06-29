@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,17 +20,16 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import static ventanas.Reservas.reserva;
 
 public class NuevaReserva extends javax.swing.JFrame {
 
     BD bd;
-    String nombre_usuario, apellidos_usuario;
+    String nombre_usuario, apellidos_usuario, alojamiento_seleccionado = "";
     int id_usuario;
-    String alojamiento_seleccionado;
-    int cliente_seleccionado;
-    java.sql.Date fecha_actual;
+    int cliente_seleccionado = 0;
     int IDNuevaReserva = 0;
+
+    java.sql.Date fecha_actual;
 
     //Permite acceder a los metodos necesarios para añadir filas, columnas, dar nombre a las columnas, etc.
     DefaultTableModel modelo = new DefaultTableModel();
@@ -56,8 +56,8 @@ public class NuevaReserva extends javax.swing.JFrame {
 
         //Obtencion del ID del alojamiento desde la BD
         IDNuevaReserva = bd.obtenerSiguienteIDReserva();
-        label_id.setText(""+IDNuevaReserva);
-        
+        label_id.setText("" + IDNuevaReserva);
+
         //Obtención de fecha actual
         long fecha_miliseconds = new Date().getTime();
         fecha_actual = new java.sql.Date(fecha_miliseconds);
@@ -76,14 +76,13 @@ public class NuevaReserva extends javax.swing.JFrame {
 
             modelo.addColumn("Ref");
             modelo.addColumn("Name");
-            
+
             //Alto de filas
             table_alojamientos.setRowHeight(25);
             //Ancho de columnas
             TableColumnModel modeloColumna = table_alojamientos.getColumnModel();
             modeloColumna.getColumn(0).setPreferredWidth(10);
             modeloColumna.getColumn(1).setPreferredWidth(290);
-
 
             while (rs.next()) {
                 Object[] fila = new Object[2];
@@ -136,7 +135,7 @@ public class NuevaReserva extends javax.swing.JFrame {
             modeloColumna2.getColumn(0).setPreferredWidth(10);
             modeloColumna2.getColumn(1).setPreferredWidth(80);
             modeloColumna2.getColumn(2).setPreferredWidth(150);
-            
+
             while (rs.next()) {
                 Object[] fila = new Object[3];
 
@@ -165,7 +164,7 @@ public class NuevaReserva extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -206,6 +205,7 @@ public class NuevaReserva extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         label_id = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -364,52 +364,106 @@ public class NuevaReserva extends javax.swing.JFrame {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, 5, 475));
+
+        jLabel9.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel9.setText("€");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 305, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, -4, 870, 730));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_guardarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarReservaActionPerformed
-        
-        
-        // Obtención de fechas de entrada y salida con formato DATE
-        Date entrada_input = jDate_entrada.getDate();
-        Date salida_input = jDate_salida.getDate();
+        int validacion = 0;
 
-        long entrada_l = entrada_input.getTime();
-        long salida_l = salida_input.getTime();
+        java.sql.Date entrada = new java.sql.Date(1 / 1 / 1);
+        java.sql.Date salida = new java.sql.Date(1 / 1 / 1);
 
-        java.sql.Date entrada = new java.sql.Date(entrada_l);
-        java.sql.Date salida = new java.sql.Date(salida_l);
+        //Validación fecha entrada y salida
+        Date comprobacionEntrada;
+        comprobacionEntrada = jDate_entrada.getDate();
+        if (comprobacionEntrada == null) {
+            validacion++;
+        } else {
+            // Obtención de fecha de entrada con formato SQL DATE
+            Date entrada_input = jDate_entrada.getDate();
+            long entrada_l = entrada_input.getTime();
+            entrada = new java.sql.Date(entrada_l);
+        }
+
+        Date comprobacionSalida;
+        comprobacionSalida = jDate_salida.getDate();
+        if (comprobacionSalida == null) {
+            validacion++;
+        } else {
+            // Obtención de fecha de salida con formato SQL DATE
+            Date salida_input = jDate_salida.getDate();
+            long salida_l = salida_input.getTime();
+            salida = new java.sql.Date(salida_l);
+        }
+
+        //Validacion precio
+        double precio = 0;
+        int comprobacionDouble;
+
         try {
+            precio = Double.parseDouble(txt_precio.getText());
+            comprobacionDouble = 0;
+
+        } catch (NumberFormatException e) {
+            txt_precio.setBackground(new Color(255, 82, 82));
+            JOptionPane.showMessageDialog(null, "Introduce a number with format 999 or 999.99", "Format error", JOptionPane.INFORMATION_MESSAGE);
+            comprobacionDouble = 1;
+            validacion++;
+        }
+
+        if (comprobacionDouble > 0) {
+            validacion++;
+        }
+
+        if (alojamiento_seleccionado.equals("")) {
+            validacion++;
+        }
+        if (cliente_seleccionado == 0) {
+            validacion++;
+        }
+
+        
+        if (validacion > 0) {
+            JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
+
+        } else {
+            txt_precio.setBackground(new Color(240, 240, 240));
+
             if (bd.altaReserva(
                     IDNuevaReserva,
                     fecha_actual,
                     entrada,
                     salida,
-                    Double.parseDouble(txt_precio.getText().trim()),//Integer.parseInt(txt_precio.getText().trim())
-
+                    precio,
                     alojamiento_seleccionado,
                     cliente_seleccionado,
                     id_usuario
             ) == 0) {
                 JOptionPane.showMessageDialog(null, "Error occurred while adding new booking.");
-            } else{JOptionPane.showMessageDialog(null, "New booking successfully added.");}
-            
+            } else {
+                JOptionPane.showMessageDialog(null, "New booking successfully added.");
+            }
 
-        } catch (Exception e) {
-         }
-
-        this.dispose();
-        Reservas r = new Reservas();
-        r.setVisible(true);
-
+            this.dispose();
+            Reservas r = new Reservas();
+            r.setVisible(true);
+        }
     }//GEN-LAST:event_btn_guardarReservaActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+
+        /*
         this.dispose();
         Reservas r = new Reservas();
         r.setVisible(true);
+         */
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     /**
@@ -462,6 +516,7 @@ public class NuevaReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -9,11 +9,11 @@ public class BD {
 
     public void altaAlojamiento(int ID, String nombre, String direccion, int capacidad, int dormitorios,
             int baños, String terraza, String piscina, String aparcamiento, int usuario) {
-        
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-            
+
             PreparedStatement pst = cn.prepareStatement("INSERT INTO alojamientos VALUES(?,?,?,?,?,?,?,?,?,?)");
             pst.setInt(1, ID);
             pst.setString(2, nombre);
@@ -36,8 +36,8 @@ public class BD {
         }
     }
 
-    public void altaCliente(int ID, String nombre, String apellidos, String DNI, String pasaporte, String nacionalidad, int telefono, String email, int usuario) {
-
+    public int altaCliente(int ID, String nombre, String apellidos, String DNI, String pasaporte, String nacionalidad, String telefono, String email, int usuario) {
+        int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
@@ -49,10 +49,10 @@ public class BD {
             pst.setString(4, DNI);
             pst.setString(5, pasaporte);
             pst.setString(6, nacionalidad);
-            pst.setInt(7, telefono);
+            pst.setString(7, telefono);
             pst.setString(8, email);
             pst.setInt(9, usuario);
-            pst.executeUpdate();
+            resultado = pst.executeUpdate();
 
             pst.close();
             cn.close();
@@ -62,6 +62,7 @@ public class BD {
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return resultado;
     }
 
     public int altaReserva(int ID, java.sql.Date fecha, java.sql.Date entrada, java.sql.Date salida, Double precio, String alojamiento, int cliente, int usuario) {
@@ -117,7 +118,7 @@ public class BD {
         }
         return ID;
     }
-    
+
     public String obtenerNombreUsuario(String ID) {
 
         String nombre = "";
@@ -143,7 +144,7 @@ public class BD {
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return nombre+ " " +apellidos;
+        return nombre + " " + apellidos;
     }
 
     public String[] obtenerInfoCliente(int ID) {
@@ -375,84 +376,86 @@ public class BD {
 
     }
 
-    public int obtenerSiguienteIDAlojamiento(){
-        
+    public int obtenerSiguienteIDAlojamiento() {
+
         String maxID = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-            
+
             PreparedStatement pst = cn.prepareStatement("SELECT MAX(id_alojamiento) FROM `alojamientos`");
             ResultSet rs = pst.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 maxID = rs.getString(1);
             }
-         
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        return Integer.parseInt(maxID)+1;
+
+        return Integer.parseInt(maxID) + 1;
     }
-    
-    public int obtenerSiguienteIDCliente(){
-        
+
+    public int obtenerSiguienteIDCliente() {
+
         String maxID = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-            
+
             PreparedStatement pst = cn.prepareStatement("SELECT MAX(id_cliente) FROM `clientes`");
             ResultSet rs = pst.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 maxID = rs.getString(1);
             }
-         
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return Integer.parseInt(maxID)+1;
+        return Integer.parseInt(maxID) + 1;
     }
-    
-    public int obtenerSiguienteIDReserva(){
-        
+
+    public int obtenerSiguienteIDReserva() {
+
         int maxID = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-            
+
             PreparedStatement pst = cn.prepareStatement("SELECT MAX(id_reserva) FROM `reservas`");
             ResultSet rs = pst.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 maxID = rs.getInt(1);
-            } else{maxID = 0;}
-         
+            } else {
+                maxID = 0;
+            }
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return maxID+1;
+        return maxID + 1;
     }
-    
-    public int eliminarAlojamiento(String ID){
-    
+
+    public int eliminarAlojamiento(String ID) {
+
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-            
+
             PreparedStatement pst = cn.prepareStatement("DELETE FROM alojamientos WHERE id_alojamiento = ?");
             pst.setString(1, ID);
             resultado = pst.executeUpdate();
-            
+
             pst.close();
             cn.close();
         } catch (ClassNotFoundException ex) {
@@ -463,18 +466,18 @@ public class BD {
         }
         return resultado;
     }
-    
-    public int eliminarCliente(String ID){
-    
+
+    public int eliminarCliente(String ID) {
+
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-            
+
             PreparedStatement pst = cn.prepareStatement("DELETE FROM clientes WHERE id_cliente = ?");
             pst.setString(1, ID);
             resultado = pst.executeUpdate();
-            
+
             pst.close();
             cn.close();
         } catch (ClassNotFoundException ex) {
@@ -485,18 +488,18 @@ public class BD {
         }
         return resultado;
     }
-    
-    public int eliminarReserva(String ID){
-    
+
+    public int eliminarReserva(String ID) {
+
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-            
+
             PreparedStatement pst = cn.prepareStatement("DELETE FROM reservas WHERE id_reserva = ?");
             pst.setString(1, ID);
             resultado = pst.executeUpdate();
-            
+
             pst.close();
             cn.close();
         } catch (ClassNotFoundException ex) {
