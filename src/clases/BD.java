@@ -7,9 +7,10 @@ import ventanas.InfoReserva;
 
 public class BD {
 
-    public void altaAlojamiento(int ID, String nombre, String direccion, int capacidad, int dormitorios,
+    public int altaAlojamiento(int ID, String nombre, String direccion, int capacidad, int dormitorios,
             int baños, String terraza, String piscina, String aparcamiento, int usuario) {
 
+        int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
@@ -25,7 +26,7 @@ public class BD {
             pst.setString(8, piscina);
             pst.setString(9, aparcamiento);
             pst.setInt(10, usuario);
-            pst.executeUpdate();
+            resultado = pst.executeUpdate();
 
             pst.close();
             cn.close();
@@ -34,6 +35,7 @@ public class BD {
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return resultado;
     }
 
     public int altaCliente(int ID, String nombre, String apellidos, String DNI, String pasaporte, String nacionalidad, String telefono, String email, int usuario) {
@@ -303,7 +305,8 @@ public class BD {
         return nombre_cliente;
     }
 
-    public void modificarAlojamiento(String ID, String nombre, String direccion, int plazas, int dormitorios, int baños, String terraza, String piscina, String aparcamiento) {
+    public int modificarAlojamiento(String ID, String nombre, String direccion, int plazas, int dormitorios, int baños, String terraza, String piscina, String aparcamiento) {
+        int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
@@ -317,7 +320,7 @@ public class BD {
             pst.setString(7, piscina);
             pst.setString(8, aparcamiento);
             pst.setString(9, ID);
-            pst.executeUpdate();
+            resultado = pst.executeUpdate();
 
             pst.close();
             cn.close();
@@ -327,9 +330,11 @@ public class BD {
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return resultado;
     }
 
-    public void modificarCliente(String ID, String nombre, String apellidos, String DNI, String pasaporte, String nacionalidad, String telefono, String email) {
+    public int modificarCliente(String ID, String nombre, String apellidos, String DNI, String pasaporte, String nacionalidad, String telefono, String email) {
+        int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
@@ -342,7 +347,7 @@ public class BD {
             pst.setString(6, telefono);
             pst.setString(7, email);
             pst.setString(8, ID);
-            pst.executeUpdate();
+            resultado = pst.executeUpdate();
 
             pst.close();
             cn.close();
@@ -351,10 +356,11 @@ public class BD {
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return resultado;
     }
 
-    public void modificarReserva(String ID, java.sql.Date entrada, java.sql.Date salida, Double precio) {
-
+    public int modificarReserva(String ID, java.sql.Date entrada, java.sql.Date salida, Double precio) {
+        int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
@@ -364,7 +370,7 @@ public class BD {
             pst.setDate(2, salida);
             pst.setDouble(3, precio);
             pst.setString(4, ID);
-            pst.executeUpdate();
+            resultado = pst.executeUpdate();
 
             pst.close();
             cn.close();
@@ -373,7 +379,7 @@ public class BD {
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        return resultado;
     }
 
     public int obtenerSiguienteIDAlojamiento() {

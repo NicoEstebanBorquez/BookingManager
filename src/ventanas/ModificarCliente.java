@@ -1,15 +1,20 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Color;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 public class ModificarCliente extends javax.swing.JFrame {
 
     int cliente;
     BD bd;
+
+    //Variables utilizadas en el formulario
+    String nombre_cliente, apellidos_cliente, dni_cliente, pasaporte_cliente, nacionalidad_cliente, tlf_cliente, email_cliente;
 
     public ModificarCliente() {
         initComponents();
@@ -28,7 +33,7 @@ public class ModificarCliente extends javax.swing.JFrame {
 
         //Muestra la info del cliente al abrir la ventana
         cargarDatosCliente();
-        
+
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -45,7 +50,7 @@ public class ModificarCliente extends javax.swing.JFrame {
 
         btn_guardar = new javax.swing.JButton();
         txt_email = new javax.swing.JTextField();
-        txt_telefono = new javax.swing.JTextField();
+        txt_tlf = new javax.swing.JTextField();
         txt_nacionalidad = new javax.swing.JTextField();
         txt_pasaporte = new javax.swing.JTextField();
         txt_dni = new javax.swing.JTextField();
@@ -88,11 +93,11 @@ public class ModificarCliente extends javax.swing.JFrame {
         txt_email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 560, 340, -1));
 
-        txt_telefono.setBackground(new java.awt.Color(240, 240, 240));
-        txt_telefono.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
-        txt_telefono.setForeground(new java.awt.Color(29, 33, 123));
-        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 150, -1));
+        txt_tlf.setBackground(new java.awt.Color(240, 240, 240));
+        txt_tlf.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        txt_tlf.setForeground(new java.awt.Color(29, 33, 123));
+        txt_tlf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(txt_tlf, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 150, -1));
 
         txt_nacionalidad.setBackground(new java.awt.Color(240, 240, 240));
         txt_nacionalidad.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
@@ -203,20 +208,88 @@ public class ModificarCliente extends javax.swing.JFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
-        bd.modificarCliente(
-                String.valueOf(cliente),
-                txt_nombre.getText(),
-                txt_apellidos.getText(),
-                txt_dni.getText(),
-                txt_pasaporte.getText(),
-                txt_nacionalidad.getText(),
-                txt_telefono.getText(),
-                txt_email.getText()
-        );
-        
-        Clientes c = new Clientes();
-        c.setVisible(true);
-        this.dispose();
+        int validacion = 0;
+
+        //Variables
+        nombre_cliente = txt_nombre.getText().trim();
+        apellidos_cliente = txt_apellidos.getText().trim();
+        dni_cliente = txt_dni.getText().trim();
+        pasaporte_cliente = txt_pasaporte.getText().trim();
+        nacionalidad_cliente = txt_nacionalidad.getText().trim();
+        tlf_cliente = txt_tlf.getText().trim();
+        email_cliente = txt_email.getText().trim();
+
+        //Validacion de los campos:
+        if (nombre_cliente.equals("")) {
+            validacion++;
+            txt_nombre.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_nombre.setBackground(new Color(240, 240, 240));
+        }
+
+        if (apellidos_cliente.equals("")) {
+            validacion++;
+            txt_apellidos.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_apellidos.setBackground(new Color(240, 240, 240));
+        }
+
+        if (dni_cliente.equals("")) {
+            validacion++;
+            txt_dni.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_dni.setBackground(new Color(240, 240, 240));
+        }
+
+        if (pasaporte_cliente.equals("")) {
+            validacion++;
+            txt_pasaporte.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_pasaporte.setBackground(new Color(240, 240, 240));
+        }
+
+        if (nacionalidad_cliente.equals("")) {
+            validacion++;
+            txt_nacionalidad.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_nacionalidad.setBackground(new Color(240, 240, 240));
+        }
+
+        if (tlf_cliente.equals("")) {
+            validacion++;
+            txt_tlf.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_tlf.setBackground(new Color(240, 240, 240));
+        }
+
+        if (email_cliente.equals("")) {
+            validacion++;
+            txt_email.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_email.setBackground(new Color(240, 240, 240));
+        }
+
+        if (validacion > 0) {
+            JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (bd.modificarCliente(
+                    String.valueOf(cliente),
+                    txt_nombre.getText(),
+                    txt_apellidos.getText(),
+                    txt_dni.getText(),
+                    txt_pasaporte.getText(),
+                    txt_nacionalidad.getText(),
+                    txt_tlf.getText(),
+                    txt_email.getText()
+            ) == 0) {
+                JOptionPane.showMessageDialog(null, "Error occurred while updating customer.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Customer successfully updated.");
+            }
+            Clientes c = new Clientes();
+            c.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
@@ -284,7 +357,7 @@ public class ModificarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txt_nacionalidad;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_pasaporte;
-    private javax.swing.JTextField txt_telefono;
+    private javax.swing.JTextField txt_tlf;
     // End of variables declaration//GEN-END:variables
 
     public void cargarDatosCliente() {
@@ -297,7 +370,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         txt_dni.setText(info[2]);
         txt_pasaporte.setText(info[3]);
         txt_nacionalidad.setText(info[4]);
-        txt_telefono.setText(info[5]);
+        txt_tlf.setText(info[5]);
         txt_email.setText(info[6]);
     }
 

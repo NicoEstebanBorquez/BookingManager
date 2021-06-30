@@ -24,12 +24,16 @@ import javax.swing.table.TableColumnModel;
 public class NuevaReserva extends javax.swing.JFrame {
 
     BD bd;
-    String nombre_usuario, apellidos_usuario, alojamiento_seleccionado = "";
+
+    String nombre_usuario, apellidos_usuario;
+    java.sql.Date fecha_actual;
+    
+    //Variables utilizadas en el formulario
+    String alojamiento_seleccionado = "";
+    double precio = 0;
     int id_usuario;
     int cliente_seleccionado = 0;
     int IDNuevaReserva = 0;
-
-    java.sql.Date fecha_actual;
 
     //Permite acceder a los metodos necesarios para añadir filas, columnas, dar nombre a las columnas, etc.
     DefaultTableModel modelo = new DefaultTableModel();
@@ -404,7 +408,6 @@ public class NuevaReserva extends javax.swing.JFrame {
         }
 
         //Validacion precio
-        double precio = 0;
         int comprobacionDouble;
 
         try {
@@ -429,7 +432,6 @@ public class NuevaReserva extends javax.swing.JFrame {
             validacion++;
         }
 
-        
         if (validacion > 0) {
             JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
 
@@ -459,11 +461,9 @@ public class NuevaReserva extends javax.swing.JFrame {
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
 
-        /*
         this.dispose();
         Reservas r = new Reservas();
         r.setVisible(true);
-         */
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     /**

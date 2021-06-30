@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +43,7 @@ public class Reservas extends javax.swing.JFrame {
 
         //Obtener listado de reservas
         listadoReservas();
-        
+
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -130,7 +132,7 @@ public class Reservas extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel5.setText("Search by accommodation:");
+        jLabel5.setText("Search by accommodation ID:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
@@ -190,93 +192,128 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_nuevaReservaActionPerformed
 
     private void btn_buscarFechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarFechasActionPerformed
+        int validacion = 0;
+        java.sql.Date desde = new java.sql.Date(1 / 1 / 1);
+        java.sql.Date hasta = new java.sql.Date(1 / 1 / 1);
 
-        //Obtencion de las fechas de inicio y fin
-        Date desde_date = jDate_desde.getDate();
-        long desde_l = desde_date.getTime();
-        java.sql.Date desde = new java.sql.Date(desde_l);
-
-        Date hasta_date = jDate_hasta.getDate();
-        long hasta_l = hasta_date.getTime();
-        java.sql.Date hasta = new java.sql.Date(hasta_l);
-
-        //Consulta a la BD para obtener listado de reservas
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
-            PreparedStatement pst = cn.prepareStatement("SELECT id_reserva, fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas "
-                    + "WHERE entrada BETWEEN ? AND ? ORDER BY entrada");
-            pst.setDate(1, desde);
-            pst.setDate(2, hasta);
-            ResultSet rs = pst.executeQuery();
-
-            table_reservas = new JTable(modelo);
-            jScrollPane1.setViewportView(table_reservas);
-            
-            //Alto de filas
-            table_reservas.setRowHeight(25);
-
-            //Limpia la tabla
-            modelo.setRowCount(0);
-
-            //Añade las reservas del alojamiento indicado
-            while (rs.next()) {
-                Object[] fila = new Object[7];
-
-                for (int i = 0; i < 7; i++) {
-                    fila[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(fila);
-            }
-            pst.close();
-            cn.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        //Validación fecha de inicio y fin
+        Date comprobacionEntrada;
+        comprobacionEntrada = jDate_desde.getDate();
+        if (comprobacionEntrada == null) {
+            validacion++;
+        } else {
+            // Obtención de fecha de inicio con formato SQL DATE
+            Date entrada_input = jDate_desde.getDate();
+            long entrada_l = entrada_input.getTime();
+            desde = new java.sql.Date(entrada_l);
         }
-        obtenerReservaSeleccionada();
+
+        Date comprobacionSalida;
+        comprobacionSalida = jDate_hasta.getDate();
+        if (comprobacionSalida == null) {
+            validacion++;
+        } else {
+            // Obtención de fecha de fin con formato SQL DATE
+            Date salida_input = jDate_hasta.getDate();
+            long salida_l = salida_input.getTime();
+            hasta = new java.sql.Date(salida_l);
+        }
+
+        if (validacion > 0) {
+            JOptionPane.showMessageDialog(null, "Please complete date fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
+        } else {
+            //Consulta a la BD para obtener listado de reservas
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+
+                PreparedStatement pst = cn.prepareStatement("SELECT id_reserva, fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas "
+                        + "WHERE entrada BETWEEN ? AND ? ORDER BY entrada");
+                pst.setDate(1, desde);
+                pst.setDate(2, hasta);
+                ResultSet rs = pst.executeQuery();
+
+                table_reservas = new JTable(modelo);
+                jScrollPane1.setViewportView(table_reservas);
+
+                //Alto de filas
+                table_reservas.setRowHeight(25);
+
+                //Limpia la tabla
+                modelo.setRowCount(0);
+
+                //Añade las reservas del alojamiento indicado
+                while (rs.next()) {
+                    Object[] fila = new Object[7];
+
+                    for (int i = 0; i < 7; i++) {
+                        fila[i] = rs.getObject(i + 1);
+                    }
+                    modelo.addRow(fila);
+                }
+                pst.close();
+                cn.close();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            obtenerReservaSeleccionada();
+        }
     }//GEN-LAST:event_btn_buscarFechasActionPerformed
 
     private void btn_buscarAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarAlojamientoActionPerformed
+        int validacion = 0;
 
-        //Consulta a la BD para obtener listado de reservas
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
-            PreparedStatement pst = cn.prepareStatement("SELECT id_reserva,fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas WHERE id_alojamiento=? ORDER BY entrada");
-            pst.setString(1, txt_alojamientoBusqueda.getText());
-            ResultSet rs = pst.executeQuery();
-
-            table_reservas = new JTable(modelo);
-            jScrollPane1.setViewportView(table_reservas);
-            
-            //Alto de filas
-            table_reservas.setRowHeight(25);
-
-            //Limpia la tabla
-            modelo.setRowCount(0);
-
-            //Añade las reservas del alojamiento indicado
-            while (rs.next()) {
-                Object[] fila = new Object[7];
-
-                for (int i = 0; i < 7; i++) {
-                    fila[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(fila);
-            }
-            pst.close();
-            cn.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        if (txt_alojamientoBusqueda.getText().equals("")) {
+            validacion++;
+            txt_alojamientoBusqueda.setBackground(new Color(255, 82, 82));
         }
-        obtenerReservaSeleccionada();
-        txt_alojamientoBusqueda.setText("");
+
+        if (validacion > 0) {
+            JOptionPane.showMessageDialog(null, "Please introduce an accommodation ID.", "Empty field", JOptionPane.WARNING_MESSAGE);
+        } else {
+            txt_alojamientoBusqueda.setBackground(new Color(240, 240, 240));
+
+            //Consulta a la BD para obtener listado de reservas
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+
+                PreparedStatement pst = cn.prepareStatement("SELECT id_reserva,fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas WHERE id_alojamiento=? ORDER BY entrada");
+                pst.setString(1, txt_alojamientoBusqueda.getText().trim());
+                ResultSet rs = pst.executeQuery();
+
+                table_reservas = new JTable(modelo);
+                jScrollPane1.setViewportView(table_reservas);
+
+                //Alto de filas
+                table_reservas.setRowHeight(25);
+
+                //Limpia la tabla
+                modelo.setRowCount(0);
+
+                //Añade las reservas del alojamiento indicado
+                while (rs.next()) {
+                    Object[] fila = new Object[7];
+
+                    for (int i = 0; i < 7; i++) {
+                        fila[i] = rs.getObject(i + 1);
+                    }
+                    modelo.addRow(fila);
+                }
+                pst.close();
+                cn.close();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            obtenerReservaSeleccionada();
+            txt_alojamientoBusqueda.setText("");
+        }
+
+
     }//GEN-LAST:event_btn_buscarAlojamientoActionPerformed
 
     private void btn_verTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verTodasActionPerformed
@@ -388,7 +425,7 @@ public class Reservas extends javax.swing.JFrame {
 
             //Alto de filas
             table_reservas.setRowHeight(25);
-            
+
             while (rs.next()) {
                 Object[] fila = new Object[7];
 

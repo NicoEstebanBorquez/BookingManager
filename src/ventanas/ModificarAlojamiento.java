@@ -1,16 +1,21 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Color;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 public class ModificarAlojamiento extends javax.swing.JFrame {
 
-    String alojamiento, terraza, piscina, parking;
+    String alojamiento;
     int pax, dormitorios, baños;
     BD bd;
+
+    //Variables utilizadas en el formulario
+    String nombre_alojamiento, direccion_alojamiento, terraza, piscina, parking;
 
     public ModificarAlojamiento() {
         initComponents();
@@ -205,6 +210,27 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
+        int validacion = 0;
+
+        //Variables
+        nombre_alojamiento = txt_nombre.getText().trim();
+        direccion_alojamiento = txt_direccion.getText().trim();
+
+        //Validacion de los campos:
+        if (nombre_alojamiento.equals("")) {
+            validacion++;
+            txt_nombre.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_nombre.setBackground(new Color(240, 240, 240));
+        }
+
+        if (direccion_alojamiento.equals("")) {
+            validacion++;
+            txt_direccion.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_direccion.setBackground(new Color(240, 240, 240));
+        }
+
         //ComboBox PAX
         if (combo_pax.getSelectedIndex() == 0) {
             pax = 0;
@@ -273,20 +299,28 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
             parking = "NO";
         }
 
-        bd.modificarAlojamiento(
-                alojamiento,
-                txt_nombre.getText(),
-                txt_direccion.getText(),
-                pax,
-                dormitorios,
-                baños,
-                terraza,
-                piscina,
-                parking
-        );
-        Alojamientos a = new Alojamientos();
-        a.setVisible(true);
-        this.dispose();
+        if (validacion > 0) {
+            JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (bd.modificarAlojamiento(
+                    alojamiento,
+                    nombre_alojamiento,
+                    direccion_alojamiento,
+                    pax,
+                    dormitorios,
+                    baños,
+                    terraza,
+                    piscina,
+                    parking
+            ) == 0) {
+                JOptionPane.showMessageDialog(null, "Error occurred while updating this accommodation.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Cccommodation successfully updated.");
+            }
+            Alojamientos a = new Alojamientos();
+            a.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed

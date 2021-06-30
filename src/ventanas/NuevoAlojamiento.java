@@ -1,18 +1,23 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Color;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import javax.swing.WindowConstants;
 
 public class NuevoAlojamiento extends javax.swing.JFrame {
 
     BD bd;
-    String nombre_usuario, apellidos_usuario, terraza, piscina, parking;
+    String nombre_usuario, apellidos_usuario;
     int id_usuario, pax, dormitorios, baños;
     int IDNuevoAlojamiento = 0;
+
+    //Variables utilizadas en el formulario
+    String nombre_alojamiento, direccion_alojamiento, terraza, piscina, parking;
 
     public NuevoAlojamiento() {
         initComponents();
@@ -228,6 +233,27 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
+        int validacion = 0;
+
+        //Variables
+        nombre_alojamiento = txt_nombre.getText().trim();
+        direccion_alojamiento = txt_direccion.getText().trim();
+
+        //Validacion de los campos:
+        if (nombre_alojamiento.equals("")) {
+            validacion++;
+            txt_nombre.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_nombre.setBackground(new Color(240, 240, 240));
+        }
+
+        if (direccion_alojamiento.equals("")) {
+            validacion++;
+            txt_direccion.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_direccion.setBackground(new Color(240, 240, 240));
+        }
+
         //ComboBox PAX
         if (combo_pax.getSelectedIndex() == 0) {
             pax = 0;
@@ -296,21 +322,31 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
             parking = "NO";
         }
 
-        bd.altaAlojamiento(
-                IDNuevoAlojamiento,
-                txt_nombre.getText().trim(),
-                txt_direccion.getText().trim(),
-                pax,
-                dormitorios,
-                baños,
-                terraza,
-                piscina,
-                parking,
-                id_usuario);
+        if (validacion > 0) {
+            JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (bd.altaAlojamiento(
+                    IDNuevoAlojamiento,
+                    nombre_alojamiento,
+                    direccion_alojamiento,
+                    pax,
+                    dormitorios,
+                    baños,
+                    terraza,
+                    piscina,
+                    parking,
+                    id_usuario
+            ) == 0) {
+                JOptionPane.showMessageDialog(null, "Error occurred while adding new accommodation.");
+            } else {
+                JOptionPane.showMessageDialog(null, "New accommodation successfully added.");
+            }
 
-        Alojamientos a = new Alojamientos();
-        a.setVisible(true);
-        this.dispose();
+            Alojamientos a = new Alojamientos();
+            a.setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed

@@ -17,6 +17,9 @@ public class NuevoCliente extends javax.swing.JFrame {
     int id_usuario;
     int IDNuevoCliente = 0;
 
+    //Variables utilizadas en el formulario
+    String nombre_cliente, apellidos_cliente, dni_cliente, pasaporte_cliente, nacionalidad_cliente, tlf_cliente, email_cliente;
+
     public NuevoCliente() {
         initComponents();
 
@@ -165,6 +168,11 @@ public class NuevoCliente extends javax.swing.JFrame {
         txt_dni.setForeground(new java.awt.Color(29, 33, 123));
         txt_dni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_dni.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_dni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_dniKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 305, 200, -1));
 
         txt_pasaporte.setBackground(new java.awt.Color(240, 240, 240));
@@ -172,6 +180,11 @@ public class NuevoCliente extends javax.swing.JFrame {
         txt_pasaporte.setForeground(new java.awt.Color(29, 33, 123));
         txt_pasaporte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_pasaporte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_pasaporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_pasaporteKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_pasaporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 355, 200, -1));
 
         txt_nacionalidad.setBackground(new java.awt.Color(240, 240, 240));
@@ -238,39 +251,73 @@ public class NuevoCliente extends javax.swing.JFrame {
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         int validacion = 0;
 
-        if (txt_nombre.getText().equals("")) {
+        //Variables
+        nombre_cliente = txt_nombre.getText().trim();
+        apellidos_cliente = txt_apellidos.getText().trim();
+        dni_cliente = txt_dni.getText().trim();
+        pasaporte_cliente = txt_pasaporte.getText().trim();
+        nacionalidad_cliente = txt_nacionalidad.getText().trim();
+        tlf_cliente = txt_tlf.getText().trim();
+        email_cliente = txt_email.getText().trim();
+
+        //Validacion de los campos:
+        if (nombre_cliente.equals("")) {
             validacion++;
             txt_nombre.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_nombre.setBackground(new Color(240, 240, 240));
         }
 
-        if (txt_apellidos.getText().equals("")) {
+        if (apellidos_cliente.equals("")) {
             validacion++;
             txt_apellidos.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_apellidos.setBackground(new Color(240, 240, 240));
         }
 
-        if (txt_dni.getText().equals("")) {
-            validacion++;
-            txt_dni.setBackground(new Color(255, 82, 82));
+        //Validacion IDCard y passport
+        
+        if (txt_dni.isEnabled()) {
+            if (dni_cliente.equals("")) {
+                validacion++;
+                txt_dni.setBackground(new Color(255, 82, 82));
+            } else {
+                txt_dni.setBackground(new Color(240, 240, 240));
+            }
+        } else {
+            dni_cliente = "-";
         }
 
-        if (txt_pasaporte.getText().equals("")) {
-            validacion++;
-            txt_pasaporte.setBackground(new Color(255, 82, 82));
+        if (txt_pasaporte.isEnabled()) {
+            if (pasaporte_cliente.equals("")) {
+                validacion++;
+                txt_pasaporte.setBackground(new Color(255, 82, 82));
+            } else {
+                txt_pasaporte.setBackground(new Color(240, 240, 240));
+            }
+        } else {
+            pasaporte_cliente = "-";
         }
 
-        if (txt_nacionalidad.getText().equals("")) {
+        if (nacionalidad_cliente.equals("")) {
             validacion++;
             txt_nacionalidad.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_nacionalidad.setBackground(new Color(240, 240, 240));
         }
 
-        if (txt_tlf.getText().equals("")) {
+        if (tlf_cliente.equals("")) {
             validacion++;
             txt_tlf.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_tlf.setBackground(new Color(240, 240, 240));
         }
 
-        if (txt_email.getText().equals("")) {
+        if (email_cliente.equals("")) {
             validacion++;
             txt_email.setBackground(new Color(255, 82, 82));
+        } else {
+            txt_email.setBackground(new Color(240, 240, 240));
         }
 
         if (validacion > 0) {
@@ -278,24 +325,17 @@ public class NuevoCliente extends javax.swing.JFrame {
         } else {
             if (bd.altaCliente(
                     IDNuevoCliente,
-                    txt_nombre.getText().trim(),
-                    txt_apellidos.getText().trim(),
-                    txt_dni.getText().trim(),
-                    txt_pasaporte.getText().trim(),
-                    txt_nacionalidad.getText().trim(),
-                    txt_tlf.getText().trim(),
-                    txt_email.getText().trim(),
+                    nombre_cliente,
+                    apellidos_cliente,
+                    dni_cliente,
+                    pasaporte_cliente,
+                    nacionalidad_cliente,
+                    tlf_cliente,
+                    email_cliente,
                     id_usuario
             ) == 0) {
                 JOptionPane.showMessageDialog(null, "Error occurred while adding new customer.");
             } else {
-                txt_nombre.setBackground(new Color(240, 240, 240));
-                txt_apellidos.setBackground(new Color(240, 240, 240));
-                txt_dni.setBackground(new Color(240, 240, 240));
-                txt_pasaporte.setBackground(new Color(240, 240, 240));
-                txt_nacionalidad.setBackground(new Color(240, 240, 240));
-                txt_tlf.setBackground(new Color(240, 240, 240));
-                txt_email.setBackground(new Color(240, 240, 240));
                 JOptionPane.showMessageDialog(null, "New customer successfully added.");
             }
             this.dispose();
@@ -309,6 +349,14 @@ public class NuevoCliente extends javax.swing.JFrame {
         Clientes cl = new Clientes();
         cl.setVisible(true);
     }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void txt_dniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dniKeyTyped
+        txt_pasaporte.setEnabled(false);
+    }//GEN-LAST:event_txt_dniKeyTyped
+
+    private void txt_pasaporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_pasaporteKeyTyped
+        txt_dni.setEnabled(false);
+    }//GEN-LAST:event_txt_pasaporteKeyTyped
 
     /**
      * @param args the command line arguments

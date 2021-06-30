@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import java.awt.Color;
 import java.awt.Image;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,17 +12,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 public class ModificarReserva extends javax.swing.JFrame {
 
     int reserva;
     BD bd;
+    String nombre_usuario, apellidos_usuario;
+
+    //Variables utilizadas en el formulario
+    String alojamiento_seleccionado = "";
+    double precio = 0;
+    int id_usuario;
 
     public ModificarReserva() {
         initComponents();
 
-        setSize(585, 355);
+        setSize(585, 400);
         setResizable(false);
         setTitle("Modificar reserva");
         setLocationRelativeTo(null);
@@ -35,7 +43,7 @@ public class ModificarReserva extends javax.swing.JFrame {
 
         //Muestra la info del alojamiento al abrir la ventana
         cargarDatosReserva();
-        
+
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -89,7 +97,7 @@ public class ModificarReserva extends javax.swing.JFrame {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, -1, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, -1));
 
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
@@ -100,7 +108,7 @@ public class ModificarReserva extends javax.swing.JFrame {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, -1, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, -1));
         getContentPane().add(jDate_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
         getContentPane().add(jDate_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, -1, -1));
 
@@ -141,6 +149,8 @@ public class ModificarReserva extends javax.swing.JFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
+        int validacion = 0;
+
         // Obtención de fechas de entrada y salida con formato DATE
         Date entrada_input = jDate_entrada.getDate();
         Date salida_input = jDate_salida.getDate();
@@ -151,14 +161,44 @@ public class ModificarReserva extends javax.swing.JFrame {
         java.sql.Date entrada = new java.sql.Date(entrada_l);
         java.sql.Date salida = new java.sql.Date(salida_l);
 
-        bd.modificarReserva(
-                String.valueOf(reserva),
-                entrada,
-                salida,
-                Double.parseDouble(txt_precio.getText()));
-        Reservas r = new Reservas();
-        r.setVisible(true);
-        this.dispose();
+        //Validacion precio
+        int comprobacionDouble;
+
+        try {
+            precio = Double.parseDouble(txt_precio.getText());
+            comprobacionDouble = 0;
+        } catch (NumberFormatException e) {
+            txt_precio.setBackground(new Color(255, 82, 82));
+            JOptionPane.showMessageDialog(null, "Introduce a number with format 999 or 999.99", "Format error", JOptionPane.INFORMATION_MESSAGE);
+            comprobacionDouble = 1;
+            validacion++;
+        }
+
+        if (comprobacionDouble > 0) {
+            validacion++;
+        }
+
+        if (validacion > 0) {
+            JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);  
+        } else {
+            txt_precio.setBackground(new Color(240, 240, 240));
+
+            if (bd.modificarReserva(
+                    String.valueOf(reserva),
+                    entrada,
+                    salida,
+                    precio
+            ) == 0) {
+                JOptionPane.showMessageDialog(null, "Error occurred while updating booking.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Booking successfully updated.");
+            }
+
+            this.dispose();
+            Reservas r = new Reservas();
+            r.setVisible(true);
+        }
+
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
