@@ -10,9 +10,6 @@ public class InicioRecepcion extends javax.swing.JFrame {
 
     String usuario, nombre_usuario;
 
-    /**
-     * Creates new form InicioRecepcion
-     */
     public InicioRecepcion() {
         initComponents();
         usuario = Login.usuario;
@@ -47,15 +44,65 @@ public class InicioRecepcion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel_titulo = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btn_alojamientos = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel_titulo.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
+        jLabel_titulo.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel_titulo.setText("Receptionist's Panel");
+        getContentPane().add(jLabel_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 350, 50));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo/logo_small.png"))); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 350, 52));
+
+        jLabel6.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Accommodations");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 190, -1));
+
+        jLabel1.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Bookings");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 150, -1));
+
+        jLabel4.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Customers");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, 150, -1));
+
+        btn_alojamientos.setBackground(new java.awt.Color(246, 246, 246));
+        btn_alojamientos.setText("Accommodations");
+        btn_alojamientos.setBorder(null);
+        btn_alojamientos.setFocusable(false);
+        btn_alojamientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_alojamientosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_alojamientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 150, 70));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 730));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_alojamientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alojamientosActionPerformed
+        Alojamientos al = new Alojamientos();
+        al.setVisible(true);
+    }//GEN-LAST:event_btn_alojamientosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,6 +140,12 @@ public class InicioRecepcion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_alojamientos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel_Wallpaper;
+    private javax.swing.JLabel jLabel_titulo;
     // End of variables declaration//GEN-END:variables
 }

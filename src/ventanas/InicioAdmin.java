@@ -52,6 +52,8 @@ public class InicioAdmin extends javax.swing.JFrame {
        }
     }
     
+    
+    //Icono de ventana
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/logo/icon.png"));
@@ -153,7 +155,7 @@ public class InicioAdmin extends javax.swing.JFrame {
         jLabel_titulo.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel_titulo.setForeground(new java.awt.Color(29, 33, 123));
         jLabel_titulo.setText("Administration Panel");
-        getContentPane().add(jLabel_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 350, 50));
+        getContentPane().add(jLabel_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 350, 50));
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(29, 33, 123));
@@ -201,12 +203,12 @@ public class InicioAdmin extends javax.swing.JFrame {
                 btn_cerrarSesionActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, -1, -1));
+        getContentPane().add(btn_cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 670, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("LOGO");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, 210, 30));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo/logo_small.png"))); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 350, 52));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 730));
 
         pack();

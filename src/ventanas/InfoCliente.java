@@ -2,6 +2,7 @@ package ventanas;
 
 import clases.BD;
 import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -38,6 +39,13 @@ public class InfoCliente extends javax.swing.JFrame {
 
         //Muestra la info del cliente al abrir la ventana
         mostrarInfoCliente();
+    }
+    
+    //Icono de ventana
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/logo/icon.png"));
+        return retValue;
     }
 
     /**
@@ -77,6 +85,7 @@ public class InfoCliente extends javax.swing.JFrame {
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_cerrar.setBackground(new java.awt.Color(255, 255, 255));

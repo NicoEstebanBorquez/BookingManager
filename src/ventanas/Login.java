@@ -18,7 +18,7 @@ public class Login extends javax.swing.JFrame {
 
         setSize(400, 550);
         setResizable(false);
-        setTitle("ON_ReservationsSoftware");
+        setTitle("BookingManager");
         setLocationRelativeTo(null);
 
         //Wallpaper
@@ -101,7 +101,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton_Acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 440, 120, 35));
-        getContentPane().add(jLabel_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 350, 32));
+        getContentPane().add(jLabel_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 350, 52));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 550));
 
         pack();

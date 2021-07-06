@@ -2,6 +2,7 @@ package ventanas;
 
 import clases.BD;
 import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -36,6 +37,13 @@ public class InfoAlojamiento extends javax.swing.JFrame {
 
         //Muestra la info del alojamiento al abrir la ventana
         mostrarInfoAlojamiento();
+    }
+    
+    //Icono de ventana
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/logo/icon.png"));
+        return retValue;
     }
 
     /**
@@ -81,6 +89,7 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         jLabel12.setText("jLabel12");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
