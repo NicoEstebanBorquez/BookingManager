@@ -130,12 +130,6 @@ public class Login extends javax.swing.JFrame {
                     if (puesto.equals("Administrador") && estatus.equals("Activo")) {
                         dispose();
                         new InicioAdmin().setVisible(true);
-                    } else if (puesto.equals("Reservas") && estatus.equals("Activo")) {
-                        dispose();
-                        new InicioReservas().setVisible(true);
-                    } else if (puesto.equals("Recepcion") && estatus.equals("Activo")) {
-                        dispose();
-                        new InicioRecepcion().setVisible(true);
                     } else if (estatus.equals("Inactivo")) {
                         JOptionPane.showMessageDialog(null, "Está intentando acceder con un usuario inactivo", "Error al iniciar sesión", JOptionPane.ERROR_MESSAGE);
                         limpiar();
@@ -181,12 +175,6 @@ public class Login extends javax.swing.JFrame {
                         if (puesto.equals("Administrador") && estatus.equals("Activo")) {
                             dispose();
                             new InicioAdmin().setVisible(true);
-                        } else if (puesto.equals("Reservas") && estatus.equals("Activo")) {
-                            dispose();
-                            new InicioReservas().setVisible(true);
-                        } else if (puesto.equals("Recepcion") && estatus.equals("Activo")) {
-                            dispose();
-                            new InicioRecepcion().setVisible(true);
                         } else if (estatus.equals("Inactivo")) {
                             JOptionPane.showMessageDialog(null, "Está intentando acceder con un usuario inactivo", "Error al iniciar sesión", JOptionPane.ERROR_MESSAGE);
                         }
@@ -250,7 +238,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txt_user;
     // End of variables declaration//GEN-END:variables
 
-    public void limpiar(){
+    public void limpiar() {
         txt_user.setText("");
         txt_password.setText("");
     }
