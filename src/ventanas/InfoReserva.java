@@ -91,24 +91,26 @@ public class InfoReserva extends javax.swing.JFrame {
         Close.setBackground(new java.awt.Color(255, 255, 255));
         Close.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         Close.setForeground(new java.awt.Color(23, 33, 123));
+        Close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/cancel.png"))); // NOI18N
         Close.setText("Close");
         Close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CloseActionPerformed(evt);
             }
         });
-        getContentPane().add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, -1, -1));
+        getContentPane().add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, 111, -1));
 
-        btn_modificar.setBackground(new java.awt.Color(23, 33, 123));
+        btn_modificar.setBackground(new java.awt.Color(255, 255, 255));
         btn_modificar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
-        btn_modificar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_modificar.setText("Modify");
+        btn_modificar.setForeground(new java.awt.Color(23, 33, 123));
+        btn_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/edit.png"))); // NOI18N
+        btn_modificar.setText("Edit");
         btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_modificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, 89, -1));
+        getContentPane().add(btn_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, 111, -1));
 
         label_alojamiento.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_alojamiento.setForeground(new java.awt.Color(29, 33, 123));
@@ -143,13 +145,14 @@ public class InfoReserva extends javax.swing.JFrame {
         btn_eliminar.setBackground(new java.awt.Color(255, 255, 255));
         btn_eliminar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_eliminar.setForeground(new java.awt.Color(23, 33, 123));
+        btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/remove.png"))); // NOI18N
         btn_eliminar.setText("Delete");
         btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_eliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, 89, -1));
+        getContentPane().add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, 111, -1));
         getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 135, 285, -1));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);

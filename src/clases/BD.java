@@ -7,8 +7,7 @@ import ventanas.InfoReserva;
 
 public class BD {
 
-    public int altaAlojamiento(int ID, String nombre, String direccion, int capacidad, int dormitorios,
-            int baños, String terraza, String piscina, String aparcamiento, int usuario) {
+    public int altaAlojamiento(Alojamiento alojamiento) {
 
         int resultado = 0;
         try {
@@ -16,16 +15,16 @@ public class BD {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
             PreparedStatement pst = cn.prepareStatement("INSERT INTO alojamientos VALUES(?,?,?,?,?,?,?,?,?,?)");
-            pst.setInt(1, ID);
-            pst.setString(2, nombre);
-            pst.setString(3, direccion);
-            pst.setInt(4, capacidad);
-            pst.setInt(5, dormitorios);
-            pst.setInt(6, baños);
-            pst.setString(7, terraza);
-            pst.setString(8, piscina);
-            pst.setString(9, aparcamiento);
-            pst.setInt(10, usuario);
+            pst.setString(1, "");
+            pst.setString(2, alojamiento.getNombre());
+            pst.setString(3, alojamiento.getDireccion());
+            pst.setInt(4, alojamiento.getPlazas());
+            pst.setInt(5, alojamiento.getDormitorios());
+            pst.setInt(6, alojamiento.getBaños());
+            pst.setString(7, alojamiento.getTerraza());
+            pst.setString(8, alojamiento.getPiscina());
+            pst.setString(9, alojamiento.getAparcamiento());
+            pst.setInt(10, alojamiento.getId_usuario());
             resultado = pst.executeUpdate();
 
             pst.close();
@@ -38,22 +37,23 @@ public class BD {
         return resultado;
     }
 
-    public int altaCliente(int ID, String nombre, String apellidos, String DNI, String pasaporte, String nacionalidad, String telefono, String email, int usuario) {
+    public int altaCliente(Cliente cliente) {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
             PreparedStatement pst = cn.prepareStatement("INSERT INTO clientes VALUES (?,?,?,?,?,?,?,?,?)");
-            pst.setInt(1, ID);
-            pst.setString(2, nombre);
-            pst.setString(3, apellidos);
-            pst.setString(4, DNI);
-            pst.setString(5, pasaporte);
-            pst.setString(6, nacionalidad);
-            pst.setString(7, telefono);
-            pst.setString(8, email);
-            pst.setInt(9, usuario);
+
+            pst.setInt(1, 0);
+            pst.setString(2, cliente.getNombre());
+            pst.setString(3, cliente.getApellidos());
+            pst.setString(4, cliente.getDni());
+            pst.setString(5, cliente.getPasaporte());
+            pst.setString(6, cliente.getNacionalidad());
+            pst.setString(7, cliente.getTelefono());
+            pst.setString(8, cliente.getEmail());
+            pst.setInt(9, cliente.getId_usuario());
             resultado = pst.executeUpdate();
 
             pst.close();
@@ -67,21 +67,21 @@ public class BD {
         return resultado;
     }
 
-    public int altaReserva(int ID, java.sql.Date fecha, java.sql.Date entrada, java.sql.Date salida, Double precio, String alojamiento, int cliente, int usuario) {
+    public int altaReserva(Reserva reserva) {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
             PreparedStatement pst = cn.prepareStatement("INSERT INTO reservas VALUES (?,?,?,?,?,?,?,?)");
-            pst.setInt(1, ID);
-            pst.setDate(2, fecha);
-            pst.setDate(3, entrada);
-            pst.setDate(4, salida);
-            pst.setDouble(5, precio);
-            pst.setString(6, alojamiento);
-            pst.setInt(7, cliente);
-            pst.setInt(8, usuario);
+            pst.setInt(1, 0);
+            pst.setDate(2, reserva.getFecha_confirmacion());
+            pst.setDate(3, reserva.getEntrada());
+            pst.setDate(4, reserva.getSalida());
+            pst.setDouble(5, reserva.getPrecio());
+            pst.setInt(6, reserva.getId_alojamiento());
+            pst.setInt(7, reserva.getId_cliente());
+            pst.setInt(8, reserva.getId_usuario());
             resultado = pst.executeUpdate();
 
             pst.close();
@@ -184,7 +184,7 @@ public class BD {
         return info;
     }
 
-    public String[] obtenerInfoAlojamiento(String ID) {
+    public String[] obtenerInfoAlojamiento(int ID) {
 
         String[] info = new String[9];
         try {
@@ -192,7 +192,7 @@ public class BD {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
             PreparedStatement pst = cn.prepareStatement("SELECT nombre, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento, id_usuario FROM alojamientos WHERE id_alojamiento = ?");
-            pst.setString(1, ID);
+            pst.setInt(1, ID);
 
             ResultSet rs = pst.executeQuery();
 
@@ -305,21 +305,21 @@ public class BD {
         return nombre_cliente;
     }
 
-    public int modificarAlojamiento(String ID, String nombre, String direccion, int plazas, int dormitorios, int baños, String terraza, String piscina, String aparcamiento) {
+    public int modificarAlojamiento(Alojamiento alojamiento) {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
             PreparedStatement pst = cn.prepareStatement("UPDATE alojamientos SET nombre=?, direccion=?, plazas=?, dormitorios=?, baños=?, terraza=?, piscina=?, aparcamiento=? WHERE id_alojamiento=?");
-            pst.setString(1, nombre);
-            pst.setString(2, direccion);
-            pst.setInt(3, plazas);
-            pst.setInt(4, dormitorios);
-            pst.setInt(5, baños);
-            pst.setString(6, terraza);
-            pst.setString(7, piscina);
-            pst.setString(8, aparcamiento);
-            pst.setString(9, ID);
+            pst.setString(1, alojamiento.getNombre());
+            pst.setString(2, alojamiento.getDireccion());
+            pst.setInt(3, alojamiento.getPlazas());
+            pst.setInt(4, alojamiento.getDormitorios());
+            pst.setInt(5, alojamiento.getBaños());
+            pst.setString(6, alojamiento.getTerraza());
+            pst.setString(7, alojamiento.getPiscina());
+            pst.setString(8, alojamiento.getAparcamiento());
+            pst.setInt(9, alojamiento.getId_alojamiento());
             resultado = pst.executeUpdate();
 
             pst.close();
@@ -333,20 +333,20 @@ public class BD {
         return resultado;
     }
 
-    public int modificarCliente(String ID, String nombre, String apellidos, String DNI, String pasaporte, String nacionalidad, String telefono, String email) {
+    public int modificarCliente(Cliente cliente) {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
             PreparedStatement pst = cn.prepareStatement("UPDATE clientes SET nombre=?, apellidos=?, DNI=?, pasaporte=?, nacionalidad=?, telefono=?, email=? WHERE id_cliente=?");
-            pst.setString(1, nombre);
-            pst.setString(2, apellidos);
-            pst.setString(3, DNI);
-            pst.setString(4, pasaporte);
-            pst.setString(5, nacionalidad);
-            pst.setString(6, telefono);
-            pst.setString(7, email);
-            pst.setString(8, ID);
+            pst.setString(1, cliente.getNombre());
+            pst.setString(2, cliente.getApellidos());
+            pst.setString(3, cliente.getDni());
+            pst.setString(4, cliente.getPasaporte());
+            pst.setString(5, cliente.getNacionalidad());
+            pst.setString(6, cliente.getTelefono());
+            pst.setString(7, cliente.getEmail());
+            pst.setInt(8, cliente.getId_cliente());
             resultado = pst.executeUpdate();
 
             pst.close();
@@ -359,17 +359,17 @@ public class BD {
         return resultado;
     }
 
-    public int modificarReserva(String ID, java.sql.Date entrada, java.sql.Date salida, Double precio) {
+    public int modificarReserva(Reserva reserva) {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
             PreparedStatement pst = cn.prepareStatement("UPDATE reservas SET entrada=?, salida=?, precio=? WHERE id_reserva=?");
 
-            pst.setDate(1, entrada);
-            pst.setDate(2, salida);
-            pst.setDouble(3, precio);
-            pst.setString(4, ID);
+            pst.setDate(1, reserva.getEntrada());
+            pst.setDate(2, reserva.getSalida());
+            pst.setDouble(3, reserva.getPrecio());
+            pst.setInt(4, reserva.getId_reserva());
             resultado = pst.executeUpdate();
 
             pst.close();
@@ -382,76 +382,7 @@ public class BD {
         return resultado;
     }
 
-    public int obtenerSiguienteIDAlojamiento() {
-
-        String maxID = "";
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
-            PreparedStatement pst = cn.prepareStatement("SELECT MAX(id_alojamiento) FROM `alojamientos`");
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                maxID = rs.getString(1);
-            }
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return Integer.parseInt(maxID) + 1;
-    }
-
-    public int obtenerSiguienteIDCliente() {
-
-        String maxID = "";
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
-            PreparedStatement pst = cn.prepareStatement("SELECT MAX(id_cliente) FROM `clientes`");
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                maxID = rs.getString(1);
-            }
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return Integer.parseInt(maxID) + 1;
-    }
-
-    public int obtenerSiguienteIDReserva() {
-
-        int maxID = 0;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
-            PreparedStatement pst = cn.prepareStatement("SELECT MAX(id_reserva) FROM `reservas`");
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                maxID = rs.getInt(1);
-            } else {
-                maxID = 0;
-            }
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return maxID + 1;
-    }
-
-    public int eliminarAlojamiento(String ID) {
+    public int eliminarAlojamiento(int ID) {
 
         int resultado = 0;
         try {
@@ -459,7 +390,7 @@ public class BD {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
 
             PreparedStatement pst = cn.prepareStatement("DELETE FROM alojamientos WHERE id_alojamiento = ?");
-            pst.setString(1, ID);
+            pst.setInt(1, ID);
             resultado = pst.executeUpdate();
 
             pst.close();
@@ -512,6 +443,28 @@ public class BD {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
+    }
+    
+    public int eliminarUsuario(int ID) {
+
+        int resultado = 0;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM usuarios WHERE id_usuario = ?");
+            pst.setInt(1, ID);
+            resultado = pst.executeUpdate();
+
+            pst.close();
+            cn.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            //Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al eliminar. El usuario tiene reservas pendientes.\nException: " + ex);
         }
         return resultado;
     }

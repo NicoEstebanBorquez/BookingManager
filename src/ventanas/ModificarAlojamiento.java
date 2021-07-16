@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import clases.Alojamiento;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -11,12 +12,8 @@ import javax.swing.WindowConstants;
 
 public class ModificarAlojamiento extends javax.swing.JFrame {
 
-    String alojamiento;
-    int pax, dormitorios, baños;
+    int alojamiento;
     BD bd;
-
-    //Variables utilizadas en el formulario
-    String nombre_alojamiento, direccion_alojamiento, terraza, piscina, parking;
 
     public ModificarAlojamiento() {
         initComponents();
@@ -42,7 +39,7 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
     }
-    
+
     //Icono de ventana
     @Override
     public Image getIconImage() {
@@ -121,24 +118,26 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/cancel.png"))); // NOI18N
         btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, -1, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 111, -1));
 
-        btn_guardar.setBackground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setBackground(new java.awt.Color(255, 255, 255));
         btn_guardar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
-        btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_guardar.setText("Save changes");
+        btn_guardar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/save.png"))); // NOI18N
+        btn_guardar.setText("Save");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, -1, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 111, -1));
         getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 135, 265, -1));
 
         jLabel15.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
@@ -220,20 +219,24 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
         int validacion = 0;
-
-        //Variables
-        nombre_alojamiento = txt_nombre.getText().trim();
-        direccion_alojamiento = txt_direccion.getText().trim();
+        //int id_alojamiento = Integer.parseInt(alojamiento);
+        int id_alojamiento = alojamiento;
+        //Objeto Alojamiento
+        Alojamiento alojamiento = new Alojamiento();
+        alojamiento.setId_alojamiento(id_alojamiento);
+        alojamiento.setNombre(txt_nombre.getText().trim());
+        alojamiento.setDireccion(txt_direccion.getText().trim());
+        
 
         //Validacion de los campos:
-        if (nombre_alojamiento.equals("")) {
+        if (alojamiento.getNombre().equals("")) {
             validacion++;
             txt_nombre.setBackground(new Color(255, 82, 82));
         } else {
             txt_nombre.setBackground(new Color(240, 240, 240));
         }
 
-        if (direccion_alojamiento.equals("")) {
+        if (alojamiento.getDireccion().equals("")) {
             validacion++;
             txt_direccion.setBackground(new Color(255, 82, 82));
         } else {
@@ -242,89 +245,79 @@ public class ModificarAlojamiento extends javax.swing.JFrame {
 
         //ComboBox PAX
         if (combo_pax.getSelectedIndex() == 0) {
-            pax = 0;
+            alojamiento.setPlazas(0);
         } else if (combo_pax.getSelectedIndex() == 1) {
-            pax = 1;
+            alojamiento.setPlazas(1);
         } else if (combo_pax.getSelectedIndex() == 2) {
-            pax = 2;
+            alojamiento.setPlazas(2);
         } else if (combo_pax.getSelectedIndex() == 3) {
-            pax = 3;
+            alojamiento.setPlazas(3);
         } else if (combo_pax.getSelectedIndex() == 4) {
-            pax = 4;
+            alojamiento.setPlazas(4);
         } else if (combo_pax.getSelectedIndex() == 5) {
-            pax = 5;
+            alojamiento.setPlazas(5);
         } else if (combo_pax.getSelectedIndex() == 6) {
-            pax = 6;
+            alojamiento.setPlazas(6);
         } else if (combo_pax.getSelectedIndex() == 7) {
-            pax = 7;
+            alojamiento.setPlazas(7);
         } else if (combo_pax.getSelectedIndex() == 8) {
-            pax = 8;
+            alojamiento.setPlazas(8);
         }
 
         //ComboBox dormitorios
         if (combo_dormitorios.getSelectedIndex() == 0) {
-            dormitorios = 0;
+            alojamiento.setDormitorios(0);
         } else if (combo_dormitorios.getSelectedIndex() == 1) {
-            dormitorios = 1;
+            alojamiento.setDormitorios(1);
         } else if (combo_dormitorios.getSelectedIndex() == 2) {
-            dormitorios = 2;
+            alojamiento.setDormitorios(2);
         } else if (combo_dormitorios.getSelectedIndex() == 3) {
-            dormitorios = 3;
+            alojamiento.setDormitorios(3);
         } else if (combo_dormitorios.getSelectedIndex() == 4) {
-            dormitorios = 4;
+            alojamiento.setDormitorios(4);
         }
 
         //ComboBox baños
         if (combo_baños.getSelectedIndex() == 0) {
-            baños = 0;
+            alojamiento.setBaños(0);
         } else if (combo_baños.getSelectedIndex() == 1) {
-            baños = 1;
+            alojamiento.setBaños(1);
         } else if (combo_baños.getSelectedIndex() == 2) {
-            baños = 2;
+            alojamiento.setBaños(2);
         } else if (combo_baños.getSelectedIndex() == 3) {
-            baños = 3;
+            alojamiento.setBaños(3);
         } else if (combo_baños.getSelectedIndex() == 4) {
-            baños = 4;
+            alojamiento.setBaños(4);
         }
 
         //CheckBox terraza
         if (check_terraza.isSelected()) {
-            terraza = "YES";
+            alojamiento.setTerraza("YES");
         } else {
-            terraza = "NO";
+            alojamiento.setTerraza("NO");
         }
 
         //CheckBox piscina
         if (check_piscina.isSelected()) {
-            piscina = "YES";
+            alojamiento.setPiscina("YES");
         } else {
-            piscina = "NO";
+            alojamiento.setPiscina("NO");
         }
 
         //CheckBox parking
         if (check_parking.isSelected()) {
-            parking = "YES";
+            alojamiento.setAparcamiento("YES");
         } else {
-            parking = "NO";
+            alojamiento.setAparcamiento("NO");
         }
 
         if (validacion > 0) {
             JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (bd.modificarAlojamiento(
-                    alojamiento,
-                    nombre_alojamiento,
-                    direccion_alojamiento,
-                    pax,
-                    dormitorios,
-                    baños,
-                    terraza,
-                    piscina,
-                    parking
-            ) == 0) {
+            if (bd.modificarAlojamiento(alojamiento) == 0) {
                 JOptionPane.showMessageDialog(null, "Error occurred while updating this accommodation.");
             } else {
-                JOptionPane.showMessageDialog(null, "Cccommodation successfully updated.");
+                JOptionPane.showMessageDialog(null, "Accommodation successfully updated.");
             }
             Alojamientos a = new Alojamientos();
             a.setVisible(true);

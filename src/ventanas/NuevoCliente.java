@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import clases.Cliente;
 
 import clases.BD;
 import java.awt.Color;
@@ -16,10 +17,6 @@ public class NuevoCliente extends javax.swing.JFrame {
     BD bd;
     String nombre_usuario, apellidos_usuario;
     int id_usuario;
-    int IDNuevoCliente = 0;
-
-    //Variables utilizadas en el formulario
-    String nombre_cliente, apellidos_cliente, dni_cliente, pasaporte_cliente, nacionalidad_cliente, tlf_cliente, email_cliente;
 
     public NuevoCliente() {
         initComponents();
@@ -29,28 +26,24 @@ public class NuevoCliente extends javax.swing.JFrame {
         setTitle("New customer");
         setLocationRelativeTo(null);
 
-        //Evite que el programa se cierre al cerrar la ventana
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
+        
         bd = new BD();
 
         nombre_usuario = InicioAdmin.nombre_usuario;
         apellidos_usuario = InicioAdmin.apellidos_usuario;
         label_gestionadoPor.setText(nombre_usuario + " " + apellidos_usuario);
-
         id_usuario = bd.obtenerIDusuario(nombre_usuario, apellidos_usuario);
-
-        //Obtencion del ID del cliente desde la BD
-        IDNuevoCliente = bd.obtenerSiguienteIDCliente();
-        label_id.setText("" + IDNuevoCliente);
 
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        
+        //Evita que el programa se cierre al cerrar la ventana
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
-    
+
     //Icono de ventana
     @Override
     public Image getIconImage() {
@@ -147,16 +140,17 @@ public class NuevoCliente extends javax.swing.JFrame {
         jLabel10.setText("Assigned to:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 125, -1, -1));
 
-        btn_guardar.setBackground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setBackground(new java.awt.Color(255, 255, 255));
         btn_guardar.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
-        btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_guardar.setText("Add");
+        btn_guardar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/save.png"))); // NOI18N
+        btn_guardar.setText("Save");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, 83, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(583, 500, 111, -1));
 
         txt_nombre.setBackground(new java.awt.Color(240, 240, 240));
         txt_nombre.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
@@ -219,19 +213,20 @@ public class NuevoCliente extends javax.swing.JFrame {
 
         label_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_id.setForeground(new java.awt.Color(29, 33, 123));
-        label_id.setText("ref");
+        label_id.setText("ELIMINAR");
         getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 155, -1, -1));
 
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/cancel.png"))); // NOI18N
         btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 540, 83, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(583, 540, 111, -1));
 
         jLabel16.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(29, 33, 123));
@@ -258,26 +253,29 @@ public class NuevoCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        int validacion = 0;
 
-        //Variables
-        nombre_cliente = txt_nombre.getText().trim();
-        apellidos_cliente = txt_apellidos.getText().trim();
-        dni_cliente = txt_dni.getText().trim();
-        pasaporte_cliente = txt_pasaporte.getText().trim();
-        nacionalidad_cliente = txt_nacionalidad.getText().trim();
-        tlf_cliente = txt_tlf.getText().trim();
-        email_cliente = txt_email.getText().trim();
+        int validacion = 0;
+        
+        //Objeto Cliente
+        Cliente cliente = new Cliente();
+        cliente.setNombre(txt_nombre.getText().trim());
+        cliente.setApellidos(txt_apellidos.getText().trim());
+        cliente.setDni(txt_dni.getText().trim());
+        cliente.setPasaporte(txt_pasaporte.getText().trim());
+        cliente.setNacionalidad(txt_nacionalidad.getText().trim());
+        cliente.setTelefono(txt_tlf.getText().trim());
+        cliente.setEmail(txt_email.getText().trim());
+        cliente.setId_usuario(id_usuario);
 
         //Validacion de los campos:
-        if (nombre_cliente.equals("")) {
+        if (cliente.getNombre().equals("")) {
             validacion++;
             txt_nombre.setBackground(new Color(255, 82, 82));
         } else {
             txt_nombre.setBackground(new Color(240, 240, 240));
         }
 
-        if (apellidos_cliente.equals("")) {
+        if (cliente.getApellidos().equals("")) {
             validacion++;
             txt_apellidos.setBackground(new Color(255, 82, 82));
         } else {
@@ -285,44 +283,43 @@ public class NuevoCliente extends javax.swing.JFrame {
         }
 
         //Validacion IDCard y passport
-        
         if (txt_dni.isEnabled()) {
-            if (dni_cliente.equals("")) {
+            if (cliente.getDni().equals("")) {
                 validacion++;
                 txt_dni.setBackground(new Color(255, 82, 82));
             } else {
                 txt_dni.setBackground(new Color(240, 240, 240));
             }
         } else {
-            dni_cliente = "-";
+            cliente.setDni("-");
         }
 
         if (txt_pasaporte.isEnabled()) {
-            if (pasaporte_cliente.equals("")) {
+            if (cliente.getPasaporte().equals("")) {
                 validacion++;
                 txt_pasaporte.setBackground(new Color(255, 82, 82));
             } else {
                 txt_pasaporte.setBackground(new Color(240, 240, 240));
             }
         } else {
-            pasaporte_cliente = "-";
+            cliente.setPasaporte("-");
         }
 
-        if (nacionalidad_cliente.equals("")) {
+        if (cliente.getNacionalidad().equals("")) {
             validacion++;
             txt_nacionalidad.setBackground(new Color(255, 82, 82));
         } else {
             txt_nacionalidad.setBackground(new Color(240, 240, 240));
         }
 
-        if (tlf_cliente.equals("")) {
+        if (cliente.getTelefono().equals("")) {
             validacion++;
             txt_tlf.setBackground(new Color(255, 82, 82));
         } else {
             txt_tlf.setBackground(new Color(240, 240, 240));
         }
 
-        if (email_cliente.equals("")) {
+        if (cliente.getEmail().equals("")) {
             validacion++;
             txt_email.setBackground(new Color(255, 82, 82));
         } else {
@@ -332,21 +329,12 @@ public class NuevoCliente extends javax.swing.JFrame {
         if (validacion > 0) {
             JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (bd.altaCliente(
-                    IDNuevoCliente,
-                    nombre_cliente,
-                    apellidos_cliente,
-                    dni_cliente,
-                    pasaporte_cliente,
-                    nacionalidad_cliente,
-                    tlf_cliente,
-                    email_cliente,
-                    id_usuario
-            ) == 0) {
+            if (bd.altaCliente(cliente) == 0) {
                 JOptionPane.showMessageDialog(null, "Error occurred while adding new customer.");
             } else {
                 JOptionPane.showMessageDialog(null, "New customer successfully added.");
             }
+
             this.dispose();
             Clientes cl = new Clientes();
             cl.setVisible(true);

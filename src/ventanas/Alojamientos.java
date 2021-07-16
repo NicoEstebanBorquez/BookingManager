@@ -22,8 +22,8 @@ import static ventanas.Clientes.cliente;
 
 public class Alojamientos extends javax.swing.JFrame {
 
-    //Variable que contiene el cliente seleccionado
-    public static String alojamiento;
+    //Variable que contiene el alojamiento seleccionado
+    public static int alojamiento;
 
     //Permite acceder a los metodos necesarios para añadir filas, columnas, dar nombre a las columnas, etc.
     DefaultTableModel modelo = new DefaultTableModel();
@@ -87,16 +87,17 @@ public class Alojamientos extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, 862, 252));
 
-        btn_nuevoAlojamiento.setBackground(new java.awt.Color(29, 33, 123));
+        btn_nuevoAlojamiento.setBackground(new java.awt.Color(255, 255, 255));
         btn_nuevoAlojamiento.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
-        btn_nuevoAlojamiento.setForeground(new java.awt.Color(255, 255, 255));
-        btn_nuevoAlojamiento.setText("Add new accommodation");
+        btn_nuevoAlojamiento.setForeground(new java.awt.Color(29, 33, 123));
+        btn_nuevoAlojamiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/save.png"))); // NOI18N
+        btn_nuevoAlojamiento.setText("Add accommodation");
         btn_nuevoAlojamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_nuevoAlojamientoActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_nuevoAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 395, -1, -1));
+        getContentPane().add(btn_nuevoAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 395, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(29, 33, 123));
@@ -210,7 +211,7 @@ public class Alojamientos extends javax.swing.JFrame {
                 int columna_point = 0;
 
                 if (fila_point > -1) {
-                    alojamiento = (String) modelo.getValueAt(fila_point, columna_point);
+                    alojamiento = (int)modelo.getValueAt(fila_point, columna_point);
                     verInfoAlojamiento();
                 }
             }

@@ -11,7 +11,7 @@ import javax.swing.WindowConstants;
 
 public class InfoAlojamiento extends javax.swing.JFrame {
 
-    String alojamiento;
+    int alojamiento;
     String nombre, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento, usuario = "";
     BD bd;
 
@@ -130,24 +130,26 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         btn_cerrar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cerrar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_cerrar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/cancel.png"))); // NOI18N
         btn_cerrar.setText("Close");
         btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cerrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, -1, -1));
+        getContentPane().add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, 111, -1));
 
-        btn_modificar.setBackground(new java.awt.Color(29, 33, 123));
+        btn_modificar.setBackground(new java.awt.Color(255, 255, 255));
         btn_modificar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
-        btn_modificar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_modificar.setText("Modify");
+        btn_modificar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/edit.png"))); // NOI18N
+        btn_modificar.setText("Edit");
         btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_modificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 350, 90, -1));
+        getContentPane().add(btn_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 350, 111, -1));
 
         label_baños.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_baños.setForeground(new java.awt.Color(29, 33, 123));
@@ -184,13 +186,14 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         btn_eliminar.setBackground(new java.awt.Color(255, 255, 255));
         btn_eliminar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_eliminar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/remove.png"))); // NOI18N
         btn_eliminar.setText("Delete");
         btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_eliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 90, -1));
+        getContentPane().add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 111, -1));
 
         jLabel15.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(29, 33, 123));
@@ -368,7 +371,7 @@ public class InfoAlojamiento extends javax.swing.JFrame {
         aparcamiento = infoAlojamiento[7];
         usuario = infoAlojamiento[8];
 
-        label_id.setText(alojamiento);
+        label_id.setText(String.valueOf(alojamiento));
         label_nombre.setText(nombre);
         label_direccion.setText(direccion);
         label_capacidad.setText(plazas);

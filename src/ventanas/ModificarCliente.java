@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import clases.Cliente;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -13,10 +14,10 @@ public class ModificarCliente extends javax.swing.JFrame {
 
     int cliente;
     BD bd;
-
+/*
     //Variables utilizadas en el formulario
     String nombre_cliente, apellidos_cliente, dni_cliente, pasaporte_cliente, nacionalidad_cliente, tlf_cliente, email_cliente;
-
+*/
     public ModificarCliente() {
         initComponents();
 
@@ -85,16 +86,17 @@ public class ModificarCliente extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_guardar.setBackground(new java.awt.Color(29, 33, 123));
-        btn_guardar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
-        btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_guardar.setText("Save changes");
+        btn_guardar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_guardar.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        btn_guardar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/save.png"))); // NOI18N
+        btn_guardar.setText("Save");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, -1, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, 111, -1));
 
         txt_email.setBackground(new java.awt.Color(240, 240, 240));
         txt_email.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
@@ -141,13 +143,14 @@ public class ModificarCliente extends javax.swing.JFrame {
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/cancel.png"))); // NOI18N
         btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 530, -1, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 530, 111, -1));
 
         jLabel8.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(29, 33, 123));
@@ -218,60 +221,63 @@ public class ModificarCliente extends javax.swing.JFrame {
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
         int validacion = 0;
-
-        //Variables
-        nombre_cliente = txt_nombre.getText().trim();
-        apellidos_cliente = txt_apellidos.getText().trim();
-        dni_cliente = txt_dni.getText().trim();
-        pasaporte_cliente = txt_pasaporte.getText().trim();
-        nacionalidad_cliente = txt_nacionalidad.getText().trim();
-        tlf_cliente = txt_tlf.getText().trim();
-        email_cliente = txt_email.getText().trim();
-
+        int id_cliente = cliente;
+        
+        //Objeto Cliente
+        Cliente cliente = new Cliente();
+        cliente.setId_cliente(id_cliente);
+        cliente.setNombre(txt_nombre.getText().trim());
+        cliente.setApellidos(txt_apellidos.getText().trim());
+        cliente.setDni(txt_dni.getText().trim());
+        cliente.setPasaporte(txt_pasaporte.getText().trim());
+        cliente.setNacionalidad(txt_nacionalidad.getText().trim());
+        cliente.setTelefono(txt_tlf.getText().trim());
+        cliente.setEmail(txt_email.getText().trim());
+        
         //Validacion de los campos:
-        if (nombre_cliente.equals("")) {
+        if (cliente.getNombre().equals("")) {
             validacion++;
             txt_nombre.setBackground(new Color(255, 82, 82));
         } else {
             txt_nombre.setBackground(new Color(240, 240, 240));
         }
 
-        if (apellidos_cliente.equals("")) {
+        if (cliente.getApellidos().equals("")) {
             validacion++;
             txt_apellidos.setBackground(new Color(255, 82, 82));
         } else {
             txt_apellidos.setBackground(new Color(240, 240, 240));
         }
 
-        if (dni_cliente.equals("")) {
+        if (cliente.getDni().equals("")) {
             validacion++;
             txt_dni.setBackground(new Color(255, 82, 82));
         } else {
             txt_dni.setBackground(new Color(240, 240, 240));
         }
 
-        if (pasaporte_cliente.equals("")) {
+        if (cliente.getPasaporte().equals("")) {
             validacion++;
             txt_pasaporte.setBackground(new Color(255, 82, 82));
         } else {
             txt_pasaporte.setBackground(new Color(240, 240, 240));
         }
 
-        if (nacionalidad_cliente.equals("")) {
+        if (cliente.getNacionalidad().equals("")) {
             validacion++;
             txt_nacionalidad.setBackground(new Color(255, 82, 82));
         } else {
             txt_nacionalidad.setBackground(new Color(240, 240, 240));
         }
 
-        if (tlf_cliente.equals("")) {
+        if (cliente.getTelefono().equals("")) {
             validacion++;
             txt_tlf.setBackground(new Color(255, 82, 82));
         } else {
             txt_tlf.setBackground(new Color(240, 240, 240));
         }
 
-        if (email_cliente.equals("")) {
+        if (cliente.getEmail().equals("")) {
             validacion++;
             txt_email.setBackground(new Color(255, 82, 82));
         } else {
@@ -281,16 +287,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         if (validacion > 0) {
             JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (bd.modificarCliente(
-                    String.valueOf(cliente),
-                    txt_nombre.getText(),
-                    txt_apellidos.getText(),
-                    txt_dni.getText(),
-                    txt_pasaporte.getText(),
-                    txt_nacionalidad.getText(),
-                    txt_tlf.getText(),
-                    txt_email.getText()
-            ) == 0) {
+            if (bd.modificarCliente(cliente) == 0) {
                 JOptionPane.showMessageDialog(null, "Error occurred while updating customer.");
             } else {
                 JOptionPane.showMessageDialog(null, "Customer successfully updated.");

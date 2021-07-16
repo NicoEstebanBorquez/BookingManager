@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import clases.Reserva;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -21,11 +22,6 @@ public class ModificarReserva extends javax.swing.JFrame {
     int reserva;
     BD bd;
     String nombre_usuario, apellidos_usuario;
-
-    //Variables utilizadas en el formulario
-    String alojamiento_seleccionado = "";
-    double precio = 0;
-    int id_usuario;
 
     public ModificarReserva() {
         initComponents();
@@ -51,7 +47,7 @@ public class ModificarReserva extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
     }
-    
+
     //Icono de ventana
     @Override
     public Image getIconImage() {
@@ -97,27 +93,29 @@ public class ModificarReserva extends javax.swing.JFrame {
         getContentPane().add(label_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 155, -1, -1));
         getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 305, 100, -1));
 
-        btn_guardar.setBackground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setBackground(new java.awt.Color(255, 255, 255));
         btn_guardar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
-        btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_guardar.setText("Save changes");
+        btn_guardar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/save.png"))); // NOI18N
+        btn_guardar.setText("Save");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 111, -1));
 
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/cancel.png"))); // NOI18N
         btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 111, -1));
         getContentPane().add(jDate_entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
         getContentPane().add(jDate_salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, -1, -1));
 
@@ -159,6 +157,11 @@ public class ModificarReserva extends javax.swing.JFrame {
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
         int validacion = 0;
+        int id_reserva = reserva;
+
+        //Objeto Reserva
+        Reserva reserva = new Reserva();
+        reserva.setId_reserva(id_reserva);
 
         // Obtención de fechas de entrada y salida con formato DATE
         Date entrada_input = jDate_entrada.getDate();
@@ -168,13 +171,15 @@ public class ModificarReserva extends javax.swing.JFrame {
         long salida_l = salida_input.getTime();
 
         java.sql.Date entrada = new java.sql.Date(entrada_l);
+        reserva.setEntrada(entrada);
         java.sql.Date salida = new java.sql.Date(salida_l);
+        reserva.setSalida(salida);
 
         //Validacion precio
         int comprobacionDouble;
 
         try {
-            precio = Double.parseDouble(txt_precio.getText());
+            reserva.setPrecio(Double.parseDouble(txt_precio.getText()));
             comprobacionDouble = 0;
         } catch (NumberFormatException e) {
             txt_precio.setBackground(new Color(255, 82, 82));
@@ -188,16 +193,11 @@ public class ModificarReserva extends javax.swing.JFrame {
         }
 
         if (validacion > 0) {
-            JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);  
+            JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
         } else {
             txt_precio.setBackground(new Color(240, 240, 240));
 
-            if (bd.modificarReserva(
-                    String.valueOf(reserva),
-                    entrada,
-                    salida,
-                    precio
-            ) == 0) {
+            if (bd.modificarReserva(reserva) == 0) {
                 JOptionPane.showMessageDialog(null, "Error occurred while updating booking.");
             } else {
                 JOptionPane.showMessageDialog(null, "Booking successfully updated.");

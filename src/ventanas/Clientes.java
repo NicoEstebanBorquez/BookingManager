@@ -88,16 +88,17 @@ public class Clientes extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 125, 862, 252));
 
-        btn_nuevoCliente.setBackground(new java.awt.Color(29, 33, 123));
+        btn_nuevoCliente.setBackground(new java.awt.Color(255, 255, 255));
         btn_nuevoCliente.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
-        btn_nuevoCliente.setForeground(new java.awt.Color(255, 255, 255));
-        btn_nuevoCliente.setText("Add new customer");
+        btn_nuevoCliente.setForeground(new java.awt.Color(29, 33, 123));
+        btn_nuevoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/save.png"))); // NOI18N
+        btn_nuevoCliente.setText("Add customer");
         btn_nuevoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_nuevoClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_nuevoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 395, -1, -1));
+        getContentPane().add(btn_nuevoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(735, 390, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(29, 33, 123));

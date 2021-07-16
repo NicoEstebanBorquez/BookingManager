@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import clases.Alojamiento;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -14,11 +15,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
 
     BD bd;
     String nombre_usuario, apellidos_usuario;
-    int id_usuario, pax, dormitorios, baños;
-    int IDNuevoAlojamiento = 0;
-
-    //Variables utilizadas en el formulario
-    String nombre_alojamiento, direccion_alojamiento, terraza, piscina, parking;
+    int id_usuario;
 
     public NuevoAlojamiento() {
         initComponents();
@@ -27,10 +24,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         setResizable(false);
         setTitle("New accommodation");
         setLocationRelativeTo(null);
-
-        //Evite que el programa se cierre al cerrar la ventana
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
+        
         bd = new BD();
 
         nombre_usuario = InicioAdmin.nombre_usuario;
@@ -39,17 +33,17 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
 
         id_usuario = bd.obtenerIDusuario(nombre_usuario, apellidos_usuario);
 
-        //Obtencion del ID del alojamiento desde la BD
-        IDNuevoAlojamiento = bd.obtenerSiguienteIDAlojamiento();
-        label_id.setText("" + IDNuevoAlojamiento);
-
+        
         //Imagen de fondo
         ImageIcon wallpaper = new ImageIcon("src/images/Wallpaper.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        
+        //Evita que el programa se cierre al cerrar la ventana
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
-    
+
     //Icono de ventana
     @Override
     public Image getIconImage() {
@@ -129,16 +123,17 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         jLabel7.setText("Bedrooms:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
 
-        btn_guardar.setBackground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setBackground(new java.awt.Color(255, 255, 255));
         btn_guardar.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
-        btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_guardar.setText("Add");
+        btn_guardar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/save.png"))); // NOI18N
+        btn_guardar.setText("Save");
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 350, 83, -1));
+        getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 350, 111, -1));
 
         txt_direccion.setBackground(new java.awt.Color(240, 240, 240));
         txt_direccion.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
@@ -187,13 +182,14 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/cancel.png"))); // NOI18N
         btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 390, 83, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 390, 111, -1));
         getContentPane().add(check_parking, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 445, -1, -1));
         getContentPane().add(check_piscina, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 405, -1, -1));
         getContentPane().add(check_terraza, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 365, -1, -1));
@@ -215,7 +211,7 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
 
         label_id.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         label_id.setForeground(new java.awt.Color(29, 33, 123));
-        label_id.setText("ref");
+        label_id.setText("ELIMINAR");
         getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 156, -1, -1));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -244,19 +240,21 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
 
         int validacion = 0;
 
-        //Variables
-        nombre_alojamiento = txt_nombre.getText().trim();
-        direccion_alojamiento = txt_direccion.getText().trim();
+        //Objeto Alojamiento
+        Alojamiento alojamiento = new Alojamiento();
+        alojamiento.setNombre(txt_nombre.getText().trim());
+        alojamiento.setDireccion(txt_direccion.getText().trim());
+        alojamiento.setId_usuario(id_usuario);
 
         //Validacion de los campos:
-        if (nombre_alojamiento.equals("")) {
+        if (alojamiento.getNombre().equals("")) {
             validacion++;
             txt_nombre.setBackground(new Color(255, 82, 82));
         } else {
             txt_nombre.setBackground(new Color(240, 240, 240));
         }
 
-        if (direccion_alojamiento.equals("")) {
+        if (alojamiento.getDireccion().equals("")) {
             validacion++;
             txt_direccion.setBackground(new Color(255, 82, 82));
         } else {
@@ -265,87 +263,76 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
 
         //ComboBox PAX
         if (combo_pax.getSelectedIndex() == 0) {
-            pax = 0;
+            alojamiento.setPlazas(0);
         } else if (combo_pax.getSelectedIndex() == 1) {
-            pax = 1;
+            alojamiento.setPlazas(1);
         } else if (combo_pax.getSelectedIndex() == 2) {
-            pax = 2;
+            alojamiento.setPlazas(2);
         } else if (combo_pax.getSelectedIndex() == 3) {
-            pax = 3;
+            alojamiento.setPlazas(3);
         } else if (combo_pax.getSelectedIndex() == 4) {
-            pax = 4;
+            alojamiento.setPlazas(4);
         } else if (combo_pax.getSelectedIndex() == 5) {
-            pax = 5;
+            alojamiento.setPlazas(5);
         } else if (combo_pax.getSelectedIndex() == 6) {
-            pax = 6;
+            alojamiento.setPlazas(6);
         } else if (combo_pax.getSelectedIndex() == 7) {
-            pax = 7;
+            alojamiento.setPlazas(7);
         } else if (combo_pax.getSelectedIndex() == 8) {
-            pax = 8;
+            alojamiento.setPlazas(8);
         }
 
         //ComboBox dormitorios
         if (combo_dormitorios.getSelectedIndex() == 0) {
-            dormitorios = 0;
+            alojamiento.setDormitorios(0);
         } else if (combo_dormitorios.getSelectedIndex() == 1) {
-            dormitorios = 1;
+            alojamiento.setDormitorios(1);
         } else if (combo_dormitorios.getSelectedIndex() == 2) {
-            dormitorios = 2;
+            alojamiento.setDormitorios(2);
         } else if (combo_dormitorios.getSelectedIndex() == 3) {
-            dormitorios = 3;
+            alojamiento.setDormitorios(3);
         } else if (combo_dormitorios.getSelectedIndex() == 4) {
-            dormitorios = 4;
+            alojamiento.setDormitorios(4);
         }
 
         //ComboBox baños
         if (combo_baños.getSelectedIndex() == 0) {
-            baños = 0;
+            alojamiento.setBaños(0);
         } else if (combo_baños.getSelectedIndex() == 1) {
-            baños = 1;
+            alojamiento.setBaños(1);
         } else if (combo_baños.getSelectedIndex() == 2) {
-            baños = 2;
+            alojamiento.setBaños(2);
         } else if (combo_baños.getSelectedIndex() == 3) {
-            baños = 3;
+            alojamiento.setBaños(3);
         } else if (combo_baños.getSelectedIndex() == 4) {
-            baños = 4;
+            alojamiento.setBaños(4);
         }
 
         //CheckBox terraza
         if (check_terraza.isSelected()) {
-            terraza = "YES";
+            alojamiento.setTerraza("YES");
         } else {
-            terraza = "NO";
+            alojamiento.setTerraza("NO");
         }
 
         //CheckBox piscina
         if (check_piscina.isSelected()) {
-            piscina = "YES";
+            alojamiento.setPiscina("YES");
         } else {
-            piscina = "NO";
+            alojamiento.setPiscina("NO");
         }
 
         //CheckBox parking
         if (check_parking.isSelected()) {
-            parking = "YES";
+            alojamiento.setAparcamiento("YES");
         } else {
-            parking = "NO";
+            alojamiento.setAparcamiento("NO");
         }
 
         if (validacion > 0) {
             JOptionPane.showMessageDialog(null, "Please complete all fields.", "Empty fields", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (bd.altaAlojamiento(
-                    IDNuevoAlojamiento,
-                    nombre_alojamiento,
-                    direccion_alojamiento,
-                    pax,
-                    dormitorios,
-                    baños,
-                    terraza,
-                    piscina,
-                    parking,
-                    id_usuario
-            ) == 0) {
+            if (bd.altaAlojamiento(alojamiento) == 0) {
                 JOptionPane.showMessageDialog(null, "Error occurred while adding new accommodation.");
             } else {
                 JOptionPane.showMessageDialog(null, "New accommodation successfully added.");
@@ -355,7 +342,6 @@ public class NuevoAlojamiento extends javax.swing.JFrame {
             a.setVisible(true);
             this.dispose();
         }
-
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed

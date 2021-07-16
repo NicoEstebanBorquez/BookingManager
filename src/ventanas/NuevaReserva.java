@@ -1,6 +1,7 @@
 package ventanas;
 
 import clases.BD;
+import clases.Reserva;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -28,14 +29,15 @@ public class NuevaReserva extends javax.swing.JFrame {
 
     String nombre_usuario, apellidos_usuario;
     java.sql.Date fecha_actual;
-    
-    //Variables utilizadas en el formulario
-    String alojamiento_seleccionado = "";
-    double precio = 0;
     int id_usuario;
+    int alojamiento_seleccionado = 0;
     int cliente_seleccionado = 0;
+    
+    /*
+    //Variables utilizadas en el formulario
+    double precio = 0;
     int IDNuevaReserva = 0;
-
+*/
     //Permite acceder a los metodos necesarios para añadir filas, columnas, dar nombre a las columnas, etc.
     DefaultTableModel modelo = new DefaultTableModel();
     DefaultTableModel modelo_clientes = new DefaultTableModel();
@@ -58,10 +60,6 @@ public class NuevaReserva extends javax.swing.JFrame {
         apellidos_usuario = InicioAdmin.apellidos_usuario;
         label_gestionadoPor.setText(nombre_usuario + " " + apellidos_usuario);
         id_usuario = bd.obtenerIDusuario(nombre_usuario, apellidos_usuario);
-
-        //Obtencion del ID del alojamiento desde la BD
-        IDNuevaReserva = bd.obtenerSiguienteIDReserva();
-        label_id.setText("" + IDNuevaReserva);
 
         //Obtención de fecha actual
         long fecha_miliseconds = new Date().getTime();
@@ -113,7 +111,7 @@ public class NuevaReserva extends javax.swing.JFrame {
                 int columna_point = 0;
 
                 if (fila_point > -1) {
-                    alojamiento_seleccionado = (String) modelo.getValueAt(fila_point, columna_point);
+                    alojamiento_seleccionado = (int)modelo.getValueAt(fila_point, columna_point);
                 }
             }
         });
@@ -277,16 +275,17 @@ public class NuevaReserva extends javax.swing.JFrame {
         jLabel8.setText("Customer:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 505, -1, -1));
 
-        btn_guardarReserva.setBackground(new java.awt.Color(29, 33, 123));
+        btn_guardarReserva.setBackground(new java.awt.Color(255, 255, 255));
         btn_guardarReserva.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
-        btn_guardarReserva.setForeground(new java.awt.Color(255, 255, 255));
-        btn_guardarReserva.setText("Add");
+        btn_guardarReserva.setForeground(new java.awt.Color(29, 33, 123));
+        btn_guardarReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/save.png"))); // NOI18N
+        btn_guardarReserva.setText("Save");
         btn_guardarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarReservaActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_guardarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 530, 83, -1));
+        getContentPane().add(btn_guardarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 530, 111, -1));
 
         jLabel10.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(29, 33, 123));
@@ -356,13 +355,14 @@ public class NuevaReserva extends javax.swing.JFrame {
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/cancel.png"))); // NOI18N
         btn_cancelar.setText("Cancel");
         btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 570, 83, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 570, 111, -1));
 
         jLabel15.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(29, 33, 123));
@@ -372,7 +372,7 @@ public class NuevaReserva extends javax.swing.JFrame {
 
         label_id.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         label_id.setForeground(new java.awt.Color(29, 33, 123));
-        label_id.setText("ref");
+        label_id.setText("ELIMINAR");
         getContentPane().add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 155, -1, -1));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -389,7 +389,15 @@ public class NuevaReserva extends javax.swing.JFrame {
 
     private void btn_guardarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarReservaActionPerformed
         int validacion = 0;
-
+        
+        //Objeto Reserva
+        Reserva reserva = new Reserva();
+        reserva.setId_reserva(1);
+        reserva.setFecha_confirmacion(fecha_actual);
+        reserva.setId_alojamiento(alojamiento_seleccionado);
+        reserva.setId_cliente(cliente_seleccionado);
+        reserva.setId_usuario(id_usuario);
+        
         java.sql.Date entrada = new java.sql.Date(1 / 1 / 1);
         java.sql.Date salida = new java.sql.Date(1 / 1 / 1);
 
@@ -403,6 +411,7 @@ public class NuevaReserva extends javax.swing.JFrame {
             Date entrada_input = jDate_entrada.getDate();
             long entrada_l = entrada_input.getTime();
             entrada = new java.sql.Date(entrada_l);
+            reserva.setEntrada(entrada);
         }
 
         Date comprobacionSalida;
@@ -414,13 +423,14 @@ public class NuevaReserva extends javax.swing.JFrame {
             Date salida_input = jDate_salida.getDate();
             long salida_l = salida_input.getTime();
             salida = new java.sql.Date(salida_l);
+            reserva.setSalida(salida);
         }
 
         //Validacion precio
         int comprobacionDouble;
 
         try {
-            precio = Double.parseDouble(txt_precio.getText());
+            reserva.setPrecio(Double.parseDouble(txt_precio.getText())); //= Double.parseDouble(txt_precio.getText());
             comprobacionDouble = 0;
 
         } catch (NumberFormatException e) {
@@ -434,7 +444,7 @@ public class NuevaReserva extends javax.swing.JFrame {
             validacion++;
         }
 
-        if (alojamiento_seleccionado.equals("")) {
+        if (alojamiento_seleccionado == 0) {
             validacion++;
         }
         if (cliente_seleccionado == 0) {
@@ -447,16 +457,7 @@ public class NuevaReserva extends javax.swing.JFrame {
         } else {
             txt_precio.setBackground(new Color(240, 240, 240));
 
-            if (bd.altaReserva(
-                    IDNuevaReserva,
-                    fecha_actual,
-                    entrada,
-                    salida,
-                    precio,
-                    alojamiento_seleccionado,
-                    cliente_seleccionado,
-                    id_usuario
-            ) == 0) {
+            if (bd.altaReserva(reserva) == 0) {
                 JOptionPane.showMessageDialog(null, "Error occurred while adding new booking.");
             } else {
                 JOptionPane.showMessageDialog(null, "New booking successfully added.");

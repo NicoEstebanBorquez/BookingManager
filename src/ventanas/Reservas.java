@@ -102,16 +102,17 @@ public class Reservas extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 871, 220));
 
-        btn_nuevaReserva.setBackground(new java.awt.Color(29, 33, 123));
+        btn_nuevaReserva.setBackground(new java.awt.Color(255, 255, 255));
         btn_nuevaReserva.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
-        btn_nuevaReserva.setForeground(new java.awt.Color(255, 255, 255));
+        btn_nuevaReserva.setForeground(new java.awt.Color(29, 33, 123));
+        btn_nuevaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/save.png"))); // NOI18N
         btn_nuevaReserva.setText("Add new booking");
         btn_nuevaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_nuevaReservaActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_nuevaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 590, -1, -1));
+        getContentPane().add(btn_nuevaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 590, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(29, 33, 123));
@@ -152,6 +153,7 @@ public class Reservas extends javax.swing.JFrame {
         btn_buscarAlojamiento.setBackground(new java.awt.Color(255, 255, 255));
         btn_buscarAlojamiento.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_buscarAlojamiento.setForeground(new java.awt.Color(29, 33, 123));
+        btn_buscarAlojamiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/search.png"))); // NOI18N
         btn_buscarAlojamiento.setText("Search");
         btn_buscarAlojamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,6 +165,7 @@ public class Reservas extends javax.swing.JFrame {
         btn_buscarFechas.setBackground(new java.awt.Color(255, 255, 255));
         btn_buscarFechas.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_buscarFechas.setForeground(new java.awt.Color(29, 33, 123));
+        btn_buscarFechas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/search.png"))); // NOI18N
         btn_buscarFechas.setText("Search");
         btn_buscarFechas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,13 +184,14 @@ public class Reservas extends javax.swing.JFrame {
         btn_verTodas.setBackground(new java.awt.Color(255, 255, 255));
         btn_verTodas.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_verTodas.setForeground(new java.awt.Color(29, 33, 123));
+        btn_verTodas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/show-all.png"))); // NOI18N
         btn_verTodas.setText("Show all bookings");
         btn_verTodas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_verTodasActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_verTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 310, -1, -1));
+        getContentPane().add(btn_verTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 310, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 730));
 
         pack();

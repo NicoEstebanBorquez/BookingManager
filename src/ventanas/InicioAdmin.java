@@ -20,9 +20,9 @@ public class InicioAdmin extends javax.swing.JFrame {
 
         usuario = Login.usuario;
         
-        setSize(600,730);
+        setSize(910, 530);
         setResizable(false);
-        setTitle("Administration panel. Connected as: " + usuario);
+        setTitle("Administration panel");
         setLocationRelativeTo(null);
         
         //Evite que el programa se siga ejecutando en segundo plano despues de cerrar la ventana
@@ -70,7 +70,6 @@ public class InicioAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_nuevoUsuario = new javax.swing.JButton();
-        btn_gestionarUsuarios = new javax.swing.JButton();
         btn_clientes = new javax.swing.JButton();
         btn_alojamientos = new javax.swing.JButton();
         btn_reservas = new javax.swing.JButton();
@@ -87,7 +86,7 @@ public class InicioAdmin extends javax.swing.JFrame {
         btn_nuevoUsuario.setBackground(new java.awt.Color(246, 246, 246));
         btn_nuevoUsuario.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         btn_nuevoUsuario.setForeground(new java.awt.Color(29, 33, 123));
-        btn_nuevoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/accommodations.png"))); // NOI18N
+        btn_nuevoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/users.png"))); // NOI18N
         btn_nuevoUsuario.setText("                      Users  ");
         btn_nuevoUsuario.setBorder(null);
         btn_nuevoUsuario.setFocusable(false);
@@ -96,22 +95,12 @@ public class InicioAdmin extends javax.swing.JFrame {
                 btn_nuevoUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_nuevoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 315, 80));
-
-        btn_gestionarUsuarios.setBackground(new java.awt.Color(246, 246, 246));
-        btn_gestionarUsuarios.setBorder(null);
-        btn_gestionarUsuarios.setFocusable(false);
-        btn_gestionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_gestionarUsuariosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn_gestionarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 560, 50, 20));
+        getContentPane().add(btn_nuevoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 300, 315, 80));
 
         btn_clientes.setBackground(new java.awt.Color(246, 246, 246));
         btn_clientes.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         btn_clientes.setForeground(new java.awt.Color(29, 33, 123));
-        btn_clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/accommodations.png"))); // NOI18N
+        btn_clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/customers.png"))); // NOI18N
         btn_clientes.setText("              Customers  ");
         btn_clientes.setBorder(null);
         btn_clientes.setFocusable(false);
@@ -120,12 +109,12 @@ public class InicioAdmin extends javax.swing.JFrame {
                 btn_clientesActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 315, 80));
+        getContentPane().add(btn_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 200, 315, 80));
 
         btn_alojamientos.setBackground(new java.awt.Color(246, 246, 246));
         btn_alojamientos.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         btn_alojamientos.setForeground(new java.awt.Color(29, 33, 123));
-        btn_alojamientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/accommodations.png"))); // NOI18N
+        btn_alojamientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/accommodation.png"))); // NOI18N
         btn_alojamientos.setText("  Accommodations  ");
         btn_alojamientos.setBorder(null);
         btn_alojamientos.setFocusable(false);
@@ -134,12 +123,12 @@ public class InicioAdmin extends javax.swing.JFrame {
                 btn_alojamientosActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_alojamientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 315, 80));
+        getContentPane().add(btn_alojamientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 200, 315, 80));
 
         btn_reservas.setBackground(new java.awt.Color(246, 246, 246));
         btn_reservas.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         btn_reservas.setForeground(new java.awt.Color(29, 33, 123));
-        btn_reservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/accommodations.png"))); // NOI18N
+        btn_reservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/bookings.png"))); // NOI18N
         btn_reservas.setText("                 Bookings ");
         btn_reservas.setBorder(null);
         btn_reservas.setFocusable(false);
@@ -148,43 +137,44 @@ public class InicioAdmin extends javax.swing.JFrame {
                 btn_reservasActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_reservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 315, 80));
+        getContentPane().add(btn_reservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 300, 315, 80));
 
-        jLabel_titulo.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
+        jLabel_titulo.setFont(new java.awt.Font("Gadugi", 1, 26)); // NOI18N
         jLabel_titulo.setForeground(new java.awt.Color(29, 33, 123));
         jLabel_titulo.setText("Administration Panel");
-        getContentPane().add(jLabel_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 350, 50));
+        getContentPane().add(jLabel_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 90, 350, 50));
 
         jLabel_nombreUsuario.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel_nombreUsuario.setForeground(new java.awt.Color(29, 33, 73));
-        getContentPane().add(jLabel_nombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 340, 40));
+        getContentPane().add(jLabel_nombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 125, 340, 40));
 
+        btn_cerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
+        btn_cerrarSesion.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
+        btn_cerrarSesion.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/logout.png"))); // NOI18N
         btn_cerrarSesion.setText("Logout");
+        btn_cerrarSesion.setBorder(null);
+        btn_cerrarSesion.setFocusable(false);
         btn_cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cerrarSesionActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 560, -1, -1));
+        getContentPane().add(btn_cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(683, 410, 100, 38));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo/logo_small.png"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 350, 52));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(-530, 0, 1530, 730));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 350, 52));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_nuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoUsuarioActionPerformed
-        AnadirUsuario au = new AnadirUsuario();
-        au.setVisible(true);
-    }//GEN-LAST:event_btn_nuevoUsuarioActionPerformed
-
-    private void btn_gestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionarUsuariosActionPerformed
         GestionarUsuarios gu = new GestionarUsuarios();
         gu.setVisible(true);
-    }//GEN-LAST:event_btn_gestionarUsuariosActionPerformed
+    }//GEN-LAST:event_btn_nuevoUsuarioActionPerformed
 
     private void btn_cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarSesionActionPerformed
         this.dispose();
@@ -246,7 +236,6 @@ public class InicioAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btn_alojamientos;
     private javax.swing.JButton btn_cerrarSesion;
     private javax.swing.JButton btn_clientes;
-    private javax.swing.JButton btn_gestionarUsuarios;
     private javax.swing.JButton btn_nuevoUsuario;
     private javax.swing.JButton btn_reservas;
     private javax.swing.JLabel jLabel7;

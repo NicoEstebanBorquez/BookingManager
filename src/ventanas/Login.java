@@ -92,6 +92,7 @@ public class Login extends javax.swing.JFrame {
         jButton_Acceder.setBackground(new java.awt.Color(210, 210, 210));
         jButton_Acceder.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jButton_Acceder.setForeground(new java.awt.Color(0, 0, 93));
+        jButton_Acceder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/login.png"))); // NOI18N
         jButton_Acceder.setText("Login");
         jButton_Acceder.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton_Acceder.setBorderPainted(false);
@@ -100,7 +101,7 @@ public class Login extends javax.swing.JFrame {
                 jButton_AccederActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 440, 120, 35));
+        getContentPane().add(jButton_Acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 440, 120, 38));
         getContentPane().add(jLabel_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 350, 52));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 550));
 
