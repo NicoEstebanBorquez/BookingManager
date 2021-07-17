@@ -2,7 +2,6 @@ package ventanas;
 
 import clases.BD;
 import java.sql.*;
-import clases.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
@@ -33,7 +32,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         setSize(800, 385);
         setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Gestionar Usuarios - Sesión de " + usuario);
+        setTitle("Users");
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         //Obtener listado de usuarios
@@ -44,55 +43,6 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(), jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
-
-        /*
-        try {
-            Connection cn = Conexion.conectar();
-            PreparedStatement pst = cn.prepareStatement("select id_usuario, username, nombre, apellidos, puesto, estatus from usuarios");
-
-            ResultSet rs = pst.executeQuery();
-
-            this.jTable_usuarios = new JTable(model);
-            this.jScrollPane1.setViewportView(jTable_usuarios);
-
-            model.addColumn("ID");
-            model.addColumn("Username");
-            model.addColumn("Nombre");
-            model.addColumn("Apellidos");
-            model.addColumn("Puesto");
-            model.addColumn("Estatus");
-
-            while (rs.next()) {
-                //Creamos las filas, que serán rellenadas con los datos recibidos de la BD
-                Object[] fila = new Object[6];
-
-                for (int i = 0; i < 6; i++) {
-                    fila[i] = rs.getObject(i + 1);
-                }
-                model.addRow(fila);
-            }
-            cn.close();
-        } catch (SQLException e) {
-            System.err.println("Error al rellenar la tabla " + e);
-            JOptionPane.showMessageDialog(null, "Error en la conexión con la base de datos. Contacte con el Administrador del sistema.");
-        }
-
-        //Este es el evento que nos permite pinchar sobre el nombre de un usuario y que se abra una ventana con sus datos
-        jTable_usuarios.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int fila_point = jTable_usuarios.rowAtPoint(e.getPoint());
-                int columna_point = 0;
-
-                if (fila_point > -1) {
-                    user_update = (int) model.getValueAt(fila_point, columna_point);
-                    InfoUsuario iu = new InfoUsuario();
-                    iu.setVisible(true);
-                }
-            }
-        });
-        */
-        
     }
 
     @Override
@@ -203,13 +153,13 @@ public class GestionarUsuarios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_usuarios;
     // End of variables declaration//GEN-END:variables
- 
+
     public void listadoUsuarios() {
 
         //Consulta a la BD para obtener listado de clientes
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("select id_usuario, username, nombre, apellidos, puesto, estatus from usuarios");
             ResultSet rs = pst.executeQuery();
@@ -219,24 +169,14 @@ public class GestionarUsuarios extends javax.swing.JFrame {
 
             modelo.addColumn("ID");
             modelo.addColumn("Username");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Apellidos");
-            modelo.addColumn("Puesto");
-            modelo.addColumn("Estatus");
+            modelo.addColumn("First name");
+            modelo.addColumn("Last name");
+            modelo.addColumn("Position");
+            modelo.addColumn("Status");
 
-            /*
             //Alto de filas
             table_usuarios.setRowHeight(25);
-            //Ancho de columnas
-            TableColumnModel modeloColumna = table_usuarios.getColumnModel();
-            modeloColumna.getColumn(0).setPreferredWidth(10);
-            modeloColumna.getColumn(1).setPreferredWidth(50);
-            modeloColumna.getColumn(2).setPreferredWidth(100);
-            modeloColumna.getColumn(3).setPreferredWidth(20);
-            modeloColumna.getColumn(4).setPreferredWidth(20);
-            modeloColumna.getColumn(5).setPreferredWidth(20);
-            modeloColumna.getColumn(6).setPreferredWidth(120);
-*/
+
             while (rs.next()) {
                 Object[] fila = new Object[6];
 
@@ -265,7 +205,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
                     user_update = (int) modelo.getValueAt(fila_point, columna_point);
                     verInfoUsuario();
                 }
-            } 
+            }
         });
     }
 
@@ -274,5 +214,4 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         iu.setVisible(true);
         this.dispose();
     }
-
 }

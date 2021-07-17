@@ -1,6 +1,5 @@
 package ventanas;
 
-import clases.Conexion;
 import clases.BD;
 import clases.Usuario;
 import java.awt.Color;
@@ -102,7 +101,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
 
         jLabel7_puesto.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         jLabel7_puesto.setForeground(new java.awt.Color(29, 33, 123));
-        jLabel7_puesto.setText("Puesto:");
+        jLabel7_puesto.setText("Position:");
         getContentPane().add(jLabel7_puesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
 
         jLabel8_tlf.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
@@ -113,6 +112,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
         jButton_anadir.setBackground(new java.awt.Color(255, 255, 255));
         jButton_anadir.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jButton_anadir.setForeground(new java.awt.Color(29, 33, 123));
+        jButton_anadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/save.png"))); // NOI18N
         jButton_anadir.setText("Save");
         jButton_anadir.setBorder(null);
         jButton_anadir.setBorderPainted(false);
@@ -121,7 +121,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
                 jButton_anadirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_anadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 335, 90, 40));
+        getContentPane().add(jButton_anadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, 111, 35));
 
         jLabel1_titulo.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
         jLabel1_titulo.setForeground(new java.awt.Color(29, 33, 123));
@@ -180,6 +180,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
         btn_limpiar.setBackground(new java.awt.Color(255, 255, 255));
         btn_limpiar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_limpiar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/reload.png"))); // NOI18N
         btn_limpiar.setText("Reset fields");
         btn_limpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_limpiar.setBorderPainted(false);
@@ -189,11 +190,12 @@ public class AnadirUsuario extends javax.swing.JFrame {
                 btn_limpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 395, 140, 35));
+        getContentPane().add(btn_limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 140, 35));
 
         btn_cancelar.setBackground(new java.awt.Color(255, 255, 255));
         btn_cancelar.setFont(new java.awt.Font("Gadugi", 0, 18)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(29, 33, 123));
+        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconos/cancel.png"))); // NOI18N
         btn_cancelar.setText("Cancel");
         btn_cancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_cancelar.setBorderPainted(false);
@@ -203,7 +205,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
                 btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 395, 100, 35));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, 111, 35));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 650));
 
         pack();
@@ -262,7 +264,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
         //Consulta para comprobar que el username elegido está disponible
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("select username from usuarios where username = '" + usuario.getUsername() + "'");
             ResultSet rs = pst.executeQuery();
 
@@ -275,7 +277,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
 
                 if (validacion == 0) {
                     Class.forName("com.mysql.jdbc.Driver");
-                    Connection cn2 = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+                    Connection cn2 = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
                     PreparedStatement pst2 = cn2.prepareStatement("insert into usuarios values (?,?,?,?,?,?,?,?,?)");
 
                     pst2.setInt(1, 0);
@@ -286,7 +288,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
                     pst2.setString(6, usuario.getTelefono());
                     pst2.setString(7, usuario.getPuesto());
                     pst2.setString(8, usuario.getEmail());
-                    pst2.setString(9, "Activo");
+                    pst2.setString(9, "Active");
 
                     pst2.executeUpdate(); //Ejecutar sentencia
                     cn2.close();

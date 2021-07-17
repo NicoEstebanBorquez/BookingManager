@@ -162,7 +162,7 @@ public class Alojamientos extends javax.swing.JFrame {
         //Consulta a la BD para obtener listado de alojamientos
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("SELECT id_alojamiento, nombre, plazas, dormitorios, direccion FROM alojamientos");
             ResultSet rs = pst.executeQuery();

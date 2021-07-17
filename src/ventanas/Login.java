@@ -5,7 +5,8 @@ import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.sql.*;
-import clases.Conexion; //Para poder utilizar la clase "Conexion" que nos conecta con la BD
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
@@ -116,39 +117,37 @@ public class Login extends javax.swing.JFrame {
 
         if (!usuario.equals("") || !pass.equals("")) {
 
-            //Si los campos tienen algo, intenta hacer la conexion con la BD
             try {
-                Connection cn = Conexion.conectar();
-                PreparedStatement pst = cn.prepareStatement("select puesto, estatus from usuarios where username = '" + usuario + "' and password = '" + pass + "'");
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
+                PreparedStatement pst = cn.prepareStatement("select estatus from usuarios where username = '" + usuario + "' and password = '" + pass + "'");
                 ResultSet rs = pst.executeQuery();
 
                 if (rs.next()) {
-                    //Si recibe algo mete dentro del String 'tipo_nivel' lo que recibe de la BD
-                    //Lo mismo hace con 'estatus':
-                    String puesto = rs.getString("puesto");
                     String estatus = rs.getString("estatus");
 
-                    if (puesto.equals("Administrador") && estatus.equals("Activo")) {
+                    if (estatus.equals("Active")) {
                         dispose();
                         new InicioAdmin().setVisible(true);
-                    } else if (estatus.equals("Inactivo")) {
-                        JOptionPane.showMessageDialog(null, "Está intentando acceder con un usuario inactivo", "Error al iniciar sesión", JOptionPane.ERROR_MESSAGE);
+                    } else if (estatus.equals("Inactive")) {
+                        JOptionPane.showMessageDialog(null, "You are trying to access with a Inactive username", "Login error", JOptionPane.ERROR_MESSAGE);
                         limpiar();
                     }
 
                 } else {
-                    //Si no recibe nada quiere decir que ese user no está en la BD
-                    JOptionPane.showMessageDialog(null, "Datos de acceso incorrectos.");
+                    JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login error", JOptionPane.ERROR_MESSAGE);
                     limpiar();
                 }
 
             } catch (SQLException e) {
                 System.out.println("Error en el boton Acceder " + e);
                 JOptionPane.showMessageDialog(null, "Error en la conexión con la base de datos. Contacte con el Administrador del sistema.");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Debe introducir su nombre de usuario y contraseña.");
+            JOptionPane.showMessageDialog(null, "Please introduce username and password.", "Login error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_AccederActionPerformed
 
@@ -161,28 +160,24 @@ public class Login extends javax.swing.JFrame {
 
             if (!usuario.equals("") || !pass.equals("")) {
 
-                //Si los campos tienen algo, intenta hacer la conexion con la BD
                 try {
-                    Connection cn = Conexion.conectar();
-                    PreparedStatement pst = cn.prepareStatement("select puesto, estatus from usuarios where username = '" + usuario + "' and password = '" + pass + "'");
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
+                    PreparedStatement pst = cn.prepareStatement("select estatus from usuarios where username = '" + usuario + "' and password = '" + pass + "'");
                     ResultSet rs = pst.executeQuery();
 
                     if (rs.next()) {
-                        //Si recibe algo mete dentro del String 'tipo_nivel' lo que recibe de la BD
-                        //Lo mismo hace con 'estatus':
-                        String puesto = rs.getString("puesto");
                         String estatus = rs.getString("estatus");
 
-                        if (puesto.equals("Administrador") && estatus.equals("Activo")) {
+                        if (estatus.equals("Active")) {
                             dispose();
                             new InicioAdmin().setVisible(true);
-                        } else if (estatus.equals("Inactivo")) {
-                            JOptionPane.showMessageDialog(null, "Está intentando acceder con un usuario inactivo", "Error al iniciar sesión", JOptionPane.ERROR_MESSAGE);
+                        } else if (estatus.equals("Inactive")) {
+                            JOptionPane.showMessageDialog(null, "You are trying to access with a Inactive username", "Login error", JOptionPane.ERROR_MESSAGE);
                         }
 
                     } else {
-                        //Si no recibe nada quiere decir que ese user no está en la BD
-                        JOptionPane.showMessageDialog(null, "Datos de acceso incorrectos.");
+                        JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login error", JOptionPane.ERROR_MESSAGE);
                         txt_user.setText("");
                         txt_password.setText("");
                     }
@@ -190,9 +185,11 @@ public class Login extends javax.swing.JFrame {
                 } catch (SQLException e) {
                     System.out.println("Error en el boton Acceder " + e);
                     JOptionPane.showMessageDialog(null, "Error en la conexión con la base de datos. Contacte con el Administrador del sistema.");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Debe introducir su nombre de usuario y contraseña.");
+                JOptionPane.showMessageDialog(null, "Please introduce username and password.", "Login error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_txt_passwordKeyPressed

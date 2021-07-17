@@ -238,7 +238,7 @@ public class Reservas extends javax.swing.JFrame {
             //Consulta a la BD para obtener listado de reservas
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+                Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
                 PreparedStatement pst = cn.prepareStatement("SELECT id_reserva, fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas "
                         + "WHERE entrada BETWEEN ? AND ? ORDER BY entrada");
@@ -291,7 +291,7 @@ public class Reservas extends javax.swing.JFrame {
             //Consulta a la BD para obtener listado de reservas
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+                Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
                 PreparedStatement pst = cn.prepareStatement("SELECT id_reserva,fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas WHERE id_alojamiento=? ORDER BY entrada");
                 pst.setString(1, txt_alojamientoBusqueda.getText().trim());
@@ -334,7 +334,7 @@ public class Reservas extends javax.swing.JFrame {
         //Consulta a la BD para obtener listado de reservas
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+           Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("SELECT id_reserva, fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas ORDER BY entrada");
             ResultSet rs = pst.executeQuery();
 
@@ -421,7 +421,7 @@ public class Reservas extends javax.swing.JFrame {
         //Consulta a la BD para obtener listado de reservas
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("SELECT id_reserva, fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente FROM reservas ORDER BY entrada");
             ResultSet rs = pst.executeQuery();
 

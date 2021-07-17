@@ -12,10 +12,10 @@ public class BD {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("INSERT INTO alojamientos VALUES(?,?,?,?,?,?,?,?,?,?)");
-            pst.setString(1, "");
+            pst.setInt(1, 0);
             pst.setString(2, alojamiento.getNombre());
             pst.setString(3, alojamiento.getDireccion());
             pst.setInt(4, alojamiento.getPlazas());
@@ -41,8 +41,7 @@ public class BD {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("INSERT INTO clientes VALUES (?,?,?,?,?,?,?,?,?)");
 
             pst.setInt(1, 0);
@@ -58,7 +57,6 @@ public class BD {
 
             pst.close();
             cn.close();
-
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -71,9 +69,9 @@ public class BD {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
-
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("INSERT INTO reservas VALUES (?,?,?,?,?,?,?,?)");
+            
             pst.setInt(1, 0);
             pst.setDate(2, reserva.getFecha_confirmacion());
             pst.setDate(3, reserva.getEntrada());
@@ -99,7 +97,7 @@ public class BD {
         int ID = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("SELECT id_usuario FROM usuarios WHERE nombre=? AND apellidos=?");
             pst.setString(1, nombre);
@@ -127,7 +125,7 @@ public class BD {
         String apellidos = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("SELECT nombre, apellidos FROM usuarios WHERE id_usuario=?");
             pst.setString(1, ID);
@@ -155,7 +153,7 @@ public class BD {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("SELECT nombre, apellidos, DNI, pasaporte, nacionalidad, telefono, email, id_usuario FROM clientes WHERE id_cliente = ?");
             pst.setInt(1, ID);
@@ -189,7 +187,7 @@ public class BD {
         String[] info = new String[9];
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("SELECT nombre, direccion, plazas, dormitorios, baños, terraza, piscina, aparcamiento, id_usuario FROM alojamientos WHERE id_alojamiento = ?");
             pst.setInt(1, ID);
@@ -224,7 +222,7 @@ public class BD {
         String[] info = new String[7];
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("SELECT fecha_confirmacion, entrada, salida, precio, id_alojamiento, id_cliente, id_usuario FROM reservas WHERE id_reserva = ?");
             pst.setInt(1, ID);
@@ -257,7 +255,7 @@ public class BD {
         String nombre_alojamiento = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+          Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("SELECT nombre FROM alojamientos WHERE id_alojamiento = ?");
             pst.setString(1, ID);
 
@@ -284,7 +282,7 @@ public class BD {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+   Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("SELECT nombre, apellidos FROM clientes WHERE id_cliente = ?");
             pst.setString(1, ID);
 
@@ -309,7 +307,7 @@ public class BD {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("UPDATE alojamientos SET nombre=?, direccion=?, plazas=?, dormitorios=?, baños=?, terraza=?, piscina=?, aparcamiento=? WHERE id_alojamiento=?");
             pst.setString(1, alojamiento.getNombre());
             pst.setString(2, alojamiento.getDireccion());
@@ -337,7 +335,7 @@ public class BD {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+           Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("UPDATE clientes SET nombre=?, apellidos=?, DNI=?, pasaporte=?, nacionalidad=?, telefono=?, email=? WHERE id_cliente=?");
             pst.setString(1, cliente.getNombre());
             pst.setString(2, cliente.getApellidos());
@@ -363,7 +361,7 @@ public class BD {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+           Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("UPDATE reservas SET entrada=?, salida=?, precio=? WHERE id_reserva=?");
 
             pst.setDate(1, reserva.getEntrada());
@@ -387,7 +385,7 @@ public class BD {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+  Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("DELETE FROM alojamientos WHERE id_alojamiento = ?");
             pst.setInt(1, ID);
@@ -409,7 +407,7 @@ public class BD {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("DELETE FROM clientes WHERE id_cliente = ?");
             pst.setString(1, ID);
@@ -431,7 +429,7 @@ public class BD {
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("DELETE FROM reservas WHERE id_reserva = ?");
             pst.setString(1, ID);
@@ -447,12 +445,13 @@ public class BD {
         return resultado;
     }
     
-    public int eliminarUsuario(int ID) {
+    public int eliminarUsuario(int ID)
+    {
 
         int resultado = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/on_reservationssoftware", "root", "");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
 
             PreparedStatement pst = cn.prepareStatement("DELETE FROM usuarios WHERE id_usuario = ?");
             pst.setInt(1, ID);

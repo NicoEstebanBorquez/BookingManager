@@ -1,6 +1,5 @@
 package ventanas;
 
-import clases.Conexion;
 import clases.BD;
 import java.awt.Color;
 import java.awt.Image;
@@ -9,6 +8,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.WindowConstants;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class InfoUsuario extends javax.swing.JFrame {
@@ -28,10 +29,10 @@ public class InfoUsuario extends javax.swing.JFrame {
         setSize(750, 500);
         setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Información del usuario - Sesión de " + usuario);
+        setTitle("User information");
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        ID_usuario_seleccionado =  GestionarUsuarios.user_update;
+        ID_usuario_seleccionado = GestionarUsuarios.user_update;
         bd = new BD();
 
         //this.jLabel_titulo.setText("Información del usuario: " + String.valueOf(ID_usuario_seleccionado));
@@ -43,7 +44,8 @@ public class InfoUsuario extends javax.swing.JFrame {
 
         //Rellena los campos de InfoUsuario con los datos del usuario seleccionado en GestionarUsuarios ---------------------------------------------------------------
         try {
-            Connection cn = Conexion.conectar();
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
             PreparedStatement pst = cn.prepareStatement("select * from usuarios where id_usuario = '" + ID_usuario_seleccionado + "'");
             ResultSet rs = pst.executeQuery();
 
@@ -63,9 +65,9 @@ public class InfoUsuario extends javax.swing.JFrame {
                     this.combo_puesto.setSelectedIndex(2);
                 }
 
-                if (rs.getString("estatus").equals("Activo")) {
+                if (rs.getString("estatus").equals("Active")) {
                     this.combo_estatus.setSelectedIndex(0);
-                } else if (rs.getString("estatus").equals("Inactivo")) {
+                } else if (rs.getString("estatus").equals("Inactive")) {
                     this.combo_estatus.setSelectedIndex(1);
                 }
             }
@@ -73,6 +75,8 @@ public class InfoUsuario extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.err.println("Error al cargar los datos del usuario. " + e);
             JOptionPane.showMessageDialog(null, "Error en la conexión con la base de datos. Contacte con el Administrador del sistema.");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InfoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     }
@@ -210,7 +214,7 @@ public class InfoUsuario extends javax.swing.JFrame {
         combo_estatus.setBackground(new java.awt.Color(240, 240, 240));
         combo_estatus.setFont(new java.awt.Font("Gadugi", 0, 16)); // NOI18N
         combo_estatus.setForeground(new java.awt.Color(29, 33, 123));
-        combo_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        combo_estatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
         getContentPane().add(combo_estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, -1, -1));
 
         combo_puesto.setBackground(new java.awt.Color(240, 240, 240));
@@ -308,7 +312,8 @@ public class InfoUsuario extends javax.swing.JFrame {
         } else {
             try {
                 //Comprobación de que el nombre de username elegido no está ya siendo utilizado en la BD por otro user
-                Connection cn1 = Conexion.conectar();
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection cn1 = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
                 PreparedStatement pst1 = cn1.prepareStatement("select username from usuarios where username=? and not id_usuario=?");
                 pst1.setString(1, txt_username.getText());
                 pst1.setString(2, txt_id.getText());
@@ -321,7 +326,8 @@ public class InfoUsuario extends javax.swing.JFrame {
                 } else {
                     txt_username.setBackground(new Color(240, 240, 240));
 
-                    Connection cn2 = Conexion.conectar();
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection cn2 = DriverManager.getConnection("jdbc:mysql://bfsa3sxsr1yktijoeled-mysql.services.clever-cloud.com/bfsa3sxsr1yktijoeled", "ut5cg3puxyn4x8k7", "dexvZuEzWRPF4siweVO2");
                     PreparedStatement pst2 = cn2.prepareStatement("update usuarios set nombre=?, apellidos=?, email=?, telefono=?, username=?, puesto=?,  estatus=? where id_usuario = '" + this.txt_id.getText() + "'");
 
                     pst2.setString(1, this.txt_nombre.getText().trim());
@@ -338,9 +344,9 @@ public class InfoUsuario extends javax.swing.JFrame {
                     }
 
                     if (this.combo_estatus.getSelectedIndex() == 0) {
-                        pst2.setString(7, "Activo");
+                        pst2.setString(7, "Active");
                     } else if (this.combo_estatus.getSelectedIndex() == 1) {
-                        pst2.setString(7, "Inactivo");
+                        pst2.setString(7, "Inactive");
                     }
 
                     pst2.executeUpdate();
@@ -359,6 +365,8 @@ public class InfoUsuario extends javax.swing.JFrame {
             } catch (SQLException e) {
                 System.err.println("Error al actualizar los datos del usuario. " + e);
                 JOptionPane.showMessageDialog(null, "Error en la conexión con la base de datos. Contacte con el Administrador del sistema.");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(InfoUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
